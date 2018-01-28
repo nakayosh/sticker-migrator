@@ -3,21 +3,18 @@ import React from 'react';
 import Page from '../app/components/page';
 import Content from '../app/components/content';
 
-import Logo from '../../../images/logo_large.png';
+import GeneralHeader from '../general_header';
+import WizardContainer from './containers/wizard_container';
 
 export default class Home extends React.PureComponent {
 
   render () {
     return (
       <Page>
-        <Content>
-          <h1>
-            <span className='invisible'>
-              Sticker Migrater
-            </span>
+        <GeneralHeader />
 
-            <img src={Logo} alt='Sticker Migrater' />
-          </h1>
+        <Content>
+          <WizardContainer />
         </Content>
       </Page>
     );

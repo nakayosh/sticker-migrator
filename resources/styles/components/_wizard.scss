@@ -1,0 +1,41 @@
+.wizard {
+  padding: 24px 36px;
+  border-radius: 6px;
+  border: 1px solid $p500;
+  background-color: $p000;
+}
+
+.wizard__form {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.wizard__input {
+  flex-grow: 1;
+  margin-right: 8px;
+  padding: 8px 16px;
+  color: $t500;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid $p500;
+  background-color: $p100;
+  transition: 0.1s ease-out;
+  font-family: consolas,"Liberation Mono",courier,monospace;
+
+  &:focus {
+    border: 1px solid $h100;
+    background-color: lighten($h100, 40%);
+  }
+}
+
+.wizard__submit {
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding: 8px 16px;
+  color: $white;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid $h500;
+  background-color: $h100;
+  background-image: linear-gradient(-180deg, $h100 0%, $h500 90%);
+}
