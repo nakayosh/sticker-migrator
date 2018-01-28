@@ -10,10 +10,10 @@
 
     <title>Sticker Migrater</title>
 
+    <meta name="csrf-token" content="{{ csrf_token() }}" id="csrf-token">
     {{--
     <meta name="msapplication-config" content="/browserconfig.xml">
     <meta name="theme-color" content="#1da1f2">
-    <meta name="csrf-token" content="{{ csrf_token() }}" id="csrf-token">
     --}}
 
     <link rel="stylesheet" href="{{ mix('style.css', '/packs') }}" />
