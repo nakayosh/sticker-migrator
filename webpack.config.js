@@ -14,7 +14,7 @@ module.exports = {
 
   entry: {
     main: './resources/smigrater/main.js',
-    theme_light: './resources/styles/main.scss',
+    style: './resources/styles/main.scss',
   },
 
   output: {
