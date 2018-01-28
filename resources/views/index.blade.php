@@ -25,7 +25,7 @@
   </head>
 
   <body class="" role="application">
-    <div id="root"></div>
+    <div id="root" data-props='{}'></div>
     <script src="{{ mix('/main.js', '/packs') }}"></script>
   </body>
 
