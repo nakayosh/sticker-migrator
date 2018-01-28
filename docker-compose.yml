@@ -1,0 +1,20 @@
+version: "3"
+services:
+
+  db:
+    restart: always
+    image: mariadb:10.2
+    # volumes:
+    #   - ./mariadb:/var/lib/mysql
+
+  web:
+    build: .
+    image: neetshin/smigrater
+    restart: always
+    env_file: .env
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    volumes:
+      - .:/smigrater
