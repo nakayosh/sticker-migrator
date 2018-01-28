@@ -3,7 +3,8 @@ FROM php:7.2.0-fpm-alpine3.6
 LABEL maintainer="https://gitlab.com/nijipico/sticker_migrater" \
       description="Sticker Migrater from LINE to Telegram"
 
-ENV NODE_ENV=production
+ENV NODE_ENV=production \
+    COMPOSER_ALLOW_SUPERUSER=true
 
 EXPOSE 8080
 
