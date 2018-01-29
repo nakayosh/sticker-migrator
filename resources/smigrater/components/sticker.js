@@ -17,7 +17,7 @@ export default class Sticker extends ImmutablePureComponent {
 
     return (
       <div className='sticker'>
-        <img src={sticker.get('url')} alt={sticker.get('emoji')[0]} />
+        <img src={sticker.get('url')} alt='' />
       </div>
     );
   }

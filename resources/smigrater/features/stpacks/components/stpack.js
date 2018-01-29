@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ImmtuablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 
@@ -9,6 +10,7 @@ import StickerContainer from '../../../containers/sticker_container';
 export default class Stapck extends ImmutablePureComponent {
 
   static propTypes = {
+    id: PropTypes.string.isRequired,
     stpack: ImmtuablePropTypes.map,
   }
 

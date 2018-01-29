@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import Stpack from '../components/stpack';
 
 const mapStateToProps = (state, { id }) => ({
-  stpack: state.get(['stpack', id]),
+  stpack: state.getIn(['stpacks', id], null),
 });
 
 // const mapDispatchToProps = dispatch => ({
@@ -10,5 +10,4 @@ const mapStateToProps = (state, { id }) => ({
 
 export default connect(
   mapStateToProps,
-  // mapDispatchToProps,
 )(Stpack);
