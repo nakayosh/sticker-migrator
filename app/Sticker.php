@@ -8,8 +8,10 @@ class Sticker extends Model
 {
     protected $fillable = [
         'url',
-        'sticker_id',
+        'id',
     ];
+
+    public $incrementing = false;
 
     public function stpack(){
         return $this->belongsTo('App\Stpack');
