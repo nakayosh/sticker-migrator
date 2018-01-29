@@ -1,0 +1,44 @@
+.stpack {
+  padding: 24px 36px;
+  border-radius: 6px;
+  border: 1px solid $p500;
+  background-color: $p000;
+}
+
+.stpack__letter-head {
+  display: flex;
+  align-items: flex-start;
+}
+
+.stpack__thumbnail {
+  width: 160px;
+  height: auto;
+}
+
+.stpack__title {
+  font-weight: bold;
+  font-size: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stpack__download-button {
+  text-align: center;
+  width: 100%;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  border: 1px solid $h500;
+  background-color: $h100;
+  background-image: linear-gradient(-180deg, $h100 0%, $h500 90%);
+
+  i {
+    margin-right: 0.5em;
+  }
+
+  a {
+    color: $white;
+    font-size: 16px;
+  }
+}
