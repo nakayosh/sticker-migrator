@@ -11,7 +11,7 @@ class testController extends Controller
     public function index(Request $request, $stpack_no){
         $packmodel = Stpack::where('stpack_id', $stpack_no);
         if ($packmodel->exists()) {
-            $stpack = $packmodel->get();
+            $stpack = $packmodel->first();
         } else {
             $downloader = new Line();
             $stpack = $downloader->download('https://store.line.me/stickershop/product/'.$stpack_no.'/ja');
