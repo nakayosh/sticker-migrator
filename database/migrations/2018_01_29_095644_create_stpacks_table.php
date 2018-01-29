@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStickerTable extends Migration
+class CreateStpacksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateStickerTable extends Migration
      */
     public function up()
     {
-        Schema::create('sticker', function (Blueprint $table) {
+        Schema::create('stpacks', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('stpack_id');
-            $table->integer('sticker_id');
-            $table->string('url');
+            $table->integer('stpack_id')->unique();
+            $table->string('name');
+            $table->string('short_name');
+            $table->string('thumbnail_url');
+            $table->string('url')->default('');
+            $table->string('original_url');
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ class CreateStickerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sticker');
+        Schema::dropIfExists('stpacks');
     }
 }
