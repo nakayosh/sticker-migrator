@@ -6,7 +6,6 @@ import IconButton from '../components/icon_button';
 export default class Message extends React.PureComponent {
 
   static propTypes = {
-    intl: PropTypes.object.isRequired,
     show: PropTypes.bool,
     text: PropTypes.string,
     time: PropTypes.number,
@@ -21,7 +20,7 @@ export default class Message extends React.PureComponent {
   }
 
   render () {
-    const { show, text, onClose } = this.props;
+    const { show, text } = this.props;
 
     return (
       <div className={classNames('message-container', { 'message-container--show': show })}>
@@ -32,9 +31,9 @@ export default class Message extends React.PureComponent {
 
           <IconButton
             className='message__close-button'
-            icon='icon-time'
+            icon='fa fa-time'
             title='Dissmiss this message'
-            onClick={onClose}
+            onClick={this.props.onClose}
           />
         </div>
       </div>

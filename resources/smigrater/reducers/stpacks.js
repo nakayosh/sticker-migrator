@@ -1,9 +1,9 @@
 import {
   STPACK_FETCH_SUCCESS,
 } from '../actions/stpacks';
-import { List as ImmutableList } from 'immutable';
+import { Map as ImmutableMap } from 'immutable';
 
-const initialState = ImmutableList();
+const initialState = ImmutableMap();
 
 export default function packs(state = initialState, action) {
   switch(action.type) {

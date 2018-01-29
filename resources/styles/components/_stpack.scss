@@ -1,5 +1,4 @@
 .stpack {
-  position: relative;
   padding: 8px 16px;
   border-radius: 6px;
   border: 1px solid $p500;
@@ -12,15 +11,26 @@
 
 .stpack__letter-head {
   display: flex;
+  position: relative;
   align-items: flex-start;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid $p500;
 }
 
 .stpack__thumbnail {
+  flex-shrink: 0;
   width: 160px;
   height: auto;
+  margin-right: 8px;
+}
+
+.stpack__meta {
+  flex-grow: 1;
 }
 
 .stpack__title {
+  margin-top: 0;
   font-weight: bold;
   font-size: 24px;
   white-space: nowrap;
@@ -28,34 +38,59 @@
   text-overflow: ellipsis;
 }
 
+.stpack__time {
+  color: $t100;
+  font-size: 14px;
+}
+
 .stpack__dropdown-menu {
   position: absolute;
-  padding: 24px 36px;
   top: 0;
   right: 0;
 
   button {
     color: $t100;
-    font-size: 21px;
+    font-size: 28px;
+  }
+}
+
+.stpack__stickers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.stpack__sticker {
+  flex-basis: 25%;
+  flex-grow: 1;
+  flex-shrink: 0;
+  padding: 8px;
+  box-sizing: border-box;
+  border-radius: 6px;
+
+  &:hover {
+    background-color: $p500;
   }
 }
 
 .stpack__download-button {
-  text-align: center;
-  width: 100%;
-  padding: 8px 16px;
-  box-sizing: border-box;
-  border-radius: 6px;
-  border: 1px solid $h500;
-  background-color: $h100;
-  background-image: linear-gradient(-180deg, $h100 0%, $h500 90%);
-
   i {
     margin-right: 0.5em;
   }
 
   a {
+    padding: 8px 16px;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    height: 100%;
     color: $white;
     font-size: 16px;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 }

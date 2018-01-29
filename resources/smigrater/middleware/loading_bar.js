@@ -6,8 +6,6 @@ export default function loadingBarMiddleware(config = {}) {
   const promiseTypeSuffixes = config.promiseTypeSuffixes || defaultTypeSuffixes;
 
   return ({ dispatch }) => next => (action) => {
-    console.log(action.type);
-
     if (action.type && !action.skipLoading) {
       const [PENDING, FULFILLED, REJECTED] = promiseTypeSuffixes;
 

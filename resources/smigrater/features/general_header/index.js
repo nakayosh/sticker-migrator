@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Logo from '../../../images/logo_large.png';
+import MessageContainer from '../../containers/message_container';
 
 export default class GeneralHeader extends React.PureComponent {
 
@@ -17,6 +18,8 @@ export default class GeneralHeader extends React.PureComponent {
             <img src={Logo} alt='Sticker Migrater' />
           </h1>
         </Link>
+
+        <MessageContainer />
       </header>
     );
   }

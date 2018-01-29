@@ -36,7 +36,7 @@ export default class Wizard extends React.PureComponent {
             onChange={this.handleChange}
           />
 
-          <button className='wizard__submit button' onClick={this.handleSubmit}>
+          <button className='wizard__submit rich-button button' onClick={this.handleSubmit}>
             <i className='fa fa-download' aria-hidden />
           </button>
         </div>

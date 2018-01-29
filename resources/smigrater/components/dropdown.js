@@ -5,6 +5,9 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import detectPassiveEvents from 'detect-passive-events';
 import IconButton from '../components/icon_button';
 
+import Motion from 'react-motion/lib/Motion';
+import spring from 'react-motion/lib/spring';
+
 const listenerOptions = detectPassiveEvents.hasSupport ? { passive: true } : false;
 
 export const DropdownMenuCaret = props => {
@@ -91,13 +94,17 @@ export class DropdownMenu extends React.PureComponent {
     const { items, style, placement } = this.props;
 
     return (
-      <div className='dropdown-menu' style={style} ref={this.setRef}>
-        <DropdownMenuCaret placement={placement} />
+      <Motion defaultStyle={{ opacity: 0, scaleX: 0.85, scaleY: 0.75 }} style={{ opacity: spring(1, { damping: 35, stiffness: 400 }), scaleX: spring(1, { damping: 35, stiffness: 400 }), scaleY: spring(1, { damping: 35, stiffness: 400 }) }}>
+        {({ opacity, scaleX, scaleY }) => (
+          <div className='dropdown-menu'  style={{ ...style, opacity: opacity, transform: `scale(${scaleX}, ${scaleY})` }} ref={this.setRef}>
+            <DropdownMenuCaret placement={placement} />
 
-        <ul className='dropdown-menu__list'>
-          {items.map((option, i) => this.renderItem(option, i))}
-        </ul>
-      </div>
+            <ul className='dropdown-menu__list'>
+              {items.map((option, i) => this.renderItem(option, i))}
+            </ul>
+          </div>
+        )}
+      </Motion>
     );
   }
 
