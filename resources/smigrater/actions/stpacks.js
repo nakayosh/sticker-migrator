@@ -1,5 +1,4 @@
 import api from '../api';
-// import { showLoading, hideLoading } from 'react-redux-loading-bar';
 
 export const STPACK_FETCH_REQUEST = 'STPACK_FETCH_REQUEST';
 export const STPACK_FETCH_SUCCESS = 'STPACK_FETCH_SUCCESS';
