@@ -5,6 +5,7 @@ use GuzzleHttp\Client;
 use Ramsey\Uuid\Uuid;
 use App\Stpack;
 use App\Sticker;
+use GuzzleHttp\Exception\RequestException;
 
 class Line
 {
@@ -19,7 +20,13 @@ class Line
         $short_name_hf = Uuid::uuid4()->toString();
         $short_name = str_replace('-', '_', $short_name_hf);
         $client = new Client();
-        $response = $client->request('GET', $stpack_url);
+        try{
+            $response = $client->request('GET', $stpack_url);
+        } catch(RequestException $e) {
+            $response = $e->getResponse();
+            $status_code = $response->getStatusCode();
+            abort($status_code);
+        }
         preg_match_all('/background-image:\s?url\([\'\"]*(.+?);.*?[\'\"]*\);/', $response->getBody(), $matches_url);
         preg_match('/<h3\s?class=[\'\"]*mdCMN08Ttl[\'\"]*>(.+?)<\/h3>/', $response->getBody(), $sticker_name);
         preg_match('/product\/(.+?)\//', $stpack_url, $stpack_id);
