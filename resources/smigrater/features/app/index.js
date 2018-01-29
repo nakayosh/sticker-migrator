@@ -1,6 +1,8 @@
 import React from 'react';
 import { Switch, Redirect } from 'react-router';
 import { WrappedRoute } from './util/react_router_helpers';
+import LoadingBarContainer from './containers/loading_bar_container';
+
 import {
   Home,
   Stpacks,
@@ -17,6 +19,8 @@ export default class App extends React.Component {
           <WrappedRoute path='/home' component={Home} />
           <WrappedRoute path='/stpacks/:id' component={Stpacks} />
         </Switch>
+
+        <LoadingBarContainer className='loading-bar' />
       </div>
     );
   }
