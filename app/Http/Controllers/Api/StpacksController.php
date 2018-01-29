@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Lib\Imagedownloader\Line;
 use App\Stpack;
@@ -16,6 +17,6 @@ class StpacksController extends Controller
             $downloader = new Line();
             $stpack = $downloader->download('https://store.line.me/stickershop/product/'.$stpack_no.'/ja');
         }
-        return view('test', ['data' => $stpack]);
+        return response()->json($stpack);
     }
 }
