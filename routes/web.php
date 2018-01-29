@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('api/stpacks/{stpack_no}', 'Api\StpacksController@getPack');
+
 Route::get('/{any?}', function () {
     return view('index');
 })->where('any', '.*');
