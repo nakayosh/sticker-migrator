@@ -20,7 +20,7 @@ class CreateStpackTable extends Migration
             $table->string('short_name');
             $table->string('thumbnail_url');
             $table->string('url')->default('');
-            $table->stirng('original_url');
+            $table->string('original_url');
             $table->timestamps();
         });
     }
