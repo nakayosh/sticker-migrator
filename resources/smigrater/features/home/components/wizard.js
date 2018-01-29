@@ -4,23 +4,23 @@ import PropTypes from 'prop-types';
 export default class Wizard extends React.PureComponent {
 
   static propTypes = {
-    value: PropTypes.string,
-    onChange: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+  }
+
+  state = {
+    value: '',
   }
 
   handleChange = e => {
-    const value = e.currentTarget.value;
-    this.props.onChange(value);
+    this.setState({ value: e.currentTarget.value });
   }
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit();
+    this.props.onSubmit(this.state.value);
   }
 
   render () {
-    const { value } = this.props;
-
     return (
       <div className='wizard'>
         <h2>
@@ -31,7 +31,6 @@ export default class Wizard extends React.PureComponent {
           <input
             className='wizard__input input'
             type='text'
-            value={value}
             pattern='https:\/\/store\.line\.me\/stickershop\/product\/[0-9]+'
             placeholder='https://store.line.me/stickershop/product/3897'
             onChange={this.handleChange}
