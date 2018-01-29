@@ -12,10 +12,10 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}" id="csrf-token">
     <meta name="msapplication-config" content="/browserconfig.xml">
-    <meta name="theme-color" content="#1da1f2">
+    <meta name="theme-color" content="#E67E22">
     <link rel="stylesheet" href="{{ mix('style.css', '/packs') }}" />
     <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="mask-icon" href="/mask-icon.svg" color="#1da1f2">
+    <link rel="mask-icon" href="/mask-icon.svg" color="#E67E22">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
     <link rel="manifest" href="/manifest.json">
   </head>
