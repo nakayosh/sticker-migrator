@@ -18,6 +18,9 @@
     <link rel="mask-icon" href="/mask-icon.svg" color="#E67E22">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
     <link rel="manifest" href="/manifest.json">
+
+    {{--  Prefetch  --}}
+    <script src="{{ mix('/features/home.js', '/packs') }}"></script>
   </head>
 
   <body class="" role="application">
