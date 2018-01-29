@@ -24,12 +24,10 @@
   </head>
 
   <body class="" role="application">
-    {{--  <div id="root" data-props='{}'></div>  --}}
     <script src="{{ mix('/main.js', '/packs') }}"></script>
-    {{ var_dump($data) }}
-    {{--  @foreach( $data['stickers'] as $sticker )
-      <img src="{{ $sticker['url'] }}"/>
-    @endforeach  --}}
+    @foreach($data->stickers as $sticker)
+      <a href="{{ $sticker->url }}">{{ $sticker->sticker_id }}</a>
+    @endforeach
   </body>
 
 </html>
