@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('test/{stpack_no}', 'testController@index');
+Route::get('api/stpacks/{stpack_no}', 'Api\StpacksController@getPack');
 
 Route::get('/{any?}', function () {
     return view('index');
