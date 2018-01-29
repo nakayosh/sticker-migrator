@@ -14,12 +14,11 @@ class CreateStpacksTable extends Migration
     public function up()
     {
         Schema::create('stpacks', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('stpack_id')->unique();
+            $table->integer('id')->unique();
             $table->string('name');
             $table->string('short_name');
             $table->string('thumbnail_url');
-            $table->string('url')->default('');
+            $table->string('url')->nullable()->default(null);
             $table->string('original_url');
             $table->timestamps();
         });

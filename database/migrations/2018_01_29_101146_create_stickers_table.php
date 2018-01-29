@@ -14,9 +14,8 @@ class CreateStickersTable extends Migration
     public function up()
     {
         Schema::create('stickers', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('id')->unique();
             $table->integer('stpack_id');
-            $table->integer('sticker_id');
             $table->string('url');
             $table->timestamps();
         });
