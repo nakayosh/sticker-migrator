@@ -10,13 +10,17 @@ use App\Stpack;
 class StpacksController extends Controller
 {
     public function getPack(Request $request, $stpack_no){
-        $packmodel = Stpack::where('stpack_id', $stpack_no);
-        if ($packmodel->exists()) {
-            $stpack = $packmodel->first();
-        } else {
+        $packmodel = Stpack::where('id', $stpack_no);
+        $return_code = 200;
+        if (!$packmodel->exists()) {
             $downloader = new Line();
-            $stpack = $downloader->download('https://store.line.me/stickershop/product/'.$stpack_no.'/ja');
+            $download = $downloader->download('https://store.line.me/stickershop/product/'.$stpack_no.'/ja');
+            if (is_array($download)) {
+                $return_code = $download['code'];
+            }
         }
-        return response()->json($stpack);
+        $packmodel = Stpack::where('id', $stpack_no)->first();
+        $stpack = $packmodel::with('stickers')->first();
+        return response()->json($stpack, is_null($return_code) ? 500 : $return_code);
     }
 }
