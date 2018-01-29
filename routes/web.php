@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('test/{stpack_no}', 'testController@index');
+
 Route::get('/{any?}', function () {
     return view('index');
 })->where('any', '.*');
