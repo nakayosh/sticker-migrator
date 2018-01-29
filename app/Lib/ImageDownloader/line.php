@@ -2,6 +2,7 @@
 
 namespace App\Lib\ImageDownloader;
 use GuzzleHttp\Client;
+use Ramsey\Uuid\Uuid;
 
 class Line
 {
@@ -22,6 +23,8 @@ class Line
      * ]
      */
     public function download($stpack_url){
+        $short_name_hf = Uuid::uuid4()->toString();
+        $short_name = str_replace('-', '_', $short_name_hf);
         $client = new Client();
         $response = $client->request('GET', $stpack_url);
         preg_match_all('/background-image:\s?url\([\'\"]*(.+?);.*?[\'\"]*\);/', $response->getBody(), $matches_url);
@@ -38,12 +41,12 @@ class Line
         }
         return [
             'id' => $stpack_id[1],
-            'original_url' => $stpack_url,
-            'thumbnail_url' => $stickers[0]['url'],
             'name' => $sticker_name[1],
-            'short_name' => 
-            'stickers' => $stickers,
+            'short_name' => $short_name,
+            'thumbnail_url' => $stickers[0]['url'],
+            'original_url' => $stpack_url,
             'created_at' => time(),
+            'stickers' => $stickers,
         ];
     }
 }
