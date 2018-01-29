@@ -177,6 +177,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * service provider by pinfort
+         */
+        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -226,6 +230,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        /*
+         * custom aliases by pinfort
+         */
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];
