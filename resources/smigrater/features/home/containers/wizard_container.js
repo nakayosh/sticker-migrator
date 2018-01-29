@@ -1,8 +1,5 @@
 import { connect } from 'react-redux';
-import {
-  changeWizard,
-  submitWizard,
-} from '../../../actions/wizard';
+import { fetchStpack } from '../../../actions/stpacks';
 import Wizard from '../components/wizard';
 
 const mapStateToProps = state => ({
@@ -11,12 +8,12 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
 
-  onChange(value) {
-    dispatch(changeWizard(value));
-  },
+  onSubmit(value) {
+    const id = value.split('/')[5];
 
-  onSubmit() {
-    dispatch(submitWizard());
+    if (id) {
+      dispatch(fetchStpack(id));
+    }
   },
 
 });
