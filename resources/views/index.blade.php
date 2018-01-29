@@ -20,7 +20,7 @@
     <link rel="manifest" href="/manifest.json">
 
     {{--  Prefetch  --}}
-    <script src="{{ mix('/features/home.js', '/packs') }}"></script>
+    <link as="script" crossorigin="anonymous" href="{{ mix('/features/home.js', '/packs') }}" rel="preload">
   </head>
 
   <body class="" role="application">
