@@ -43,7 +43,7 @@ class Line
             'stickers' => $stickers,
         ];
         $stpack = Stpack::create($retval);
-        $stpack->saveMany($sticker_models);
+        $stpack->stickers()->saveMany($sticker_models);
         return $stpack;
     }
 }
