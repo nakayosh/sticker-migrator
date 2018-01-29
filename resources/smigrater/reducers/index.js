@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux-immutable';
-import packs from './packs';
+import stpacks from './stpacks';
 import wizard from './wizard';
 
 const reducers = {
-  packs,
+  stpacks,
   wizard,
 };
 

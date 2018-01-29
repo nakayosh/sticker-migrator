@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import Stpack from '../components/stpack';
 import { Map as ImmutableMap } from 'immutable';
+import Stpack from '../components/stpack';
 
 const mapStateToProps = () => ({
   stpack: ImmutableMap({

@@ -1,8 +1,13 @@
 .stpack {
-  padding: 24px 36px;
+  position: relative;
+  padding: 8px 16px;
   border-radius: 6px;
   border: 1px solid $p500;
   background-color: $p000;
+
+  @media screen and (min-width: 700px) {
+    padding: 24px 36px;
+  }
 }
 
 .stpack__letter-head {
@@ -21,6 +26,18 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.stpack__dropdown-menu {
+  position: absolute;
+  padding: 24px 36px;
+  top: 0;
+  right: 0;
+
+  button {
+    color: $t100;
+    font-size: 21px;
+  }
 }
 
 .stpack__download-button {
