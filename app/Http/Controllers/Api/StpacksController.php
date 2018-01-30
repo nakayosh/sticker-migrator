@@ -17,9 +17,12 @@ class StpacksController extends Controller
             $downloader = new Line();
             $download   = $downloader->download($stpack_id);
 
-            if (is_array($download)) {
-                $return_code = $download['code'];
-            }
+            if ($download['error']) {
+                return response()->json([
+                    'error' => $download['error'],
+                    'error_description' => $download['error_description']
+                ], 500);
+            };
         }
 
         $stpack_model = Stpack::where('id', $stpack_id)->first();
