@@ -8,6 +8,8 @@ import {
 function normalizeSticker(state, sticker) {
   sticker = { ...sticker };
 
+  sticker.id = sticker.id;
+
   delete sticker.stpack_id;
   delete sticker.created_at;
   delete sticker.updated_at;

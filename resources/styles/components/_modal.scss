@@ -1,0 +1,42 @@
+.modal-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: opacity 0.3s linear;
+  will-change: opacity;
+  z-index: 800;
+}
+
+.modal-root__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-root__container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 800;
+  pointer-events: none;
+  user-select: none;
+}
+
+.modal {
+  position: relative;
+  top: 20vh;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 360px;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.26);
+  pointer-events: auto;
+  z-index: 998;
+}

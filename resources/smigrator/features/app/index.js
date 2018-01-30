@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Redirect } from 'react-router';
 import { WrappedRoute } from './util/react_router_helpers';
 import { ImmutableLoadingBar as LoadingBar } from 'react-redux-loading-bar';
+import ModalContaienr from './containers/modal_container';
 
 import {
   Home,
@@ -23,6 +24,7 @@ export default class App extends React.Component {
           <WrappedRoute path='/stpacks/:id/compose' component={Compose} />
         </Switch>
 
+        <ModalContaienr />
         <LoadingBar className='loading-bar' />
       </div>
     );
