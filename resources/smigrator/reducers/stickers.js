@@ -18,7 +18,7 @@ function normalizeStickers(state, stickers) {
 }
 
 function normalizeStickerFromStpack(state, stpack) {
-  state = normalizeStickers(state, stpack.sstickers);
+  state = normalizeStickers(state, stpack.stickers);
 
   return state;
 }
