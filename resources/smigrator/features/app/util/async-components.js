@@ -3,5 +3,9 @@ export function Home () {
 }
 
 export function Stpacks () {
-  return import(/* webpackChunkName: "features/packs" */'../../stpacks');
+  return import(/* webpackChunkName: "features/stpacks" */'../../stpacks');
+}
+
+export function Compose () {
+  return import(/* webpackChunkName: "features/compose" */'../../compose');
 }
