@@ -9,7 +9,7 @@ use App\Stpack;
 
 class StpacksController extends Controller
 {
-    public function getPack(Request $request, $stpack_id){
+    public function getStpack(Request $request, $stpack_id){
         $stpack_model = Stpack::where('id', $stpack_id);
         $return_code  = 200;
 
