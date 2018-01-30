@@ -7,8 +7,8 @@ services:
     environment:
       - "MYSQL_DATABASE=smigrator"
       - "MYSQL_ROOT_PASSWORD=root"
-    # volumes:
-    #   - ./mariadb:/var/lib/mysql
+    volumes:
+      - ./mariadb:/var/lib/mysql
 
   web:
     build: .
