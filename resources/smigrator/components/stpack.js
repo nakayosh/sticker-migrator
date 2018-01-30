@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import ImmtuablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 
-import Dropdown from '../../../containers/dropdown_container';
-import LoadingIndicator from '../../../components/loading_indicator';
-import StickerContainer from '../../../containers/sticker_container';
+import Dropdown from '../containers/dropdown_container';
+import LoadingIndicator from '../components/loading_indicator';
+import StickerContainer from '../containers/sticker_container';
 
 export default class Stapck extends ImmutablePureComponent {
 
   static propTypes = {
-    id: PropTypes.string.isRequired,
     stpack: ImmtuablePropTypes.map,
   }
 
@@ -72,9 +71,9 @@ export default class Stapck extends ImmutablePureComponent {
 
         <ul className='stpack__stickers'>
           {
-            !!stpack.get('stickers').size && stpack.get('stickers').map(sticker => (
-              <li className='stpack__sticker' key={sticker.get('id')}>
-                <StickerContainer sticker={sticker} />
+            !!stpack.get('stickers').size && stpack.get('stickers').map(stickerId => (
+              <li className='stpack__sticker' key={stickerId}>
+                <StickerContainer stickerId={stickerId} />
               </li>
             ))
           }

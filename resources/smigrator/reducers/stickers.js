@@ -10,7 +10,7 @@ function normalizeSticker(state, sticker) {
 }
 
 function normalizeStickers(state, stickers) {
-  state = stickers.forEach(sticker => {
+  stickers.forEach(sticker => {
     state = normalizeSticker(state, sticker);
   });
 
