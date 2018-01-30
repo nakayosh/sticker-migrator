@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchStpack } from '../../../actions/stpacks';
+import { fetchStpack } from '../actions/stpacks';
 import Wizard from '../components/wizard';
 
 const mapStateToProps = state => ({

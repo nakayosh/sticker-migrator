@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import { fetchStpack } from '../../actions/stpacks';
+
 import Page from '../app/components/page';
 import Content from '../app/components/content';
 import GeneralHeader from '../general_header';
-
-import StpackContainer from './containers/stpack_container';
+import StpackContainer from '../../containers/stpack_container';
 
 @connect()
 export default class Stpacks extends ImmutablePureComponent {
