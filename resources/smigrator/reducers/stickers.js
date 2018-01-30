@@ -6,6 +6,12 @@ import {
 } from '../actions/stpacks';
 
 function normalizeSticker(state, sticker) {
+  sticker = { ...sticker };
+
+  delete sticker.stpack_id;
+  delete sticker.created_at;
+  delete sticker.updated_at;
+
   return state.set(sticker.id, fromJS(sticker));
 }
 
