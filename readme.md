@@ -33,7 +33,7 @@ cp .env.example .env
 
 ```
 docker-compose run --rm web composer install --no-progress \
- && php artisan key:generate \
+ && php artisan key:generate
 ```
 ```
 docker-compose run --rm web php artisan migrate \
