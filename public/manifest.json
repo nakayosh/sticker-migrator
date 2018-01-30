@@ -1,7 +1,7 @@
 {
-  "name": "Sticker Migrater",
-  "short_name": "Smigrater",
-  "description": "Sticker Migrater from LINE to Telegram",
+  "name": "Sticker Migrator",
+  "short_name": "Smigrator",
+  "description": "Sticker Migrator from LINE to Telegram",
   "icons": [
       {
           "src": "/android-chrome-icon-192.png",

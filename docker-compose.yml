@@ -5,14 +5,14 @@ services:
     restart: always
     image: mariadb:10.2
     environment:
-      - "MYSQL_DATABASE=smigrater"
+      - "MYSQL_DATABASE=smigrator"
       - "MYSQL_ROOT_PASSWORD=root"
     # volumes:
     #   - ./mariadb:/var/lib/mysql
 
   web:
     build: .
-    image: neetshin/smigrater
+    image: neetshin/smigrator
     restart: always
     env_file: .env
     ports:
@@ -20,4 +20,4 @@ services:
     depends_on:
       - db
     volumes:
-      - .:/smigrater
+      - .:/smigrator

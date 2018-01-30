@@ -7,7 +7,7 @@ import App from '../features/app';
 
 export const store = configureStore();
 
-export default class Smigrater extends React.PureComponent {
+export default class Smigrator extends React.PureComponent {
 
   render() {
     return (

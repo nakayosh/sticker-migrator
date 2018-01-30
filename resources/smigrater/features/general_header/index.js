@@ -12,10 +12,10 @@ export default class GeneralHeader extends React.PureComponent {
         <Link to='/'>
           <h1>
             <span className='invisible'>
-              Sticker Migrater
+              Sticker Migrator
             </span>
 
-            <img src={Logo} alt='Sticker Migrater' />
+            <img src={Logo} alt='Sticker Migrator' />
           </h1>
         </Link>
 

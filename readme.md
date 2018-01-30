@@ -1,6 +1,6 @@
-<p align="center"><img src="https://i.imgur.com/voeJdH5.png" width="300px"></p>
+<p align="center"><img src="https://i.imgur.com/KzB72Jc.png" width="300px"></p>
 
-Sticker Migraterは，LINEからTelegramに簡単にステッカーを移植するアプリケーションです．
+Sticker Migratorは，LINEからTelegramに簡単にステッカーを移植するアプリケーションです．
 
 ---
 ## Features
@@ -21,7 +21,7 @@ cp .env.example .env
     restart: always
     image: mariadb:10.2
     environment:
-      - "MYSQL_DATABASE=smigrater"
+      - "MYSQL_DATABASE=smigrator"
       - "MYSQL_ROOT_PASSWORD=root"
 -    # volumes:
 -    #   - ./mariadb:/var/lib/mysql
