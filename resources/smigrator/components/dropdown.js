@@ -126,12 +126,10 @@ export default class Dropdown extends React.PureComponent {
     isModalOpen: PropTypes.bool.isRequired,
     onModalOpen: PropTypes.func,
     onModalClose: PropTypes.func,
-    direction: PropTypes.oneOf(['left', 'right']),
     placement: PropTypes.oneOf(['top', 'bottom', 'right', 'left']),
   }
 
   static defaultProps = {
-    direction: 'left',
     placement: 'bottom',
   }
 
@@ -198,7 +196,7 @@ export default class Dropdown extends React.PureComponent {
   }
 
   render() {
-    const { icon, items, title, placement, disabled, direction } = this.props;
+    const { icon, items, title, placement, disabled } = this.props;
     const { expanded } = this.state;
 
     return (
@@ -216,7 +214,6 @@ export default class Dropdown extends React.PureComponent {
           <DropdownMenu
             items={items}
             placement={placement}
-            direction={direction}
             onClose={this.handleClose}
           />
         </Overlay>

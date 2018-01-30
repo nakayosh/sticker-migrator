@@ -30,7 +30,6 @@
 }
 
 .stpack__title {
-  margin-top: 0;
   font-weight: bold;
   font-size: 24px;
   white-space: nowrap;
@@ -41,6 +40,10 @@
 .stpack__time {
   color: $t100;
   font-size: 14px;
+
+  & > i {
+    margin-right: 4px;
+  }
 }
 
 .stpack__dropdown-menu {

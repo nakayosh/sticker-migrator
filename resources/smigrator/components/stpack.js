@@ -45,6 +45,7 @@ export default class Stapck extends ImmutablePureComponent {
 
           <div className='stpack__meta'>
             <time className='stpack__time' timestamp={stpack.get('created_at')}>
+              <i className='fa fa-clock-o' aria-hidden />
               { stpack.get('created_at') }
             </time>
 
