@@ -26,7 +26,7 @@ class Line
         } catch(RequestException $e) {
             $response = $e->getResponse();
             $status_code = $response->getStatusCode();
-            $message = 'LINE server return ERROR.';
+            $message = 'LINE server returned an ERROR.';
             return [
                 'code' => $status_code,
                 'error' => $this->getStatusStr($status_code),
@@ -42,7 +42,7 @@ class Line
             return [
                 'code' => 404,
                 'error' => $this->getStatusStr(404),
-                'error_description' => 'there are no stamp',
+                'error_description' => 'There are no stickers',
             ];
         }
         foreach ($matches_url[1] as $url) {
