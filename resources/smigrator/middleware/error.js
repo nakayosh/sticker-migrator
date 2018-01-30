@@ -17,6 +17,10 @@ export default function errorsMiddleware() {
             text = data.error;
           }
 
+          if (data.error_description) {
+            text = data.error_description;
+          }
+
           dispatch(showMessage({ text }));
         } else {
           console.error(action.error, action.type);
