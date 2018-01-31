@@ -21,7 +21,7 @@ class Line
         $client = new GoutteClient();
 
         try {
-            $crawler = $client->request('GET', 'https://asdjfaosdgnag.line.me/stickershop/product/'.$id.'/ja');
+            $crawler = $client->request('GET', 'https://store.line.me/stickershop/product/'.$id.'/ja');
             $status_code = $response->getStatusCode();
         } catch(RequestException $e) {
             return [
