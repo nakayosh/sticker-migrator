@@ -10,6 +10,7 @@ use App\Stpack;
 class StpacksController extends Controller
 {
     public function getStpack(Request $request, $stpack_id){
+        $stpack_model = Stpack::where('id', $stpack_id);
         $return_code  = 200;
 
         if (!$stpack_model->exists()) {
