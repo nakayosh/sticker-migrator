@@ -33,18 +33,19 @@ class Line
             ];
         }
 
-        $name         = $crawler->filter('.mdCMN08Ttl')->text();
-        $short_name   = str_replace('-', '_', Uuid::uuid4()->toString());
-        $original_url = 'https://store.line.me/stickershop/product/'.$id.'/ja';
-        $sticker_urls = $crawler->filter('.mdCMN09Image')->each(function ($node) {
-            return $this->getNodeBackgroundImage($node);
-        });
-
-        if (count($sticker_urls) === 0) {
+        // Goutte, 指定したセレクタが存在しないとエラーを吐く．
+        try {
+            $name         = $crawler->filter('.mdCMN08Ttl')->text();
+            $short_name   = str_replace('-', '_', Uuid::uuid4()->toString());
+            $original_url = 'https://store.line.me/stickershop/product/'.$id.'/ja';
+            $sticker_urls = $crawler->filter('.mdCMN09Image')->each(function ($node) {
+                return $this->getNodeBackgroundImage($node);
+            });
+        } catch(\Exception $e) {
             return [
-                'code' => 404,
+                'code'  => 404,
                 'error' => $this->getStatusStr(404),
-                'error_description' => 'There are no stickers',
+                'error_description' => 'There are no stickers or download restricted',
             ];
         }
 
