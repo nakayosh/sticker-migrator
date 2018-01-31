@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Lib\ImageDownloader;
-use GuzzleHttp\Client;
+
+use Goutte\Client as GoutteClient;
 use Ramsey\Uuid\Uuid;
+use GuzzleHttp\Exception\RequestException;
 use App\Stpack;
 use App\Sticker;
-use GuzzleHttp\Exception\RequestException;
 
 class Line
 {
@@ -16,59 +17,93 @@ class Line
      * @param $url url for line sticker page
      * @return model App\Stpack
      */
-    public function download($stpack_url){
-        $short_name_hf = Uuid::uuid4()->toString();
-        $short_name = str_replace('-', '_', $short_name_hf);
-        $client = new Client();
-        try{
-            $response = $client->get($stpack_url);
+    public function download($id) {
+        $client = new GoutteClient();
+
+        try {
+            $crawler = $client->request('GET', 'https://asdjfaosdgnag.line.me/stickershop/product/'.$id.'/ja');
             $status_code = $response->getStatusCode();
         } catch(RequestException $e) {
-            $response = $e->getResponse();
-            $status_code = $response->getStatusCode();
-            $message = 'LINE server return ERROR.';
             return [
-                'code' => $status_code,
+                'code' => $e->getResponse()->getStatusCode(),
                 'error' => $this->getStatusStr($status_code),
-                'error_description' => $message,
+                'error_description' => 'LINE server returned an ERROR',
             ];
         }
-        preg_match_all('/;\s?background-image:\s?url\([\'\"]*(.+?)[\'\"]*\);/', $response->getBody(), $matches_url);
-        preg_match('/<h3\s?class=[\'\"]*mdCMN08Ttl[\'\"]*>(.+?)<\/h3>/', $response->getBody(), $sticker_name);
-        preg_match('/product\/(.+?)\//', $stpack_url, $stpack_id);
-        $stickers = array();
-        $sticker_models = [];
-        if (count($matches_url[1]) === 0) {
+
+        $name         = $crawler->filter('.mdCMN08Ttl')->text();
+        $short_name   = str_replace('-', '_', Uuid::uuid4()->toString());
+        $original_url = 'https://store.line.me/stickershop/product/'.$id.'/ja';
+        $sticker_urls = $crawler->filter('.mdCMN09Image')->each(function ($node) {
+            return $this->getNodeBackgroundImage($node);
+        });
+
+        if (count($sticker_urls) === 0) {
             return [
                 'code' => 404,
                 'error' => $this->getStatusStr(404),
-                'error_description' => 'there are no stamp',
+                'error_description' => 'There are no stickers',
             ];
         }
-        foreach ($matches_url[1] as $url) {
-            $correct_url = explode(';', $url)[0];
-            preg_match('/sticker\/(.+?)\//', $correct_url, $st_id);
-            $pack = [
-                'url' => $correct_url,
-                'id' => $st_id[1],
+
+        $stickers       = [];
+        $sticker_models = [];
+
+        foreach ($sticker_urls as $url) {
+            $formatted_url = explode(';', $url)[0];
+            $sticker_id    = $this->getStickerIdFromUrl($formatted_url);
+
+            $sticker = [
+                'id'  => $sticker_id,
+                'url' => $formatted_url,
             ];
-            $stickers[] = $pack;
-            $sticker_models[] = new Sticker($pack);
+
+            $stickers[]       = $sticker;
+            $sticker_models[] = new Sticker($sticker);
         }
+
         $retval = [
-            'id' => $stpack_id[1],
-            'name' => $sticker_name[1],
-            'short_name' => $short_name,
+            'id'            => $id,
+            'name'          => $name,
+            'short_name'    => $short_name,
             'thumbnail_url' => $stickers[0]['url'],
-            'original_url' => $stpack_url,
-            'stickers' => $stickers,
+            'original_url'  => $original_url,
+            'stickers'      => $stickers,
         ];
+
         $stpack = Stpack::create($retval);
         $stpack->stickers()->saveMany($sticker_models);
+
         return $stpack;
     }
 
-    public function getStatusStr($code){
+    /**
+     * Get sticker ID from its image's URL
+     * @param   string  $url         Image URL for the sticker
+     * @return  string  $sticker_id  ID for the sticker
+     */
+    protected function getStickerIdFromUrl($url) {
+        preg_match('/sticker\/(.+?)\//', $url, $sticker_id);
+
+        return $sticker_id[1];
+    }
+
+    /**
+     * Get background-image from DOM node
+     * @param   Crawler  $node              DOM node
+     * @return  string   $background_image  Value of background-image
+     */
+    protected function getNodeBackgroundImage($node) {
+        preg_match(
+            '/\s?background-image:\s?url\([\'\"]*(.+?)[\'\"]*\)/',
+            $node->attr('style'),
+            $matches
+        );
+
+        return $matches[1];
+    }
+
+    public function getStatusStr($code) {
         switch ($code) {
             case 100: $text = 'Continue'; break;
             case 101: $text = 'Switching Protocols'; break;
