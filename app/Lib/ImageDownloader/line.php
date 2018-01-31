@@ -14,8 +14,8 @@ class Line
 
     /**
      * downlolad sticker from line
-     * @param $url url for line sticker page
-     * @return model App\Stpack
+     * @param $id stpack id
+     * @return model App\Stpack | array
      */
     public function download($id) {
         $client = new GoutteClient();
@@ -62,7 +62,7 @@ class Line
             $sticker_models[] = new Sticker($sticker);
         }
 
-        $retval = [
+        $stpack_data = [
             'id'            => $id,
             'name'          => $name,
             'short_name'    => $short_name,
@@ -71,7 +71,7 @@ class Line
             'stickers'      => $stickers,
         ];
 
-        $stpack = Stpack::create($retval);
+        $stpack = Stpack::create($stpack_data);
         $stpack->stickers()->saveMany($sticker_models);
 
         return $stpack;
