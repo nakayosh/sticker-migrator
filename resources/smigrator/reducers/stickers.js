@@ -8,15 +8,7 @@ import {
 function normalizeSticker(state, sticker) {
   sticker = { ...sticker };
 
-  sticker.id = sticker.id.toString();
-
-  delete sticker.id_str;
-  delete sticker.stpack_id;
-  delete sticker.stpack_id_str;
-  delete sticker.created_at;
-  delete sticker.updated_at;
-
-  return state.set(sticker.id, fromJS(sticker));
+  return state.set(sticker.id_str, fromJS(sticker));
 }
 
 function normalizeStickers(state, stickers) {

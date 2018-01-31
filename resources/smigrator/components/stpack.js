@@ -58,7 +58,7 @@ export default class Stapck extends ImmutablePureComponent {
             </time>
 
             <h2 className='stpack__title'>
-              <Link to={`/stpacks/${stpack.get('id')}`}>
+              <Link to={`/stpacks/${stpack.get('id_str')}`}>
                 { stpack.get('name') }
               </Link>
             </h2>
