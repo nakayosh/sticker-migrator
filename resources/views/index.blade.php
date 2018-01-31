@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="Sticker Migrater">
+    <meta name="apple-mobile-web-app-title" content="Sticker Migrator">
 
-    <title>Sticker Migrater</title>
+    <title>Sticker Migrator</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}" id="csrf-token">
     <meta name="msapplication-config" content="/browserconfig.xml">

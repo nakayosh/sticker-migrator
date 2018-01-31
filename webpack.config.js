@@ -13,7 +13,7 @@ module.exports = {
   devtool: !isProd && 'source-map' || '',
 
   entry: {
-    main: './resources/smigrater/main.js',
+    main: './resources/smigrator/main.js',
     style: './resources/styles/main.scss',
   },
 

@@ -1,14 +1,14 @@
 FROM php:7.2.0-fpm-alpine3.6
 
-LABEL maintainer="https://gitlab.com/nijipico/sticker_migrater" \
-      description="Sticker Migrater from LINE to Telegram"
+LABEL maintainer="https://gitlab.com/nijipico/sticker_migrator" \
+      description="Sticker Migrator from LINE to Telegram"
 
 ENV NODE_ENV=production \
     COMPOSER_ALLOW_SUPERUSER=true
 
 EXPOSE 8080
 
-WORKDIR /smigrater
+WORKDIR /smigrator
 
 RUN apk -U upgrade \
  && apk add \
@@ -44,13 +44,13 @@ COPY ./installation/php.ini /usr/local/etc/php/php.ini
 COPY ./installation/nginx.conf /etc/nginx/nginx.conf
 COPY ./installation/zzz-www.conf /usr/local/etc/php-fpm.d
 COPY ./installation/supervisord.conf /etc/supervisord.conf
-COPY . /smigrater
+COPY . /smigrator
 
-RUN mkdir -p /smigrater/storage /smigrater/bootstrap/cache \
- && chmod -R 777 /smigrater/storage /smigrater/bootstrap/cache \
+RUN mkdir -p /smigrator/storage /smigrator/bootstrap/cache \
+ && chmod -R 777 /smigrator/storage /smigrator/bootstrap/cache \
  && chmod +x /usr/local/bin/composer; sync \
  && yarn cache clean
 
-VOLUME ["/smigrater"]
+VOLUME ["/smigrator"]
 
 CMD ["supervisord"]

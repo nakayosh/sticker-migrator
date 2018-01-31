@@ -1,5 +1,5 @@
 {
-  "name": "sticker_migrater",
+  "name": "sticker_migrator",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/nijipico/sticker_migrater.git"
+    "url": "git+ssh://git@gitlab.com/nijipico/sticker_migrator.git"
   },
   "dependencies": {
     "axios": "^0.17.1",
@@ -50,6 +50,7 @@
     "react-dom": "^16.1.1",
     "react-immutable-proptypes": "^2.1.0",
     "react-immutable-pure-component": "^1.1.1",
+    "react-motion": "^0.5.2",
     "react-overlays": "^0.8.3",
     "react-redux": "^5.0.6",
     "react-redux-loading-bar": "^3.1.1",

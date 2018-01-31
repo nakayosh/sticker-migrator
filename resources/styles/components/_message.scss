@@ -1,0 +1,39 @@
+.message-container {
+  opacity: 0;
+  height: 0;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  transition: 0.35s ease-out;
+
+  @media screen and (min-width: 700px) {
+    max-width: 700px;
+  }
+
+  &--show {
+    height: 78px;
+    opacity: 1;
+  }
+}
+
+.message {
+  position: relative;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid $red;
+  background-color: lighten($red, 35%);
+
+  @media screen and (min-width: 700px) {
+    padding: 24px 36px;
+  }
+}
+
+.message__text {
+  color: $red;
+}
+
+.message__close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
