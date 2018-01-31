@@ -49,12 +49,11 @@
       display: block;
       padding: 10px 16px;
       box-sizing: border-box;
-      color: $t100;
+      color: $t500;
 
       &:hover, &:active {
         text-decoration: none;
-        color: $white;
-        background-color: $h100;
+        background-color: $p500;
       }
     }
   }

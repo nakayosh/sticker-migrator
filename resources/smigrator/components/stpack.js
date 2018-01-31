@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import ImmtuablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 
@@ -50,22 +50,26 @@ export default class Stapck extends ImmutablePureComponent {
             </time>
 
             <h2 className='stpack__title'>
-              { stpack.get('name') }
+              <Link to={`/stpacks/${stpack.get('id')}`}>
+                { stpack.get('name') }
+              </Link>
             </h2>
 
-            <div className='stpack__dropdown-menu'>
-              <Dropdown
-                icon='fa fa-ellipsis-v'
-                items={items}
-                title='Show more'
-              />
-            </div>
+            <div className='stpack__buttons-wrapper'>
+              <div className='stpack__download-button'>
+                <a className='rich-button' href={stpack.get('url')} target='_blank' onClick={this.handleDownload}>
+                  <i className='fa fa-plus' />
+                  Add on Telegram
+                </a>
+              </div>
 
-            <div className='stpack__download-button'>
-              <a className='rich-button' href={stpack.get('url')} target='_blank' onClick={this.handleDownload}>
-                <i className='fa fa-plus' />
-                Add on Telegram
-              </a>
+              <div className='stpack__dropdown-menu'>
+                <Dropdown
+                  icon='fa fa-ellipsis-v rich-button'
+                  items={items}
+                  title='Show more'
+                />
+              </div>
             </div>
           </div>
         </div>
