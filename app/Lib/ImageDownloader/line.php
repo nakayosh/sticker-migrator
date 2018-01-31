@@ -7,6 +7,7 @@ use Ramsey\Uuid\Uuid;
 use GuzzleHttp\Exception\RequestException;
 use App\Stpack;
 use App\Sticker;
+use Exception;
 
 class Line
 {
@@ -41,7 +42,7 @@ class Line
             $sticker_urls = $crawler->filter('.mdCMN09Image')->each(function ($node) {
                 return $this->getNodeBackgroundImage($node);
             });
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             return [
                 'code'  => 404,
                 'error' => $this->getStatusStr(404),
