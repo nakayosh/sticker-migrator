@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ImmtuablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
+import querystring from 'querystring';
 
 import Dropdown from '../containers/dropdown_container';
 import LoadingIndicator from '../components/loading_indicator';
@@ -15,8 +16,15 @@ export default class Stapck extends ImmutablePureComponent {
 
   handleDownload = e => {
     e.preventDefault();
+
+    const url        = this.props.stapck.get('url');
     const short_name = this.props.stpack.get('short_name');
-    window.location = `tg:\/\/addstickers?set=${short_name}`;
+
+    setTimeout(() => {
+      window.location = url;
+    }, 100);
+
+    window.location = `tg://addstickers?${querystring.encode({ set: short_name })}`;
   }
 
   render () {
