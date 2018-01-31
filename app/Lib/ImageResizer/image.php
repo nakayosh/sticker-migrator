@@ -17,7 +17,7 @@ class Image
      * @param $save_name image name to save
      * @return bool
      */
-    private function Resize($picture, $save_directory, $save_name)
+    private function resize($picture, $save_directory, $save_name)
     {
         $picture = \Image::make($picture);
         $save_path = storage_path('app').'/'.$save_directory.'/'.$save_name;
