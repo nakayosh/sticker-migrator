@@ -7,6 +7,7 @@ use Ramsey\Uuid\Uuid;
 use GuzzleHttp\Exception\RequestException;
 use App\Stpack;
 use App\Sticker;
+use Exception;
 
 class Line
 {
@@ -14,8 +15,8 @@ class Line
 
     /**
      * downlolad sticker from line
-     * @param $url url for line sticker page
-     * @return model App\Stpack
+     * @param $id stpack id
+     * @return model App\Stpack | array
      */
     public function download($id) {
         $client = new GoutteClient();
@@ -41,7 +42,7 @@ class Line
             $sticker_urls = $crawler->filter('.mdCMN09Image')->each(function ($node) {
                 return $this->getNodeBackgroundImage($node);
             });
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             return [
                 'code'  => 404,
                 'error' => $this->getStatusStr(404),
@@ -65,7 +66,7 @@ class Line
             $sticker_models[] = new Sticker($sticker);
         }
 
-        $retval = [
+        $stpack_data = [
             'id'            => $id,
             'name'          => $name,
             'short_name'    => $short_name,
@@ -74,7 +75,7 @@ class Line
             'stickers'      => $stickers,
         ];
 
-        $stpack = Stpack::create($retval);
+        $stpack = Stpack::create($stpack_data);
         $stpack->stickers()->saveMany($sticker_models);
 
         return $stpack;

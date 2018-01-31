@@ -24,10 +24,12 @@ class StpacksController extends Controller
                 ], 500);
             };
         }
-
-        $stpack_model = Stpack::where('id', $stpack_id)->first();
-        $stpack       = $stpack_model::with('stickers')->first();
-
+        if ($return_code === 200) {
+            $stpack_model = Stpack::where('id', $stpack_id)->first();
+            $stpack       = $stpack_model::with('stickers')->first();
+        } else {
+            $stpack = $download;
+        }
         return response()->json($stpack, $return_code ?: 500);
     }
 }
