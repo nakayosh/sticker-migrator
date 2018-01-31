@@ -14,7 +14,18 @@ class Stpack extends Model
         'original_url',
     ];
 
+    /**
+     * モデルの配列形態に追加するアクセサ
+     *
+     * @var array
+     */
+    protected $appends = ['id_str'];
+
     public $incrementing = false;
+
+    public function getIdStrAttribute(){
+        return (string)$this->id;
+    }
 
     public function stickers(){
         return $this->hasMany('App\Sticker');

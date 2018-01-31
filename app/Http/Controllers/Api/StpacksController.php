@@ -25,8 +25,7 @@ class StpacksController extends Controller
             };
         }
         if ($return_code === 200) {
-            $stpack_model = Stpack::where('id', $stpack_id)->first();
-            $stpack       = $stpack_model::with('stickers')->first();
+            $stpack = Stpack::with('stickers')->where('id', $stpack_id)->first();
         } else {
             $stpack = $download;
         }
