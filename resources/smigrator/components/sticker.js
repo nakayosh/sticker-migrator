@@ -14,7 +14,7 @@ export default class Sticker extends ImmutablePureComponent {
     const { sticker } = this.props;
 
     if ( !sticker ) {
-      return null;
+      return <p>no sticker specified</p>;
     }
 
     return (

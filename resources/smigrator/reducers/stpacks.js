@@ -7,7 +7,8 @@ import {
 const normalizeStpack = (state, stpack) => {
   stpack = { ...stpack };
 
-  stpack.stickers = stpack.stickers.map(sticker => sticker.id);
+  stpack.id = stpack.id.toString();
+  stpack.stickers = stpack.stickers.map(sticker => sticker.id.toString());
 
   return state.set(stpack.id, fromJS(stpack));
 };

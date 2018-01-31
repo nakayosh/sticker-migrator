@@ -9,7 +9,7 @@ const mapStateToProps = (state, { stickerId }) => ({
 const mapDispatchToProps = ( dispatch, { stickerId }) => ({
 
   onClick() {
-    dispatch(openModal('STICKER_PREVIEW_MODAL', { stickerId: stickerId }));
+    dispatch(openModal('STICKER_PREVIEW_MODAL', { stickerId }));
   },
 
 });
