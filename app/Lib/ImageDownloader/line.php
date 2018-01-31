@@ -22,10 +22,12 @@ class Line
 
         try {
             $crawler = $client->request('GET', 'https://store.line.me/stickershop/product/'.$id.'/ja');
-            $status_code = $response->getStatusCode();
         } catch(RequestException $e) {
+            $response    = $e->getResponse();
+            $status_code = $response->getStatusCode();
+
             return [
-                'code' => $e->getResponse()->getStatusCode(),
+                'code' => $status_code,
                 'error' => $this->getStatusStr($status_code),
                 'error_description' => 'LINE server returned an ERROR',
             ];
