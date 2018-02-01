@@ -22,7 +22,7 @@ class Image
         $picture = \Image::make($picture);
         $save_path = storage_path('app').'/'.$save_directory.'/'.$save_name;
         $picture_mime = $picture->mime();
-        if ($picture_mime != IMAGETYPE_PNG) {
+        if ($picture_mime != image_type_to_mime_type(IMAGETYPE_PNG)) {
             // pngでない画像！エラー
             throw new Exception('Image type shoud be png.');
         }
