@@ -19,8 +19,8 @@ class Image
      */
     public function resize($picture, $save_directory, $save_name)
     {
-        $picture      = \Image::make($picture);
-        $save_path    = storage_path('app').'/'.$save_directory.'/'.$save_name;
+        $picture   = \Image::make($picture);
+        $save_path = storage_path('app'.'/'.$save_directory.'/'.$save_name);
 
         if ($picture->mime() !== image_type_to_mime_type(IMAGETYPE_PNG)) {
             throw new Exception('Image type must be png.');
@@ -54,8 +54,8 @@ class Image
         // If the specified directory doesn't exist yet, make the directory.
         // it won't check the permission because laravel requires writing permission
         // on storage directory recursively
-        if ( !file_exists(storage_path('app').'/'.$save_directory) ) {
-            mkdir(storage_path('app').'/'.$save_directory);
+        if ( !file_exists(storage_path('app'.'/'.$save_directory)) ) {
+            mkdir(storage_path('app'.'/'.$save_directory));
         }
 
         $picture->save($save_path);

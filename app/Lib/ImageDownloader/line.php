@@ -38,7 +38,7 @@ class Line
 
         try {
             $name         = $crawler->filter('.mdCMN08Ttl')->text();
-            $short_name   = str_replace('-', '_', Uuid::uuid4()->toString());
+            $short_name   = str_replace('-', '_', Uuid::uuid4()->toString()).'_by_'.config('telegram.username');
             $original_url = 'https://store.line.me/stickershop/product/'.$id.'/ja';
             $sticker_urls = $crawler->filter('.mdCMN09Image')->each(function ($node) {
                 return $this->getNodeBackgroundImage($node);

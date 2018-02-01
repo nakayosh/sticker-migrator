@@ -31,4 +31,8 @@ class StpacksController extends Controller
         }
         return response()->json($stpack, $return_code ?: 500);
     }
+
+    public function patchStpack(Request $request, $stpack_id){
+
+    }
 }
