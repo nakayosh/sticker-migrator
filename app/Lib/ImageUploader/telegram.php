@@ -6,7 +6,7 @@ use App\Lib\ImageResizer;
 use \unreal4u\TelegramAPI\TgLog;
 use \unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 use \unreal4u\TelegramAPI\Telegram\Methods\CreateNewStickerSet;
-use \unreal4u\TelegramAPI\Telegram\Methods\UploadStickerFile;
+use \unreal4u\TelegramAPI\Telegram\Methods\AddStickerToSet;
 
 class Telegram
 {
@@ -24,18 +24,23 @@ class Telegram
                 return [ 'error' => 'sticker data invalid', 'error_description' => 'Thrown sticker data is invalid'];
             }
 
-            $image_resizer = new ImageResizer();
-            $image_resizer->resize($sticker['url'], 'resized_stickers', strval($sticker['id']));
+            // $image_resizer = new ImageResizer();
+            // $image_resizer->resize($sticker['url'], 'resized_stickers', strval($sticker['id']));
 
-            $upload_sticker_file = new UploadStickerFile();
-            $upload_sticker_file->png_sticker = new InputFile(storage_path('app').'/resized_stickers/'.strval($sticker['id']));
+            // $upload_sticker_file = new UploadStickerFile();
+            // $upload_sticker_file->png_sticker = new InputFile(storage_path('app').'/resized_stickers/'.strval($sticker['id']));
 
-            try {
-                $tg_log = new TgLog(config('telegram.authorization_token'));
-                $result = $tg_log->performApiRequest($upload_sticker_file);
-            } catch (\Exception $e) {
-                return [ 'error' => 'sicker upload failed', 'error_description' => 'Uploading sicker image failed'];
-            }
+            // $tg_log = new TgLog(config('telegram.authorization_token'));
+            // $promise = $tg_log->performApiRequest($upload_sticker_file);
+
+            // $promise->then(
+            //     function ($response) {
+
+            //     },
+            //     function (\Exception $exception) {
+            //         return [ 'error' => 'sicker upload failed', 'error_description' => 'Uploading sicker image failed'];
+            //     }
+            // );
         }
     }
 }

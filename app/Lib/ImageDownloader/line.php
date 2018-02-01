@@ -22,11 +22,13 @@ class Line
         $client = new GoutteClient();
 
         try {
-            $crawler = $client->request('GET', 'https://store.line.me/stickershop/product/'.$id.'/ja');
+            $crawler = $client->request(
+                'GET',
+                'https://store.line.me/stickershop/product/'.$id.'/ja'
+            );
         } catch(RequestException $e) {
             $response    = $e->getResponse();
             $status_code = $response->getStatusCode();
-
             return [
                 'code' => $status_code,
                 'error' => $this->getStatusStr($status_code),
@@ -34,7 +36,6 @@ class Line
             ];
         }
 
-        // Goutte, 指定したセレクタが存在しないとエラーを吐く．
         try {
             $name         = $crawler->filter('.mdCMN08Ttl')->text();
             $short_name   = str_replace('-', '_', Uuid::uuid4()->toString());
