@@ -28,7 +28,7 @@ class Telegram
             $image_resizer = new ImageResizer();
             $image_resizer->resize($sticker['url'], 'resized_stickers', $sticker['id_str']);
 
-            $compressed_image_path = storage_path('app/resized_stickers'.$sticker['id_str']);
+            $compressed_image_path = storage_path('app/resized_stickers/'.$sticker['id_str']);
 
             if ($key === 0) {
                 $create_new_sticker_set = new CreateNewStickerSet();
@@ -53,14 +53,14 @@ class Telegram
                 $add_sticker_to_set->png_sticker = new InputFile($compressed_image_path);
                 $add_sticker_to_set->emojis      = implode('', $stpack['emojis']);
 
-                $promise = $tg_log->performApiRequest($create_new_sticker_set);
+                $promise = $tg_log->performApiRequest($add_sticker_to_set);
 
                 $promise->then(
                     function ($response) {
                         // noop
                     },
                     function (\Exception $exception) {
-                        return [ 'error' => 'sicker upload failed', 'error_description' => 'Creating new sicker set failed'];
+                        return [ 'error' => 'sicker add failed', 'error_description' => 'Adding sicker to set failed'];
                     }
                 );
             }
