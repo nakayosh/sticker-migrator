@@ -16,7 +16,9 @@ class Telegram
         $stickers = $stpack['stickers'];
         $first_sticker = $stickers[0];
         $uploaded_sticker = $this->api->sticker->uploadStickerFile('app/resized_stickers/'.$first_sticker['id_str']);
-        $sticker_set = $this->api->sticker->createNewStickerSet($this->user_id, $stpack['short_name'], $stpack['name'], $uploaded_sticker['file_id'], implode('', $first_sticker['emojis']));
+        $sticker_set = $this->api->sticker->createNewStickerSet($this->user_id, $stpack['short_name'], $stpack['name'], $uploaded_sticker['file_id'], implode('', $first_sticker['emojis'] ?? ['☺']));
+        $first_sticker->file_id = $uploaded_sticker['file_id'];
+        $first_sticker->save();
         $uploaded_sticker_count = 1;
         yield $uploaded_sticker_count;
         $body_stickers = $stickers->slice(1);
@@ -28,6 +30,8 @@ class Telegram
 
     public function addStickerToStickerSet($sticker_set_name, $sticker){
         $uploaded_sticker = $this->api->sticker->uploadStickerFile('app/resized_stickers/'.$sticker['id_str']);
-        return $this->api->sticker->addStickerToSet($this->user_id, $sticker_set_name, $uploaded_sticker['file_id'], implode('', $sticker['emojis']));
+        $sticker->file_id = $uploaded_sticker['file_id'];
+        $sticker->save();
+        return $this->api->sticker->addStickerToSet($this->user_id, $sticker_set_name, $uploaded_sticker['file_id'], implode('', $sticker['emojis'] ?? ['☺']));
     }
 }

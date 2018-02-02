@@ -63,7 +63,7 @@ class Line
 
             $sticker = [
                 'id'  => $sticker_id,
-                'url' => $formatted_url,
+                'original_url' => $formatted_url,
             ];
 
             $stickers[]       = $sticker;
@@ -74,7 +74,7 @@ class Line
             'id'            => $id,
             'name'          => $name,
             'short_name'    => $short_name,
-            'thumbnail_url' => $stickers[0]['url'],
+            'thumbnail_url' => $stickers[0]['original_url'],
             'original_url'  => $original_url,
             'stickers'      => $stickers,
         ];

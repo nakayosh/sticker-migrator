@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Sticker extends Model
 {
     protected $fillable = [
-        'url',
+        'original_url',
         'id',
     ];
 

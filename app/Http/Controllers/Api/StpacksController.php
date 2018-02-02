@@ -39,7 +39,7 @@ class StpacksController extends Controller
         flush();
         $count = 1;
         foreach ($stickers as $sticker) {
-            $resizer->resize($sticker['url'], 'resized_stickers', $sticker['id_str']);
+            $resizer->resize($sticker['original_url'], 'resized_stickers', $sticker['id_str']);
             echo $count.' of '.$all_sticker_count.' were resized...<br>';
             ob_flush();
             flush();
@@ -55,7 +55,7 @@ class StpacksController extends Controller
             flush();
         }
         echo PHP_EOL.'upload finished!<br>'.PHP_EOL;
-        $url = 'https://t.me/addstickers/'.$stpack['short_name'].'_by_'.$telegram->api->user->getUserName();
+        $url = 'https://t.me/addstickers/'.$stpack['short_name'];
         echo 'let\'s download sticker from <a href="'.$url.'">'.$url.'</a><br>'.PHP_EOL;
         ob_flush();
         flush();
