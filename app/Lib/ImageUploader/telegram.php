@@ -21,7 +21,7 @@ class Telegram
         yield $uploaded_sticker_count;
         $body_stickers = $stickers->slice(1);
         foreach ($body_stickers as $sticker) {
-            $this->addStickerToStickerSet($stpack['short_name'].'_by_'.$this->api->user->getUsername(), $sticker);
+            $this->addStickerToStickerSet($stpack['short_name'], $sticker);
             yield ++$uploaded_sticker_count;
         }
     }
