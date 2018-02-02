@@ -40,7 +40,7 @@ export default class Wizard extends React.PureComponent {
 
         <div className='wizard__form'>
           <input
-            className='wizard__input input'
+            className='wizard__input rich-input input'
             type='text'
             pattern='https:\/\/store\.line\.me\/stickershop\/product\/[0-9]+'
             placeholder='https://store.line.me/stickershop/product/3897'

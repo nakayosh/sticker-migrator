@@ -7,36 +7,36 @@ import { ScrollContainer } from 'react-router-scroll-4';
 import CompactStpack from '../containers/compact_stpack_container';
 import LoadingIndicator from '../components/loading_indicator';
 
-export default class RecentStpacks extends ImmutablePureComponent {
+export default class SearchStpacks extends ImmutablePureComponent {
 
   static propTypes = {
     results: ImmutablePropTypes.list,
-    isSubmitting: PropTypes.bool.isRequired,
+    submitted: PropTypes.bool.isRequired,
   }
 
-  componentWillMount() {
-    if ( !this.props.results.size ) {
-      this.props.onScroll();
-    }
-  }
+  // componentWillMount() {
+  //   if ( !this.props.results.size ) {
+  //     this.props.onScroll();
+  //   }
+  // }
 
   handleScroll = e => {
     const { scrollTop, scrollHeight, clientHeight } = e.target;
 
-    if (scrollTop === scrollHeight - clientHeight && !this.props.isSubmitting) {
+    if (scrollTop === scrollHeight - clientHeight) {
       this.props.onScroll();
     }
   }
 
   render () {
-    const { results /*, isSubmitting */ } = this.props;
+    const { results, submitted } = this.props;
 
     return (
-      <div className='recent-stpacks'>
+      <div className='search-stpacks'>
         {
-          results.size ? (
-            <ScrollContainer scrollKey='recent'>
-              <div className='recent-stpacks__scroll-container' onScroll={this.handleScroll}>
+          submitted && results.size ? (
+            <ScrollContainer scrollKey='search'>
+              <div className='search-stpacks__scroll-container' onScroll={this.handleScroll}>
                 { results.map(result => <CompactStpack id={result} key={result} />) }
                 <LoadingIndicator />
               </div>

@@ -5,7 +5,7 @@ import Content from '../app/components/content';
 
 import GeneralHeader from '../general_header';
 import WizardContainer from '../../containers/wizard_container';
-import RecentStpacks from '../../containers/recent_stpacks_container';
+import DiscoverStpacks from '../../containers/discover_stpacks_container';
 
 export default class Home extends React.PureComponent {
 
@@ -16,7 +16,7 @@ export default class Home extends React.PureComponent {
 
         <Content>
           <WizardContainer />
-          <RecentStpacks />
+          <DiscoverStpacks />
         </Content>
       </Page>
     );

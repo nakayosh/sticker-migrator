@@ -1,0 +1,77 @@
+.discover-stpacks {
+  margin-bottom: 24px;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid $p500;
+  background-color: $p000;
+
+  @media screen and (min-width: 700px) {
+    padding: 24px 36px;
+  }
+}
+
+.discover-stpacks__header {
+  position: relative;
+  padding-bottom: 8px;
+  box-sizing: border-box;
+  border-bottom: 1px solid $p500;
+
+  &--focused {
+    .discover-stpacks__title {
+      opacity: 0;
+    }
+
+    .discover-stpacks__input-wrapper {
+      width: 100%;
+    }
+  }
+}
+
+.discover-stpacks__title {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: 0.5s ease-out;
+}
+
+.discover-stpacks__input-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 8px;
+  transition: 0.5s ease-out;
+}
+
+.discover-stpacks__input {
+  display: block;
+  width: 100%;
+  font-size: 16px;
+  transition: 0.5s ease-out;
+}
+
+.discover-stpacks__button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  color: $t100;
+  font-size: 16px;
+
+  & > i {
+    margin: auto 8px;
+  }
+}
+
+.recent-stpacks,
+.search-stpacks {
+  overflow: hidden;
+}
+
+.recent-stpacks__scroll-container,
+.search-stpacks__scroll-container {
+  height: 700px;
+  overflow-y: scroll;
+}
