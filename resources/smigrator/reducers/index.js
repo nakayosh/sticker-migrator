@@ -3,6 +3,7 @@ import message from './message';
 import modal from './modal';
 import stickers from './stickers';
 import stpacks from './stpacks';
+import recent_stpacks from './recent_stpacks';
 import { loadingBarReducer } from 'react-redux-loading-bar';
 
 const reducers = {
@@ -10,6 +11,7 @@ const reducers = {
   modal,
   stickers,
   stpacks,
+  recent_stpacks,
   loadingBar: loadingBarReducer,
 };
 
