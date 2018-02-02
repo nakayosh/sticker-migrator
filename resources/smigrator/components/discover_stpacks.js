@@ -32,7 +32,9 @@ export default class DiscoverStpacks extends ImmutablePureComponent {
     }
   }
 
-  handleClear = () => {
+  handleClear = e => {
+    e.preventDefault();
+
     this.setState({ searchExpanded: false });
     this.props.onClear();
   }
