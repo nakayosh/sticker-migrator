@@ -19,7 +19,7 @@ export default class Sticker extends ImmutablePureComponent {
 
     return (
       <button className='sticker button' onClick={this.props.onClick} >
-        <img src={sticker.get('url')} alt={sticker.get('emoji', '')} />
+        <img src={sticker.get('original_url')} alt={sticker.get('emoji', '')} />
       </button>
     );
   }
