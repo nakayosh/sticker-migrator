@@ -14,7 +14,15 @@ export default class Recent extends React.PureComponent {
         <GeneralHeader />
 
         <Content>
-          <RecentStpacks />
+          <div className='discover-stpacks'>
+            <header className='discover-stpacks__header'>
+              <h2 className='discover-stpacks__title'>
+                Recently added sticker sets
+              </h2>
+            </header>
+
+            <RecentStpacks />
+          </div>
         </Content>
       </Page>
     );

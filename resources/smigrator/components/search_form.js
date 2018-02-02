@@ -65,6 +65,7 @@ export default class SearchForm extends React.PureComponent {
           onBlur={this.handleBlur}
           onChange={this.handleChange}
           onKeyDown={this.handleKeyDown}
+          autoFocus
         />
 
         <IconButton
