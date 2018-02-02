@@ -44,6 +44,7 @@
     "font-awesome": "^4.7.0",
     "history": "^4.7.2",
     "immutable": "^3.8.2",
+    "lodash": "^4.17.4",
     "node-sass": "^4.7.2",
     "prop-types": "^15.6.0",
     "react": "^16.1.1",

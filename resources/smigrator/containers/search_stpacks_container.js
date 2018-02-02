@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { submitSearchStpacks } from '../actions/search_stpacks';
+// import { submitSearchStpacks } from '../actions/search_stpacks';
 import SearchStpacks from '../components/search_stpacks';
 
 const mapStateToProps = state => ({
@@ -7,11 +7,11 @@ const mapStateToProps = state => ({
   submitted: state.getIn(['search_stpacks', 'submitted']),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = () => ({
 
-  onScroll() {
-    dispatch(submitSearchStpacks());
-  },
+  // onScroll() {
+  //   dispatch(submitSearchStpacks());
+  // },
 
 });
 
