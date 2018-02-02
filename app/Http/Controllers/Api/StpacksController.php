@@ -18,6 +18,9 @@ class StpacksController extends Controller
 
     public function test(Request $request, $stpack_id){
         [$stpack, $return_code] = $this->getStpackData($stpack_id);
+        if ($stpack['error']) {
+            return response()->json($stpack, $return_code);
+        }
         if (!is_null($stpack['url'])) {
             return redirect()->route('api_stpack', ['stpack_id' => $stpack_id]);
         }
@@ -71,10 +74,12 @@ class StpacksController extends Controller
             $download   = $downloader->download($stpack_id);
 
             if ($download['error']) {
-                return response()->json([
+                $stpack = [
                     'error' => $download['error'],
                     'error_description' => $download['error_description'],
-                ], 500);
+                ];
+                $return_code = 500;
+                return  [$stpack, $return_code];
             };
         }
         if ($return_code === 200) {
