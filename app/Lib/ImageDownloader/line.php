@@ -8,6 +8,8 @@ use GuzzleHttp\Exception\RequestException;
 use App\Stpack;
 use App\Sticker;
 use Exception;
+use App\Lib\Telegram\Api;
+use Config;
 
 class Line
 {
@@ -34,10 +36,12 @@ class Line
             ];
         }
 
+        $telegram_api = new Api(Config::get('telegram.authorization_token'));
+
         // Goutte, 指定したセレクタが存在しないとエラーを吐く．
         try {
             $name         = $crawler->filter('.mdCMN08Ttl')->text();
-            $short_name   = 't'.str_replace('-', '_', Uuid::uuid4()->toString());
+            $short_name   = 't'.str_replace('-', '_', Uuid::uuid4()->toString()).'_by_'.$telegram_api->user->getUsername();
             $original_url = 'https://store.line.me/stickershop/product/'.$id.'/ja';
             $sticker_urls = $crawler->filter('.mdCMN09Image')->each(function ($node) {
                 return $this->getNodeBackgroundImage($node);
@@ -59,7 +63,7 @@ class Line
 
             $sticker = [
                 'id'  => $sticker_id,
-                'url' => $formatted_url,
+                'original_url' => $formatted_url,
             ];
 
             $stickers[]       = $sticker;
@@ -70,7 +74,7 @@ class Line
             'id'            => $id,
             'name'          => $name,
             'short_name'    => $short_name,
-            'thumbnail_url' => $stickers[0]['url'],
+            'thumbnail_url' => $stickers[0]['original_url'],
             'original_url'  => $original_url,
             'stickers'      => $stickers,
         ];

@@ -15,7 +15,7 @@ class Sticker extends ApiAbstractClass
     public function createNewStickerSet($user_id, $name, $title, $png_sticker, $emojis, $contains_masks=null, $mask_position=null){
         $data = [
             'user_id' => $user_id,
-            'name' => $name.'_by_'.$this->api->user->getUsername(),
+            'name' => $name,
             'title' => $title,
             'png_sticker' => $png_sticker,
             'emojis' => $emojis,

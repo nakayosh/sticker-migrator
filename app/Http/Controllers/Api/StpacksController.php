@@ -16,14 +16,44 @@ class StpacksController extends Controller
         return response()->json($stpack, $return_code ?: 500);
     }
 
+    public function searchStpack(Request $request){
+        $validatedData = $request->validate([
+            'q' => 'required|string',
+            'limit' => 'integer',
+            'offset' => 'integer',
+        ]);
+        $q = $request->input('q');
+        $limit = (integer)($request->input('limit') ?? 15);
+        $offset = (integer)($request->input('offset') ?? 0);
+        $stpacks = Stpack::with('stickers')->where('name', 'LIKE', '%'.$q.'%')->skip($offset)->take($limit)->get();
+        return response()->json($stpacks);
+    }
+
+    public function recentStpack(Request $request){
+        $validatedData = $request->validate([
+            'limit' => 'integer',
+            'offset' => 'integer',
+        ]);
+        $limit = (integer)($request->input('limit') ?? 15);
+        $offset = (integer)($request->input('offset') ?? 0);
+        $stpacks = Stpack::with('stickers')->orderBy('created_at', 'desc')->skip($offset)->take($limit)->get();
+        return response()->json($stpacks);
+    }
+
     public function test(Request $request, $stpack_id){
+        [$stpack, $return_code] = $this->getStpackData($stpack_id);
+        if ($stpack['error']) {
+            return response()->json($stpack, $return_code);
+        }
+        if (!is_null($stpack['url'])) {
+            return redirect()->route('api_stpack', ['stpack_id' => $stpack_id]);
+        }
         ini_set("max_execution_time", 0);
         header('Content-type: text/html; charset=utf-8');
         echo str_pad('',4096).PHP_EOL;
         echo 'Downloading stpack data from LINE server...<br>'.PHP_EOL;
         ob_flush();
         flush();
-        [$stpack, $return_code] = $this->getStpackData($stpack_id);
         $resizer = new Image();
         $stickers = $stpack['stickers'];
         $all_sticker_count = count($stickers);
@@ -33,7 +63,7 @@ class StpacksController extends Controller
         flush();
         $count = 1;
         foreach ($stickers as $sticker) {
-            $resizer->resize($sticker['url'], 'resized_stickers', $sticker['id_str']);
+            $resizer->resize($sticker['original_url'], 'resized_stickers', $sticker['id_str']);
             echo $count.' of '.$all_sticker_count.' were resized...<br>';
             ob_flush();
             flush();
@@ -49,10 +79,14 @@ class StpacksController extends Controller
             flush();
         }
         echo PHP_EOL.'upload finished!<br>'.PHP_EOL;
-        $url = 'https://t.me/addstickers/'.$stpack['short_name'].'_by_'.$telegram->api->user->getUserName();
+        $url = 'https://t.me/addstickers/'.$stpack['short_name'];
         echo 'let\'s download sticker from <a href="'.$url.'">'.$url.'</a><br>'.PHP_EOL;
         ob_flush();
         flush();
+        $stpack = Stpack::where('id', $stpack_id)->first();
+        $stpack->url = $url;
+        $stpack->save();
+        return redirect()->route('api_stpack', ['stpack_id' => $stpack_id]);
     }
 
     private function getStpackData(Int $stpack_id){
@@ -64,10 +98,12 @@ class StpacksController extends Controller
             $download   = $downloader->download($stpack_id);
 
             if ($download['error']) {
-                return response()->json([
+                $stpack = [
                     'error' => $download['error'],
                     'error_description' => $download['error_description'],
-                ], 500);
+                ];
+                $return_code = 500;
+                return  [$stpack, $return_code];
             };
         }
         if ($return_code === 200) {
