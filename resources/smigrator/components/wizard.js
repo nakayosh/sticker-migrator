@@ -20,6 +20,17 @@ export default class Wizard extends React.PureComponent {
     this.props.onSubmit(this.state.value);
   }
 
+  handleKeyDown = e => {
+    switch(e.key) {
+    case 'Enter':
+      this.props.onSubmit(this.state.value);
+      break;
+    case 'Escape':
+      e.currentTarget.blur();
+      break;
+    }
+  }
+
   render () {
     return (
       <div className='wizard'>
@@ -34,6 +45,7 @@ export default class Wizard extends React.PureComponent {
             pattern='https:\/\/store\.line\.me\/stickershop\/product\/[0-9]+'
             placeholder='https://store.line.me/stickershop/product/3897'
             onChange={this.handleChange}
+            onKeyDown={this.handleKeyDown}
           />
 
           <button className='wizard__submit rich-button button' onClick={this.handleSubmit}>

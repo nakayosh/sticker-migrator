@@ -10,8 +10,8 @@ function normalizeRecentStpacks(state, stpackList) {
 
   return state
     .update('results', results => results.concat(stpackList))
-    .set('submitting', false)
-    .set('offset', state.get('offset') + stpackList.size);
+    .set('offset', state.get('offset') + stpackList.size)
+    .set('submitting', false);
 }
 
 const initialState = ImmutableMap({
