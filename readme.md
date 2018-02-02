@@ -1,6 +1,6 @@
-<p align="center"><img src="https://i.imgur.com/voeJdH5.png" width="300px"></p>
+<p align="center"><img src="https://i.imgur.com/KzB72Jc.png" width="300px"></p>
 
-Sticker Migraterは，LINEからTelegramに簡単にステッカーを移植するアプリケーションです．
+Sticker Migratorは，LINEからTelegramに簡単にステッカーを移植するアプリケーションです．
 
 ---
 ## Features
@@ -34,7 +34,7 @@ cp .env.example .env
 ```
 docker-compose run --rm web ash -c "composer install --no-progress \
  && php artisan key:generate \
- && web php artisan migrate \
+ && php artisan migrate \
  && yarn --pure-lockfile \
  && yarn run prod"
 ```
