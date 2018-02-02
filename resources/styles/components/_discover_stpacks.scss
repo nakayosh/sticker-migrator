@@ -68,7 +68,20 @@
 
 .recent-stpacks,
 .search-stpacks {
+  position: relative;
   overflow: hidden;
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(-180deg, transparent 95%, #fff 100%);
+    pointer-events: none;
+  }
 }
 
 .recent-stpacks__scroll-container,
