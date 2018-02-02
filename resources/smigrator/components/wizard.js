@@ -46,6 +46,7 @@ export default class Wizard extends React.PureComponent {
             placeholder='https://store.line.me/stickershop/product/3897'
             onChange={this.handleChange}
             onKeyDown={this.handleKeyDown}
+            autoFocus
           />
 
           <button className='wizard__submit rich-button button' onClick={this.handleSubmit}>

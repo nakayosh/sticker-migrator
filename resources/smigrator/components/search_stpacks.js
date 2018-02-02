@@ -55,7 +55,7 @@ export default class SearchStpacks extends ImmutablePureComponent {
         }
 
         {
-          !submitted && !results.size && <LoadingIndicator />
+          !submitted && value !== '' && <LoadingIndicator />
         }
       </div>
     );

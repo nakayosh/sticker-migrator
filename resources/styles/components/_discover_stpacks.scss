@@ -1,5 +1,5 @@
 .discover-stpacks {
-  margin-bottom: 24px;
+  margin: 0 8px 24px;
   padding: 8px 16px;
   box-sizing: border-box;
   border-radius: 6px;
@@ -87,6 +87,7 @@
 .recent-stpacks__scroll-container,
 .search-stpacks__scroll-container {
   height: 700px;
+  padding-bottom: 68px;
   overflow-y: scroll;
 }
 
