@@ -22,7 +22,7 @@ export default class DiscoverStpacks extends ImmutablePureComponent {
   }
 
   handleChange = e => {
-    const value = e.currentTarget.value.trim();
+    const value = e.currentTarget.value;
     this.props.onChange(value);
 
     if ( value ) {

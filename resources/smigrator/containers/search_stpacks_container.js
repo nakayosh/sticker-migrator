@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import SearchStpacks from '../components/search_stpacks';
 
 const mapStateToProps = state => ({
+  value: state.getIn(['search_stpacks', 'value']),
   results: state.getIn(['search_stpacks', 'results']),
   submitted: state.getIn(['search_stpacks', 'submitted']),
 });

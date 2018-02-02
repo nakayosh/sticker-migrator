@@ -10,6 +10,7 @@ import LoadingIndicator from '../components/loading_indicator';
 export default class SearchStpacks extends ImmutablePureComponent {
 
   static propTypes = {
+    value: PropTypes.string.isRequired,
     results: ImmutablePropTypes.list,
     submitted: PropTypes.bool.isRequired,
   }
@@ -29,21 +30,32 @@ export default class SearchStpacks extends ImmutablePureComponent {
   }
 
   render () {
-    const { results, submitted } = this.props;
+    const { value, results, submitted } = this.props;
 
     return (
       <div className='search-stpacks'>
         {
-          submitted && results.size ? (
+          submitted && !!results.size && (
             <ScrollContainer scrollKey='search'>
               <div className='search-stpacks__scroll-container' onScroll={this.handleScroll}>
                 { results.map(result => <CompactStpack id={result} key={result} />) }
                 <LoadingIndicator />
               </div>
             </ScrollContainer>
-          ) : (
-            <LoadingIndicator />
           )
+        }
+
+        {
+          submitted && !results.size && (
+            <p className='search-stpacks__empty'>
+              Sorry, there is nothing such sticker yet,<br />
+              If you'd like, you can search <a href={`https://store.line.me/search?q=${ encodeURIComponent(value) }`} target='_blank'>{ value }</a> in the original Web site.
+            </p>
+          )
+        }
+
+        {
+          !submitted && !results.size && <LoadingIndicator />
         }
       </div>
     );

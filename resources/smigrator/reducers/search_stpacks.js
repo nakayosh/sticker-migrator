@@ -28,10 +28,11 @@ export default function search(state = initialState, action) {
       .set('value', action.value)
       .set('submitted', false);
   case SEARCH_STPACKS_CLEAR:
-    return state
-      .set('value', '')
-      .set('submitted', false)
-      .set('results', ImmutableList());
+    return state.withMutations(map => {
+      map.set('value', '');
+      map.set('submitted', false);
+      map.set('results', ImmutableList());
+    });
   case SEARCH_STPACKS_FETCH_REQUEST:
     return state.set('submitted', false);
   case SEARCH_STPACKS_FETCH_SUCCESS:

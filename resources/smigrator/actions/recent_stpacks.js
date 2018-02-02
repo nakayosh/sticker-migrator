@@ -10,7 +10,7 @@ export function fetchRecentStpacks() {
 
     api(getState).get('/api/stpacks/recent', {
       params: {
-        limit: 6,
+        limit: 15,
         offset: getState().getIn(['recent_stpacks', 'offset']),
       },
     }).then(response => {

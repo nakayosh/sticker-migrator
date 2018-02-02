@@ -21,25 +21,20 @@ export function changeSearchStpacks(value) {
 
 export function clearSearchStpacks() {
   return {
-    type: SEARCH_STPACKS_CHANGE,
+    type: SEARCH_STPACKS_CLEAR,
   };
 }
 
 const submitSearchStpacks = debounce((dispatch, getState) => {
   dispatch(fetchSearchStpacksRequest());
 
-  const value = getState().getIn(['search_stpacks', 'value']);
+  const q = getState().getIn(['search_stpacks', 'value']).trim();
 
-  if ( value === '' ) {
+  if (!q) {
     return;
   }
 
-  api(getState).get('/api/stpacks/search', {
-    params: {
-      q: getState().getIn(['search_stpacks', 'value']),
-      limit: 15,
-    },
-  }).then(response => {
+  api(getState).get('/api/stpacks/search', { params: { q, limit: 15 } }).then(response => {
     dispatch(fetchSearchStpacksSuccess(response.data));
   }).catch(error =>{
     dispatch(fetchSearchStpacksFail(error));
