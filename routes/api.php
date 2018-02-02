@@ -14,6 +14,6 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['middleware' => 'api'], function() {
-    Route::get('/stpacks/{stpack_id}', 'Api\StpacksController@getStpack');
+    Route::get('/stpacks/{stpack_id}', 'Api\StpacksController@getStpack')->name('api_stpack');
     Route::get('/test/{stpack_id}', 'Api\StpacksController@test');
 });

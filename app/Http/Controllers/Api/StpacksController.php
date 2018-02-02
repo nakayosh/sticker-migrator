@@ -17,13 +17,16 @@ class StpacksController extends Controller
     }
 
     public function test(Request $request, $stpack_id){
+        [$stpack, $return_code] = $this->getStpackData($stpack_id);
+        if (!is_null($stpack['url'])) {
+            return redirect()->route('api_stpack', ['stpack_id' => $stpack_id]);
+        }
         ini_set("max_execution_time", 0);
         header('Content-type: text/html; charset=utf-8');
         echo str_pad('',4096).PHP_EOL;
         echo 'Downloading stpack data from LINE server...<br>'.PHP_EOL;
         ob_flush();
         flush();
-        [$stpack, $return_code] = $this->getStpackData($stpack_id);
         $resizer = new Image();
         $stickers = $stpack['stickers'];
         $all_sticker_count = count($stickers);
@@ -53,6 +56,10 @@ class StpacksController extends Controller
         echo 'let\'s download sticker from <a href="'.$url.'">'.$url.'</a><br>'.PHP_EOL;
         ob_flush();
         flush();
+        $stpack = Stpack::where('id', $stpack_id)->first();
+        $stpack->url = $url;
+        $stpack->save();
+        return redirect()->route('api_stpack', ['stpack_id' => $stpack_id]);
     }
 
     private function getStpackData(Int $stpack_id){
