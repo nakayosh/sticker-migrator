@@ -17,6 +17,11 @@ class StpacksController extends Controller
     }
 
     public function searchStpack(Request $request){
+        $validatedData = $request->validate([
+            'q' => 'required|string',
+            'limit' => 'integer',
+            'offset' => 'integer',
+        ]);
         $q = $request->input('q');
         $limit = (integer)($request->input('limit') ?? 15);
         $offset = (integer)($request->input('offset') ?? 0);
@@ -25,6 +30,10 @@ class StpacksController extends Controller
     }
 
     public function recentStpack(Request $request){
+        $validatedData = $request->validate([
+            'limit' => 'integer',
+            'offset' => 'integer',
+        ]);
         $limit = (integer)($request->input('limit') ?? 15);
         $offset = (integer)($request->input('offset') ?? 0);
         $stpacks = Stpack::with('stickers')->orderBy('created_at', 'desc')->skip($offset)->take($limit)->get();
