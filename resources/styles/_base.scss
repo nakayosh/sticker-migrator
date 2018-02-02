@@ -165,7 +165,12 @@ h6 {
   }
 
   &:focus {
-    border: 1px solid $h100;
+    border-color: $h100;
     background-color: lighten($h100, 40%);
+  }
+
+  &:invalid {
+    border-color: $red;
+    background-color: lighten($red, 40%);
   }
 }
