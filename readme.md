@@ -32,13 +32,11 @@ cp .env.example .env
 つぎに，データベースのイニシャライズ，依存関係のインストール，アセットのビルドを行います．これには時間が掛かる場合があります．
 
 ```
-docker-compose run --rm web composer install --no-progress \
+docker-compose run --rm web ash -c "composer install --no-progress \
  && php artisan key:generate \
-```
-```
-docker-compose run --rm web php artisan migrate \
+ && web php artisan migrate \
  && yarn --pure-lockfile \
- && yarn run prod
+ && yarn run prod"
 ```
 
 最後に，コンテナを起動し，ホストに公開します．デフォルトでは `8080` 番に公開されているので，ホスト側でプロキシの設定を行うことでアクセスできるようになります．ローカル環境の場合，`localhost:8080` からもアクセスできます．
