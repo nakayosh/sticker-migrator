@@ -41,6 +41,14 @@
   }
 }
 
+.actions-modal {
+  margin: 12px 8px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  background-color: $p000;
+  border: 1px solid $p500;
+}
+
 .modal-stikcer-preview {
   top: 0;
   width: 50%;

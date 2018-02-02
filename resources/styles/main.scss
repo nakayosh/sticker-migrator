@@ -3,6 +3,7 @@
 @import "mixins";
 @import "base";
 
+@import "components/compact_stpack";
 @import "components/content";
 @import "components/dropdown";
 @import "components/general_header";
@@ -10,6 +11,7 @@
 @import "components/loading_indicator";
 @import "components/message";
 @import "components/modal";
+@import "components/recent_stpacks";
 @import "components/sticker";
 @import "components/stpack";
 @import "components/wizard";

@@ -4,26 +4,35 @@ import {
   STPACK_FETCH_SUCCESS,
   STPACK_UPDATE_SUCCESS,
 } from '../actions/stpacks';
+import { RECENT_STPACKS_FETCH_SUCCESS } from '../actions/recent_stpacks';
 
-function normalizeSticker(state, sticker) {
+const normalizeSticker = (state, sticker) => {
   sticker = { ...sticker };
 
   return state.set(sticker.id_str, fromJS(sticker));
-}
+};
 
-function normalizeStickers(state, stickers) {
+const normalizeStickers = (state, stickers) => {
   stickers.forEach(sticker => {
     state = normalizeSticker(state, sticker);
   });
 
   return state;
-}
+};
 
-function normalizeStickerFromStpack(state, stpack) {
+const normalizeStickerFromStpack = (state, stpack) => {
   state = normalizeStickers(state, stpack.stickers);
 
   return state;
-}
+};
+
+const normalizeStickerFromStpackList = (state, stpackList) => {
+  stpackList.forEach(stpack => {
+    state = normalizeStickerFromStpack(state, stpack);
+  });
+
+  return state;
+};
 
 const initialState = ImmutableList();
 
@@ -34,6 +43,8 @@ export default function sitckers(state = initialState, action) {
   case STPACK_FETCH_SUCCESS:
   case STPACK_UPDATE_SUCCESS:
     return normalizeStickerFromStpack(state, action.stpack);
+  case RECENT_STPACKS_FETCH_SUCCESS:
+    return normalizeStickerFromStpackList(state, action.stpackList);
   default:
     return state;
   }

@@ -9,7 +9,11 @@ import Content from '../app/components/content';
 import GeneralHeader from '../general_header';
 import StpackContainer from '../../containers/stpack_container';
 
-@connect()
+const mapStateToProps = (state, { match }) => ({
+  stpack: state.getIn(['stpacks', match.params.id]),
+});
+
+@connect(mapStateToProps)
 export default class Stpacks extends ImmutablePureComponent {
 
   static propTypes = {
@@ -18,7 +22,9 @@ export default class Stpacks extends ImmutablePureComponent {
   }
 
   componentWillMount () {
-    this.props.dispatch(fetchStpack(this.props.match.params.id));
+    if (!this.props.stpack) {
+      this.props.dispatch(fetchStpack(this.props.match.params.id));
+    }
   }
 
   render () {

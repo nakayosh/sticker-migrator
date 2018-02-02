@@ -10,7 +10,6 @@ export default class Message extends React.PureComponent {
     text: PropTypes.string,
     time: PropTypes.number,
     onClose: PropTypes.func.isRequired,
-    isModalOpen: PropTypes.bool.isRequired,
   }
 
   componentWillReceiveProps (nextProps) {

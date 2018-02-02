@@ -84,7 +84,7 @@ export default class Stapck extends ImmutablePureComponent {
 
         <ul className='stpack__stickers'>
           {
-            !!stpack.get('stickers').size && stpack.get('stickers').map(stickerId => (
+            stpack.get('stickers').size && stpack.get('stickers').map(stickerId => (
               <li className='stpack__sticker' key={stickerId}>
                 <StickerContainer stickerId={stickerId} />
               </li>

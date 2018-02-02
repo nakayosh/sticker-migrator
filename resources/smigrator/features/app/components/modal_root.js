@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ActionsModal from './actions_modal';
 import StickerPreviewModal from './sticker_preview_modal';
 
 const MODAL_COMPONENTS = {
+  'ACTIONS': ActionsModal,
   'STICKER_PREVIEW_MODAL': StickerPreviewModal,
 };
 
