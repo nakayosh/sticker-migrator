@@ -17,7 +17,7 @@ class Image
      * @param $save_name image name to save
      * @return bool
      */
-    private function Resize($picture, $save_directory, $save_name)
+    public function resize($picture, $save_directory, $save_name)
     {
         $picture = \Image::make($picture);
         $save_path = storage_path('app').'/'.$save_directory.'/'.$save_name;
@@ -50,6 +50,14 @@ class Image
         } else {
             $picture->resize($thumbnail_width, $thumbnail_height);
         }
+
+        // If the specified directory doesn't exist yet, make the directory.
+        // it won't check the permission because laravel requires writing permission
+        // on storage directory recursively
+        if ( !file_exists(storage_path('app'.'/'.$save_directory)) ) {
+            mkdir(storage_path('app'.'/'.$save_directory));
+        }
+
         $picture->save($save_path);
 
         return true;
