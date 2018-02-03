@@ -22,6 +22,7 @@
 
   "search_stpacks.title": "Search results for \"{query}\"",
   "search_stpacks.submit": "Search",
+  "search_stpacks.clear": "Clear",
   "search_stpacks.placeholder": "Type your keyword",
   "search_stpacks.empty": "Sorry, there is no such sticker sets yet．If you need you can search about {line_store} in LINE STORE.",
 

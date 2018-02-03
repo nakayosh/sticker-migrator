@@ -2,6 +2,7 @@ import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import { Link } from 'react-router-dom';
+import { FormattedDate } from 'react-intl';
 
 export default class CompactStpack extends ImmutablePureComponent {
 
@@ -31,7 +32,16 @@ export default class CompactStpack extends ImmutablePureComponent {
 
             <time className='stpack__time' timestamp={stpack.get('created_at')}>
               <i className='fa fa-clock-o' aria-hidden />
-              { stpack.get('created_at') }
+
+              <FormattedDate
+                value={new Date(stpack.get('created_at'))}
+                hour12={false}
+                year='numeric'
+                month='short'
+                day='2-digit'
+                hour='2-digit'
+                minute='2-digit'
+              />
             </time>
 
           </div>

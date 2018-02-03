@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 import Stpack from '../components/stpack';
 
 const mapStateToProps = (state, { id }) => ({
@@ -8,6 +9,6 @@ const mapStateToProps = (state, { id }) => ({
 // const mapDispatchToProps = dispatch => ({
 // });
 
-export default connect(
+export default injectIntl(connect(
   mapStateToProps,
-)(Stpack);
+)(Stpack));

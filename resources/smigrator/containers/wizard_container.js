@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { fetchStpack } from '../actions/stpacks';
+import { injectIntl } from 'react-intl';
 import Wizard from '../components/wizard';
 
 const mapStateToProps = state => ({
@@ -20,7 +20,7 @@ const mapDispatchToProps = (dispatch, { history }) => ({
 
 });
 
-export default withRouter(connect(
+export default injectIntl(withRouter(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Wizard));
+)(Wizard)));

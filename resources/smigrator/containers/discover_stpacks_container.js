@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 import {
   changeSearchStpacks,
   clearSearchStpacks,
@@ -22,7 +23,7 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-export default connect(
+export default injectIntl(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(DiscoverStpacks);
+)(DiscoverStpacks));

@@ -1,9 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage, defineMessages } from 'react-intl';
+import IconButton from './icon_button';
+
+const messages = defineMessages({
+  submit: { id: 'wizard.submit', defaultMessage: 'Create' },
+});
 
 export default class Wizard extends React.PureComponent {
 
   static propTypes = {
+    intl: PropTypes.object.isRequired,
     onSubmit: PropTypes.func.isRequired,
   }
 
@@ -32,10 +39,12 @@ export default class Wizard extends React.PureComponent {
   }
 
   render () {
+    const { intl } = this.props;
+
     return (
       <div className='wizard'>
-        <h2>
-          Create a new sticker set
+        <h2 className='wizard__title'>
+          <FormattedMessage id='wizard.title' defaultMessage='Create new sticker set' />
         </h2>
 
         <div className='wizard__form'>
@@ -49,9 +58,12 @@ export default class Wizard extends React.PureComponent {
             autoFocus
           />
 
-          <button className='wizard__submit rich-button button' onClick={this.handleSubmit}>
-            <i className='fa fa-download' aria-hidden />
-          </button>
+          <IconButton
+            className='wizard__submit rich-button button'
+            icon='fa fa-download'
+            title={intl.formatMessage(messages.submit)}
+            onClick={this.handleSubmit}
+          />
         </div>
       </div>
     );

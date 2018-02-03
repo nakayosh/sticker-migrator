@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import { ScrollContainer } from 'react-router-scroll-4';
+import { FormattedMessage } from 'react-intl';
 
 import CompactStpack from '../containers/compact_stpack_container';
 import LoadingIndicator from '../components/loading_indicator';
@@ -29,7 +30,7 @@ export default class RecentStpacks extends ImmutablePureComponent {
   }
 
   render () {
-    const { results /*, isSubmitting */ } = this.props;
+    const { results } = this.props;
 
     return (
       <div className='recent-stpacks'>
