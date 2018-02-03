@@ -79,7 +79,6 @@ module.exports = {
         NODE_ENV: JSON.stringify(env.NODE_ENV),
         PUSHER_APP_ID: JSON.stringify(env.PUSHER_APP_ID),
         PUSHER_APP_KEY: JSON.stringify(env.PUSHER_APP_KEY),
-        PUSHER_APP_SECRET: JSON.stringify(env.PUSHER_APP_SECRET),
         PUSHER_APP_CLUSTER: JSON.stringify(env.PUSHER_APP_CLUSTER),
       },
     }),
