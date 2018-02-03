@@ -7,7 +7,10 @@ import {
   RECENT_STPACKS_REFRESH_SUCCESS,
   RECENT_STPACKS_EXPAND_SUCCESS,
 } from '../actions/recent_stpacks';
-import { SEARCH_STPACKS_FETCH_SUCCESS } from '../actions/search_stpacks';
+import {
+  SEARCH_STPACKS_REFRESH_SUCCESS,
+  SEARCH_STPACKS_EXPAND_SUCCESS,
+} from '../actions/search_stpacks';
 
 const normalizeStpack = (state, stpack) => {
   stpack = { ...stpack };
@@ -34,7 +37,8 @@ export default function stpacks(state = initialState, action) {
     return normalizeStpack(state, action.stpack);
   case RECENT_STPACKS_REFRESH_SUCCESS:
   case RECENT_STPACKS_EXPAND_SUCCESS:
-  case SEARCH_STPACKS_FETCH_SUCCESS:
+  case SEARCH_STPACKS_REFRESH_SUCCESS:
+  case SEARCH_STPACKS_EXPAND_SUCCESS:
     return normalizeStpackFromStpackList(state, action.stpackList);
   default:
     return state;
