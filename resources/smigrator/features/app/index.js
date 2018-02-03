@@ -16,8 +16,6 @@ import {
   Home,
   Stpacks,
   Compose,
-  Recent,
-  Search,
 } from './util/async-components';
 
 addLocaleData([...en, ...ja]);
@@ -26,7 +24,7 @@ const messagesForLocale = locale => messages(`./${locale}.json`);
 
 const mapStateToProps = state => ({
   locale: state.getIn(['settings', 'locale']),
-})
+});
 
 @connect(mapStateToProps)
 export default class App extends React.Component {
@@ -45,8 +43,6 @@ export default class App extends React.Component {
             <Redirect exact from='/' to='/home' />
 
             <WrappedRoute path='/home' component={Home} />
-            <WrappedRoute path='/recent' component={Recent} />
-            <WrappedRoute path='/search' component={Search} />
             <WrappedRoute path='/stpacks/:id' component={Stpacks} />
             <WrappedRoute path='/stpacks/:id/compose' component={Compose} />
           </Switch>

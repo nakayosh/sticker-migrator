@@ -9,11 +9,3 @@ export function Stpacks () {
 export function Compose () {
   return import(/* webpackChunkName: "features/compose" */'../../compose');
 }
-
-export function Recent () {
-  return import(/* webpackChunkName: "features/recent" */'../../recent');
-}
-
-export function Search () {
-  return import(/* webpackChunkName: "features/search" */'../../search');
-}

@@ -1,4 +1,4 @@
-.discover-stpacks {
+.module {
   margin: 0 8px 24px;
   padding: 8px 16px;
   box-sizing: border-box;
@@ -12,24 +12,24 @@
   }
 }
 
-.discover-stpacks__header {
+.module__header {
   position: relative;
   padding-bottom: 8px;
   box-sizing: border-box;
   border-bottom: 1px solid $p500;
 
   &--focused {
-    .discover-stpacks__title {
+    .module__title {
       opacity: 0;
     }
 
-    .discover-stpacks__input-wrapper {
+    .module__input-wrapper {
       width: 100%;
     }
   }
 }
 
-.discover-stpacks__title {
+.module__title {
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
@@ -37,37 +37,7 @@
   transition: 0.3s ease-out;
 }
 
-.discover-stpacks__input-wrapper {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin-top: 8px;
-  width: 262px;
-  transition: 0.3s ease-out;
-}
-
-.discover-stpacks__input {
-  display: block;
-  width: 100%;
-  font-size: 16px;
-  transition: 0.3s ease-out;
-}
-
-.discover-stpacks__button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 100%;
-  color: $t100;
-  font-size: 16px;
-
-  & > i {
-    margin: auto 8px;
-  }
-}
-
-.recent-stpacks,
-.search-stpacks {
+.module-scrollable-content {
   position: relative;
   overflow: hidden;
 
@@ -84,14 +54,13 @@
   }
 }
 
-.recent-stpacks__scroll-container,
-.search-stpacks__scroll-container {
+.module-scrollable-content__inner {
   height: 700px;
   padding-bottom: 68px;
   overflow-y: scroll;
 }
 
-.search-stpacks__empty {
+.module-scrollable-content__empty {
   line-height: 1.2;
   padding: 8px 0;
   color: $t100;
