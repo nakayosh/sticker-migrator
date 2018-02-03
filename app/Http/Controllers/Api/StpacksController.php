@@ -8,10 +8,12 @@ use App\Lib\Imagedownloader\Line;
 use App\Stpack;
 use App\Lib\ImageResizer\Image;
 use App\Lib\ImageUploader\Telegram;
+use DB;
 
 class StpacksController extends Controller
 {
     public function getStpack(Request $request, $stpack_id){
+        $stpack_id = (integer)$stpack_id;
         [$stpack, $return_code] = $this->getStpackData($stpack_id);
         return response()->json($stpack, $return_code ?: 500);
     }
@@ -38,6 +40,28 @@ class StpacksController extends Controller
         $offset = (integer)($request->input('offset') ?? 0);
         $stpacks = Stpack::with('stickers')->orderBy('created_at', 'desc')->skip($offset)->take($limit)->get();
         return response()->json($stpacks);
+    }
+
+    public function patchStpack(Request $request, $stpack_id){
+        $validatedData = $request->validate([
+            'stickers' => 'required|json',
+        ]);
+        $stpack_id = (integer)$stpack_id;
+        $stickers = json_decode($request->input('stickers'), true);
+        [$stpack, $return_code] = $this->getStpackData($stpack_id);
+        if ($stpack['error']) {
+            return response()->json($stpack, $return_code);
+        }
+        DB:transaction(function () use ($stpack, $stickers){
+            $count = 0;
+            foreach ($stpack->stickers as $sticker) {
+                $sticker->emojis = $stickers[$count]['emojis'];
+                $sticker->save();
+                $count++;
+            }
+        });
+        $stpack = Stpack::with('stickers')->where('id', $stpack_id)->first();
+        return response()->json($stpack);
     }
 
     public function test(Request $request, $stpack_id){
