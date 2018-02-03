@@ -5,6 +5,7 @@ import stickers from './stickers';
 import stpacks from './stpacks';
 import recent_stpacks from './recent_stpacks';
 import search_stpacks from './search_stpacks';
+import settings from './settings';
 import { loadingBarReducer } from 'react-redux-loading-bar';
 
 const reducers = {
@@ -14,6 +15,7 @@ const reducers = {
   stpacks,
   recent_stpacks,
   search_stpacks,
+  settings,
   loadingBar: loadingBarReducer,
 };
 

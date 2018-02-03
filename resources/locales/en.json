@@ -1,0 +1,29 @@
+{
+  "wizard.title": "Create new sticker set",
+  "wizard.submit": "Create",
+  "wizard.description": "Input LINE STORE's URL to migrate sticker to Telegram. If it already exists, redirect to the download page.",
+
+  "stpack.add": "Add on Telegram",
+  "stpack.visit_original": "Visit original",
+  "stpack.share_line": "Share with LINE",
+  "stpack.share_telegram": "Share with Telegram",
+
+  "stpack.progress.compile_starting": "Starting to compile images",
+  "stpack.progress.compiling": "Compiling images... {indicator}",
+  "stpack.progress.upload_starting": "Starting to upload images... {indicator}",
+  "stpack.progress.uploading": "Uploading... {indicator}",
+  "stpack.progress.uploaded": "Complete!",
+  "stpack.progress.failed": "Failed to migration :(",
+
+  "sticker.tooltip": "Show with fullscreen",
+
+  "recent_stpacks.title": "Recently added sticker sets",
+  "recent_stpacks.empty": "Noting here yet",
+
+  "search_stpacks.title": "Search results for \"{query}\"",
+  "search_stpacks.submit": "Search",
+  "search_stpacks.placeholder": "Type your keyword",
+  "search_stpacks.empty": "Sorry, there is no such sticker sets yet．If you need you can search about {line_store} in LINE STORE.",
+
+  "loading_indicator.loading": "Loading..."
+}

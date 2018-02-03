@@ -1,10 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Switch, Redirect } from 'react-router';
 import { WrappedRoute } from './util/react_router_helpers';
 import { ImmutableLoadingBar as LoadingBar } from 'react-redux-loading-bar';
 import ModalContaienr from './containers/modal_container';
 import { isMobile } from '../../is_mobile';
+import MobileMenu from '../mobile_menu';
+import { addLocaleData, IntlProvider } from 'react-intl';
+import en from 'react-intl/locale-data/en';
+import ja from 'react-intl/locale-data/ja';
 
+// Async components
 import {
   Home,
   Stpacks,
@@ -13,29 +20,43 @@ import {
   Search,
 } from './util/async-components';
 
-import MobileMenu from '../mobile_menu';
+addLocaleData([...en, ...ja]);
+const messages = require.context('../../../locales/', false, /\.json$/);
+const messagesForLocale = locale => messages(`./${locale}.json`);
 
+const mapStateToProps = state => ({
+  locale: state.getIn(['settings', 'locale']),
+})
+
+@connect(mapStateToProps)
 export default class App extends React.Component {
 
+  static propTypes = {
+    locale: PropTypes.string.isRequired,
+  }
+
   render() {
+    const { locale } = this.props;
 
     return (
-      <div className='app' ref={this.setRef}>
-        <Switch>
-          <Redirect exact from='/' to='/home' />
+      <IntlProvider locale={locale} messages={messagesForLocale(locale)}>
+        <div className='app' ref={this.setRef}>
+          <Switch>
+            <Redirect exact from='/' to='/home' />
 
-          <WrappedRoute path='/home' component={Home} />
-          <WrappedRoute path='/recent' component={Recent} />
-          <WrappedRoute path='/search' component={Search} />
-          <WrappedRoute path='/stpacks/:id' component={Stpacks} />
-          <WrappedRoute path='/stpacks/:id/compose' component={Compose} />
-        </Switch>
+            <WrappedRoute path='/home' component={Home} />
+            <WrappedRoute path='/recent' component={Recent} />
+            <WrappedRoute path='/search' component={Search} />
+            <WrappedRoute path='/stpacks/:id' component={Stpacks} />
+            <WrappedRoute path='/stpacks/:id/compose' component={Compose} />
+          </Switch>
 
-        <ModalContaienr />
-        { isMobile(window.innerWidth) && <MobileMenu /> }
+          <ModalContaienr />
+          { isMobile(window.innerWidth) && <MobileMenu /> }
 
-        <LoadingBar className='loading-bar' />
-      </div>
+          <LoadingBar className='loading-bar' />
+        </div>
+      </IntlProvider>
     );
   }
 
