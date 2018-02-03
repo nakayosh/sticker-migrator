@@ -16,6 +16,30 @@ class StpacksController extends Controller
         return response()->json($stpack, $return_code ?: 500);
     }
 
+    public function searchStpack(Request $request){
+        $validatedData = $request->validate([
+            'q' => 'required|string',
+            'limit' => 'integer',
+            'offset' => 'integer',
+        ]);
+        $q = $request->input('q');
+        $limit = (integer)($request->input('limit') ?? 15);
+        $offset = (integer)($request->input('offset') ?? 0);
+        $stpacks = Stpack::with('stickers')->where('name', 'LIKE', '%'.$q.'%')->skip($offset)->take($limit)->get();
+        return response()->json($stpacks);
+    }
+
+    public function recentStpack(Request $request){
+        $validatedData = $request->validate([
+            'limit' => 'integer',
+            'offset' => 'integer',
+        ]);
+        $limit = (integer)($request->input('limit') ?? 15);
+        $offset = (integer)($request->input('offset') ?? 0);
+        $stpacks = Stpack::with('stickers')->orderBy('created_at', 'desc')->skip($offset)->take($limit)->get();
+        return response()->json($stpacks);
+    }
+
     public function test(Request $request, $stpack_id){
         [$stpack, $return_code] = $this->getStpackData($stpack_id);
         if ($stpack['error']) {
