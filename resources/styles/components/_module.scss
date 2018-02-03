@@ -6,9 +6,11 @@
   border-radius: 6px;
   border: 1px solid $p500;
   background-color: $p000;
+  height: 100%;
 
   @media screen and (min-width: 700px) {
     padding: 24px 36px;
+    height: auto;
   }
 }
 
@@ -40,6 +42,7 @@
 .module-scrollable-content {
   position: relative;
   overflow: hidden;
+  height: 100%;
 
   &::after {
     content: "";
@@ -55,9 +58,12 @@
 }
 
 .module-scrollable-content__inner {
-  height: 700px;
-  padding-bottom: 68px;
   overflow-y: scroll;
+  height: 100%;
+
+  @media screen and (min-width: 700px) {
+    height: 700px;
+  }
 }
 
 .module-scrollable-content__empty {
