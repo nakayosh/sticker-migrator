@@ -8,17 +8,22 @@ import {
 } from '../actions/search_stpacks';
 
 function normalizeSearchStpacks(state, stpackList) {
-  stpackList = fromJS(stpackList.map(stpack => stpack.id_str));
+  stpackList = { ...stpackList };
+  stpackList.results = fromJS(stpackList.results.map(stpack => stpack.id_str));
 
   return state
-    .set('results', stpackList)
+    .set('results', stpackList.results)
+    .set('next', stpackList.next)
+    .set('prev', stpackList.prev)
     .set('submitted', true);
 }
 
 const initialState = ImmutableMap({
   value: '',
-  submitted: false,
   results: ImmutableList(),
+  next: 0,
+  prev: 0,
+  submitted: false,
 });
 
 export default function search(state = initialState, action) {

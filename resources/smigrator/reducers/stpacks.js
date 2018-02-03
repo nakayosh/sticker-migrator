@@ -15,7 +15,7 @@ const normalizeStpack = (state, stpack) => {
 };
 
 const normalizeStpackFromStpackList = (state, stpackList) => {
-  stpackList.forEach(stpack => {
+  stpackList.results.forEach(stpack => {
     state = normalizeStpack(state, stpack);
   });
 

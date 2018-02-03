@@ -6,17 +6,20 @@ import {
 } from '../actions/recent_stpacks';
 
 function normalizeRecentStpacks(state, stpackList) {
-  stpackList = fromJS(stpackList.map(stpack => stpack.id_str));
+  stpackList = { ...stpackList };
+  stpackList.results = fromJS(stpackList.results.map(stpack => stpack.id_str));
 
   return state
-    .update('results', results => results.concat(stpackList))
-    .set('offset', state.get('offset') + stpackList.size)
+    .update('results', results => results.concat(stpackList.results))
+    .set('next', stpackList.next)
+    .set('prev', stpackList.prev)
     .set('submitting', false);
 }
 
 const initialState = ImmutableMap({
   'results': ImmutableList(),
-  'offset': 0,
+  'next': 0,
+  'prev': 0,
   'submitting': false,
 });
 

@@ -28,7 +28,7 @@ const normalizeStickerFromStpack = (state, stpack) => {
 };
 
 const normalizeStickerFromStpackList = (state, stpackList) => {
-  stpackList.forEach(stpack => {
+  stpackList.results.forEach(stpack => {
     state = normalizeStickerFromStpack(state, stpack);
   });
 
