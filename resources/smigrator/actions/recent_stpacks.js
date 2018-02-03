@@ -1,43 +1,90 @@
 import api from '../api';
 
-export const RECENT_STPACKS_FETCH_REQUEST = 'RECENT_STPACKS_FETCH_REQUEST';
-export const RECENT_STPACKS_FETCH_SUCCESS = 'RECENT_STPACKS_FETCH_SUCCESS';
-export const RECENT_STPACKS_FETCH_FAIL    = 'RECENT_STPACKS_FETCH_FAIL';
+export const RECENT_STPACKS_REFRESH_REQUEST = 'RECENT_STPACKS_REFRESH_REQUEST';
+export const RECENT_STPACKS_REFRESH_SUCCESS = 'RECENT_STPACKS_REFRESH_SUCCESS';
+export const RECENT_STPACKS_REFRESH_FAIL    = 'RECENT_STPACKS_REFRESH_FAIL';
 
-export function fetchRecentStpacks() {
+export const RECENT_STPACKS_EXPAND_REQUEST = 'RECENT_STPACKS_EXPAND_REQUEST';
+export const RECENT_STPACKS_EXPAND_SUCCESS = 'RECENT_STPACKS_EXPAND_SUCCESS';
+export const RECENT_STPACKS_EXPAND_FAIL    = 'RECENT_STPACKS_EXPAND_FAIL';
+
+export function refreshRecentStpacks() {
   return (dispatch, getState) => {
-    dispatch(fetchRecentStpacksRequest());
+    dispatch(refreshRecentStpacksRequest());
 
     api(getState).get('/api/stpacks/recent', {
       params: {
         limit: 15,
-        offset: getState().getIn(['recent_stpacks', 'offset']),
+        offset: 0,
       },
     }).then(response => {
-      dispatch(fetchRecentStpacksSuccess(response.data));
+      dispatch(refreshRecentStpacksSuccess(response.data));
     }).catch(error =>{
-      dispatch(fetchRecentStpakcsFail(error));
+      dispatch(refreshRecentStpakcsFail(error));
     });
   };
 }
 
-export function fetchRecentStpacksRequest() {
+export function refreshRecentStpacksRequest() {
   return {
-    type: RECENT_STPACKS_FETCH_REQUEST,
+    type: RECENT_STPACKS_REFRESH_REQUEST,
   };
 }
 
-export function fetchRecentStpacksSuccess(stpackList) {
+export function refreshRecentStpacksSuccess(stpackList) {
   return {
-    type: RECENT_STPACKS_FETCH_SUCCESS,
+    type: RECENT_STPACKS_REFRESH_SUCCESS,
     stpackList,
   };
 }
 
-export function fetchRecentStpakcsFail(error) {
+export function refreshRecentStpakcsFail(error) {
   return {
-    type: RECENT_STPACKS_FETCH_FAIL,
+    type: RECENT_STPACKS_REFRESH_FAIL,
     error,
   };
 }
+
+
+export function expandRecentStpacks() {
+  return (dispatch, getState) => {
+    dispatch(expandRecentStpacksRequest());
+
+    if ( !getState().getIn(['recent_stpacks', 'has_more']) ) {
+      return;
+    }
+
+    api(getState).get('/api/stpacks/recent', {
+      params: {
+        limit: 15,
+        offset: getState().getIn(['recent_stpacks', 'next']),
+      },
+    }).then(response => {
+      dispatch(expandRecentStpacksSuccess(response.data));
+    }).catch(error =>{
+      dispatch(expandRecentStpakcsFail(error));
+    });
+  };
+}
+
+export function expandRecentStpacksRequest() {
+  return {
+    type: RECENT_STPACKS_EXPAND_REQUEST,
+  };
+}
+
+export function expandRecentStpacksSuccess(stpackList) {
+  return {
+    type: RECENT_STPACKS_EXPAND_SUCCESS,
+    stpackList,
+  };
+}
+
+export function expandRecentStpakcsFail(error) {
+  return {
+    type: RECENT_STPACKS_EXPAND_FAIL,
+    error,
+  };
+}
+
 

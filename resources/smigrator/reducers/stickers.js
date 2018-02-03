@@ -4,7 +4,10 @@ import {
   STPACK_FETCH_SUCCESS,
   STPACK_UPDATE_SUCCESS,
 } from '../actions/stpacks';
-import { RECENT_STPACKS_FETCH_SUCCESS } from '../actions/recent_stpacks';
+import {
+  RECENT_STPACKS_REFRESH_SUCCESS,
+  RECENT_STPACKS_EXPAND_SUCCESS,
+} from '../actions/recent_stpacks';
 import { SEARCH_STPACKS_FETCH_SUCCESS } from '../actions/search_stpacks';
 
 const normalizeSticker = (state, sticker) => {
@@ -44,7 +47,8 @@ export default function sitckers(state = initialState, action) {
   case STPACK_FETCH_SUCCESS:
   case STPACK_UPDATE_SUCCESS:
     return normalizeStickerFromStpack(state, action.stpack);
-  case RECENT_STPACKS_FETCH_SUCCESS:
+  case RECENT_STPACKS_REFRESH_SUCCESS:
+  case RECENT_STPACKS_EXPAND_SUCCESS:
   case SEARCH_STPACKS_FETCH_SUCCESS:
     return normalizeStickerFromStpackList(state, action.stpackList);
   default:

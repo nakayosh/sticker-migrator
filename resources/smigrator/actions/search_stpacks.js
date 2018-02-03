@@ -4,9 +4,13 @@ import { debounce } from 'lodash';
 export const SEARCH_STPACKS_CHANGE = 'SEARCH_STPACKS_CHANGE';
 export const SEARCH_STPACKS_CLEAR  = 'SEARCH_STPACKS_CLEAR';
 
-export const SEARCH_STPACKS_FETCH_REQUEST = 'SEARCH_STPACKS_FETCH_REQUEST';
-export const SEARCH_STPACKS_FETCH_SUCCESS = 'SEARCH_STPACKS_FETCH_SUCCESS';
-export const SEARCH_STPACKS_FETCH_FAIL    = 'SEARCH_STPACKS_FETCH_FAIL';
+export const SEARCH_STPACKS_REFRESH_REQUEST = 'SEARCH_STPACKS_REFRESH_REQUEST';
+export const SEARCH_STPACKS_REFRESH_SUCCESS = 'SEARCH_STPACKS_REFRESH_SUCCESS';
+export const SEARCH_STPACKS_REFRESH_FAIL    = 'SEARCH_STPACKS_REFRESH_FAIL';
+
+export const SEARCH_STPACKS_EXPAND_REQUEST = 'SEARCH_STPACKS_EXPAND_REQUEST';
+export const SEARCH_STPACKS_EXPAND_SUCCESS = 'SEARCH_STPACKS_EXPAND_SUCCESS';
+export const SEARCH_STPACKS_EXPAND_FAIL    = 'SEARCH_STPACKS_EXPAND_FAIL';
 
 export function changeSearchStpacks(value) {
   return dispatch => {
@@ -26,7 +30,7 @@ export function clearSearchStpacks() {
 }
 
 const submitSearchStpacks = debounce((dispatch, getState) => {
-  dispatch(fetchSearchStpacksRequest());
+  dispatch(refreshSearchStpacksRequest());
 
   const q = getState().getIn(['search_stpacks', 'value']).trim();
 
@@ -35,29 +39,67 @@ const submitSearchStpacks = debounce((dispatch, getState) => {
   }
 
   api(getState).get('/api/stpacks/search', { params: { q, limit: 15 } }).then(response => {
-    dispatch(fetchSearchStpacksSuccess(response.data));
+    dispatch(refreshSearchStpacksSuccess(response.data));
   }).catch(error =>{
-    dispatch(fetchSearchStpacksFail(error));
+    dispatch(refreshSearchStpacksFail(error));
   });
 }, 1000, { trailing: true });
 
-export function fetchSearchStpacksRequest() {
+export function refreshSearchStpacksRequest() {
   return {
-    type: SEARCH_STPACKS_FETCH_REQUEST,
+    type: SEARCH_STPACKS_REFRESH_REQUEST,
   };
 }
 
-export function fetchSearchStpacksSuccess(stpackList) {
+export function refreshSearchStpacksSuccess(stpackList) {
   return {
-    type: SEARCH_STPACKS_FETCH_SUCCESS,
+    type: SEARCH_STPACKS_REFRESH_SUCCESS,
     stpackList,
   };
 }
 
-export function fetchSearchStpacksFail(error) {
+export function refreshSearchStpacksFail(error) {
   return {
-    type: SEARCH_STPACKS_FETCH_FAIL,
+    type: SEARCH_STPACKS_REFRESH_FAIL,
     error,
   };
 }
 
+
+export function expandSearchStpacks() {
+  return (dispatch, getState) => {
+    dispatch(expandSearchStpacksRequest());
+
+    const q = getState().getIn(['search_stpacks', 'value']).trim();
+
+    if (!q) {
+      return;
+    }
+
+    api(getState).get('/api/stpacks/search', { params: { q, limit: 15 } }).then(response => {
+      dispatch(expandSearchStpacksSuccess(response.data));
+    }).catch(error =>{
+      dispatch(expandSearchStpacksFail(error));
+    });
+  };
+}
+
+export function expandSearchStpacksRequest() {
+  return {
+    type: SEARCH_STPACKS_EXPAND_REQUEST,
+  };
+}
+
+export function expandSearchStpacksSuccess(stpackList) {
+  return {
+    type: SEARCH_STPACKS_EXPAND_SUCCESS,
+    stpackList,
+  };
+}
+
+export function expandSearchStpacksFail(error) {
+  return {
+    type: SEARCH_STPACKS_EXPAND_FAIL,
+    error,
+  };
+}
