@@ -26,7 +26,12 @@ class StpacksController extends Controller
         $limit = (integer)($request->input('limit') ?? 15);
         $offset = (integer)($request->input('offset') ?? 0);
         $stpacks = Stpack::with('stickers')->where('name', 'LIKE', '%'.$q.'%')->skip($offset)->take($limit)->get();
-        return response()->json($stpacks);
+        $retval = [
+            'results' => $stpacks,
+            'next' => $offset + $limit,
+            'prev' => $offset - $limit,
+        ];
+        return response()->json($retval);
     }
 
     public function recentStpack(Request $request){
@@ -37,7 +42,12 @@ class StpacksController extends Controller
         $limit = (integer)($request->input('limit') ?? 15);
         $offset = (integer)($request->input('offset') ?? 0);
         $stpacks = Stpack::with('stickers')->orderBy('created_at', 'desc')->skip($offset)->take($limit)->get();
-        return response()->json($stpacks);
+        $retval = [
+            'results' => $stpacks,
+            'next' => $offset + $limit,
+            'prev' => $offset - $limit,
+        ];
+        return response()->json($retval);
     }
 
     public function test(Request $request, $stpack_id){
