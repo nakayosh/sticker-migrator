@@ -13,6 +13,8 @@ services:
   redis:
     restart: always
     image: redis:4.0-alpine
+    ports:
+      - "4000:4000"
     volumes:
       - ./redis:/data
 
@@ -22,7 +24,7 @@ services:
     restart: always
     env_file: .env
     ports:
-      - "8080:8080"
+      - "3000:3000"
     depends_on:
       - db
       - redis
