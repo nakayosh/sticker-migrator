@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Lib\Imagedownloader\Line;
+use App\Lib\ImageDownloader\Line;
 use App\Stpack;
 use DB;
 use App\Jobs\MigrateStickers;
