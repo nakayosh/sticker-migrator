@@ -6,13 +6,15 @@ import ImmutablePureComponent from 'react-immutable-pure-component';
 import { ScrollContainer } from 'react-router-scroll-4';
 import { FormattedMessage } from 'react-intl';
 
+import SearchForm from '../../containers/search_form_container';
 import CompactStpack from '../../containers/compact_stpack_container';
 import LoadingIndicator from '../../components/loading_indicator';
 
 const mapStateToProps = state => ({
   value: state.getIn(['search_stpacks', 'value']),
   results: state.getIn(['search_stpacks', 'results']),
-  submitted: state.getIn(['search_stpacks', 'submitted']),
+  hasMore: state.getIn(['search_stpacks', 'has_more']),
+  submitting: state.getIn(['search_stpacks', 'submitting']),
 });
 
 @connect(mapStateToProps)
@@ -21,22 +23,25 @@ export default class SearchStpacks extends ImmutablePureComponent {
   static propTypes = {
     value: PropTypes.string.isRequired,
     results: ImmutablePropTypes.list,
-    submitted: PropTypes.bool.isRequired,
+    hasMore: PropTypes.bool.isRequired,
+    submitting: PropTypes.bool.isRequired,
   }
 
   handleScroll = e => {
     const { scrollTop, scrollHeight, clientHeight } = e.target;
 
-    if (scrollTop === scrollHeight - clientHeight) {
+    if (scrollTop === scrollHeight - clientHeight && this.props.hasMore && !this.props.submitting ) {
       this.props.onScroll();
     }
   }
 
   render () {
-    const { value, results, submitted } = this.props;
+    const { value, results, submitting, hasMore } = this.props;
 
     return (
       <div className='module'>
+        <SearchForm />
+
         <header className='module__header'>
           <h2 className='module__title'>
             <FormattedMessage id='search_stpacks.title' defaultMessage='Search results for "{query}"' values={{ query: value }} />
@@ -45,18 +50,18 @@ export default class SearchStpacks extends ImmutablePureComponent {
 
         <div className='module-scrollable-content'>
           {
-            submitted && !!results.size && (
+            !submitting && !!results.size && (
               <ScrollContainer scrollKey='search'>
                 <div className='module-scrollable-content__inner' onScroll={this.handleScroll}>
                   { results.map(result => <CompactStpack id={result} key={result} />) }
-                  <LoadingIndicator />
+                  { hasMore && <LoadingIndicator /> }
                 </div>
               </ScrollContainer>
             )
           }
 
           {
-            submitted && !results.size && (
+            !submitting && !results.size && (
               <p className='module-scrollable-content__empty'>
                 <FormattedMessage id='search_stpacks.empty' values={{ line_store: <a href={`https://store.line.me/search?q=${ encodeURIComponent(value) }`} target='_blank'>{ value }</a> }} />
               </p>
@@ -64,7 +69,7 @@ export default class SearchStpacks extends ImmutablePureComponent {
           }
 
           {
-            !submitted && value !== '' && <LoadingIndicator />
+            hasMore && submitting && value !== '' && <LoadingIndicator />
           }
         </div>
       </div>

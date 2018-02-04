@@ -42,8 +42,8 @@ export default class Wizard extends React.PureComponent {
     const { intl } = this.props;
 
     return (
-      <div className='wizard'>
-        <h2 className='wizard__title'>
+      <div className='wizard module'>
+        <h2 className='module__title'>
           <FormattedMessage id='wizard.title' defaultMessage='Create new sticker set' />
         </h2>
 

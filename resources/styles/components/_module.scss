@@ -1,6 +1,6 @@
 .module {
   margin: 0 8px 24px;
-  padding: 8px 16px;
+  padding: 12px 16px;
   box-sizing: border-box;
   border-radius: 6px;
   border-radius: 6px;
@@ -32,17 +32,21 @@
 }
 
 .module__title {
-  margin: 0;
+  margin: 4px auto;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   transition: 0.3s ease-out;
+  font-size: 18px;
+
+  @media screen and (min-width: 700px) {
+    font-size: 24px;
+  }
 }
 
 .module-scrollable-content {
   position: relative;
   overflow: hidden;
-  height: 100%;
 
   &::after {
     content: "";
@@ -59,7 +63,7 @@
 
 .module-scrollable-content__inner {
   overflow-y: scroll;
-  height: 100%;
+  height: calc(100vh - 200px);
 
   @media screen and (min-width: 700px) {
     height: 700px;

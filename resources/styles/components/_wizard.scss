@@ -1,15 +1,3 @@
-.wizard {
-  padding: 8px 16px;
-  margin: 0 8px 24px;
-  border-radius: 6px;
-  border: 1px solid $p500;
-  background-color: $p000;
-
-  @media screen and (min-width: 700px) {
-    padding: 24px 36px;
-  }
-}
-
 .wizard__form {
   display: flex;
   margin-bottom: 8px;
