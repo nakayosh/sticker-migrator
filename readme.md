@@ -35,7 +35,7 @@ cp .env.example .env
 docker-compose run --rm web ash -c "composer install --no-progress \
  && php artisan key:generate \
  && php artisan migrate \
- && yarn --pure-lockfile \
+ && yarn install --pure-lockfile \
  && yarn run prod"
 ```
 
