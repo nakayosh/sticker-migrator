@@ -21,7 +21,7 @@ cp .env.example .env
     restart: always
     image: mariadb:10.2
     environment:
-      - "MYSQL_DATABASE=smigrater"
+      - "MYSQL_DATABASE=smigrator"
       - "MYSQL_ROOT_PASSWORD=root"
 -    # volumes:
 -    #   - ./mariadb:/var/lib/mysql
@@ -33,7 +33,7 @@ cp .env.example .env
 
 ```
 docker-compose run --rm web ash -c "composer install --no-progress \
- && php artisan key:generate \
+ && php artisan key:generate
  && php artisan migrate \
  && yarn --pure-lockfile \
  && yarn run prod"
