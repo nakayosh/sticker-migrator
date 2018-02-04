@@ -4,6 +4,9 @@ namespace App\Lib\ImageUploader;
 
 use App\Lib\Telegram\Api;
 use Config;
+use App\Stpack;
+use App\Lib\Constants\StpackStatus;
+use DB;
 
 class Telegram
 {
@@ -12,7 +15,7 @@ class Telegram
         $this->user_id = Config::get('telegram.owner_user_id');
     }
 
-    public function upload($stpack){
+    public function upload(Stpack $stpack){
         $stickers = $stpack['stickers'];
         $first_sticker = $stickers[0];
         $uploaded_sticker = $this->api->sticker->uploadStickerFile('app/resized_stickers/'.$first_sticker['id_str']);
@@ -33,5 +36,17 @@ class Telegram
         $sticker->file_id = $uploaded_sticker['file_id'];
         $sticker->save();
         return $this->api->sticker->addStickerToSet($this->user_id, $sticker_set_name, $uploaded_sticker['file_id'], $sticker['emojis'] ?? '☺');
+    }
+
+    public function upload_rollback(Stpack $stpack){
+        DB::transaction(function () use ($stpack){
+            $stpack->status = StpackStatus::DOWNLOADED;
+            $stpack->url = null;
+            foreach ($stpack->stickers as $sticker) {
+                $sticker->file_id = null;
+                $sticker->save();
+            }
+            $stpack->save();
+        });
     }
 }
