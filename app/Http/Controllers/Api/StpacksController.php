@@ -32,11 +32,12 @@ class StpacksController extends Controller
         $q = $request->input('q');
         $limit = (integer)($request->input('limit') ?? 15);
         $offset = (integer)($request->input('offset') ?? 0);
-        $stpacks = Stpack::with('stickers')->where('name', 'LIKE', '%'.$q.'%')->skip($offset)->take($limit)->get();
+        $query = Stpack::with('stickers')->where('name', 'LIKE', '%'.$q.'%');
+        $stpacks = $query->skip($offset)->take($limit)->get();
         $retval = [
             'results' => $stpacks,
-            'next' => $offset + $limit,
-            'prev' => $offset - $limit,
+            'next' => $this->getNextStpackOffset($query, $offset, $limit),
+            'prev' => $this->getPrevStpackOffset(null, $offset, $limit),
         ];
         return response()->json($retval);
     }
@@ -49,11 +50,12 @@ class StpacksController extends Controller
         ]);
         $limit = (integer)($request->input('limit') ?? 15);
         $offset = (integer)($request->input('offset') ?? 0);
-        $stpacks = Stpack::with('stickers')->orderBy('created_at', 'desc')->skip($offset)->take($limit)->get();
+        $query = Stpack::with('stickers')->orderBy('created_at', 'desc');
+        $stpacks = $query->skip($offset)->take($limit)->get();
         $retval = [
             'results' => $stpacks,
-            'next' => $offset + $limit,
-            'prev' => $offset - $limit,
+            'next' => $this->getNextStpackOffset($query, $offset, $limit),
+            'prev' => $this->getPrevStpackOffset(null, $offset, $limit),
         ];
         return response()->json($retval);
     }
@@ -162,5 +164,15 @@ class StpacksController extends Controller
             $stpack = $download;
         }
         return [$stpack, $return_code];
+    }
+
+    private function getNextStpackOffset($query, Int $offset, Int $limit)
+    {
+        return $query->skip($offset + $limit)->exists() ? $offset + $limit : null;
+    }
+
+    private function getPrevStpackOffset($query, Int $offset, Int $limit)
+    {
+        return $offset - $limit >= 0 ? $offset - $limit : null;
     }
 }
