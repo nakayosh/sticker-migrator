@@ -22,7 +22,8 @@ class StpacksController extends Controller
         return response()->json($stpack, $return_code ?: 500);
     }
 
-    public function searchStpack(Request $request){
+    public function searchStpack(Request $request)
+    {
         $validatedData = $request->validate([
             'q' => 'required|string',
             'limit' => 'integer',
@@ -57,7 +58,8 @@ class StpacksController extends Controller
         return response()->json($retval);
     }
 
-    public function patchStpack(Request $request, $stpack_id){
+    public function patchStpack(Request $request, $stpack_id)
+    {
         $validatedData = $request->validate([
             'stickers' => 'required|json',
         ]);
