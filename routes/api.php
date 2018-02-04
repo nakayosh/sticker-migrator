@@ -18,5 +18,4 @@ Route::group(['middleware' => 'api'], function() {
     Route::get('/stpacks/search', 'Api\StpacksController@searchStpack');
     Route::get('/stpacks/recent', 'Api\StpacksController@recentStpack');
     Route::patch('/stpacks/{stpack_id}', 'Api\StpacksController@patchStpack');
-    Route::get('/test/{stpack_id}', 'Api\StpacksController@test');
 });
