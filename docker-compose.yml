@@ -13,10 +13,20 @@ services:
   redis:
     restart: always
     image: redis:4.0-alpine
-    ports:
-      - "4000:4000"
     volumes:
       - ./redis:/data
+
+  echo:
+    build: .
+    image: neetshin/smigrator
+    restart: always
+    env_file: .env
+    command: npm run start
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+      - redis
 
   web:
     build: .
@@ -29,4 +39,5 @@ services:
       - db
       - redis
     volumes:
-      - .:/smigrator
+      - ./public:/smigrator/public
+      - ./storage/smigrator/storage

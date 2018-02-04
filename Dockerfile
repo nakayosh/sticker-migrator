@@ -6,7 +6,7 @@ LABEL maintainer="https://gitlab.com/nijipico/sticker_migrator" \
 ENV NODE_ENV=production \
     COMPOSER_ALLOW_SUPERUSER=true
 
-EXPOSE 3000
+EXPOSE 3000 4000
 
 WORKDIR /smigrator
 
@@ -49,8 +49,10 @@ COPY . /smigrator
 RUN mkdir -p /smigrator/storage /smigrator/bootstrap/cache \
  && chmod -R 777 /smigrator/storage /smigrator/bootstrap/cache \
  && chmod +x /usr/local/bin/composer; sync \
+ && composer install --no-progress \
+ && yarn install --pure-lockfile \
  && yarn cache clean
 
-VOLUME ["/smigrator"]
+VOLUME /smigrator/public /smigrator/storage
 
 CMD ["supervisord"]
