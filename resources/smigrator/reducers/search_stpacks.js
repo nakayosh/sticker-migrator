@@ -20,7 +20,6 @@ function normalizeSearchStpacks(state, stpackList) {
     .set('results', stpackList.results)
     .set('next', stpackList.next)
     .set('prev', stpackList.prev)
-    .set('has_more', stpackList.results.size !== 0)
     .set('submitting', false);
 }
 
@@ -32,7 +31,6 @@ function appendNormalizeSearchStpacks(state, stpackList) {
     .update('results', results => results.concat(stpackList.results))
     .set('next', stpackList.next)
     .set('prev', stpackList.prev)
-    .set('has_more', stpackList.results.size !== 0)
     .set('submitting', false);
 }
 
@@ -41,7 +39,6 @@ const initialState = ImmutableMap({
   results: ImmutableList(),
   next: 0,
   prev: 0,
-  has_more: true,
   submitted: false,
 });
 

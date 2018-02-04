@@ -13,7 +13,7 @@ import LoadingIndicator from '../../components/loading_indicator';
 const mapStateToProps = state => ({
   value: state.getIn(['search_stpacks', 'value']),
   results: state.getIn(['search_stpacks', 'results']),
-  hasMore: state.getIn(['search_stpacks', 'has_more']),
+  hasMore: state.getIn(['search_stpacks', 'next']) !== null,
   submitting: state.getIn(['search_stpacks', 'submitting']),
 });
 
