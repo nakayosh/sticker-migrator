@@ -1,37 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import { ScrollContainer } from 'react-router-scroll-4';
 import { FormattedMessage } from 'react-intl';
-import {
-  refreshRecentStpacks,
-  expandRecentStpacks,
-} from '../../actions/recent_stpacks';
 
-import CompactStpack from '../../containers/compact_stpack_container';
-import LoadingIndicator from '../../components/loading_indicator';
+import CompactStpack from '../containers/compact_stpack_container';
+import LoadingIndicator from '../components/loading_indicator';
 
-const mapStateToProps = state => ({
-  results: state.getIn(['recent_stpacks', 'results']),
-  hasMore: state.getIn(['recent_stpacks', 'next']) !== null,
-  submitting: state.getIn(['recent_stpacks', 'submitting']),
-});
-
-const mapDispatchToProps = dispatch => ({
-
-  onRefresh () {
-    dispatch(refreshRecentStpacks());
-  },
-
-  onExpand () {
-    dispatch(expandRecentStpacks());
-  },
-
-});
-
-@connect(mapStateToProps, mapDispatchToProps)
 export default class RecentStpacks extends ImmutablePureComponent {
 
   static propTypes = {

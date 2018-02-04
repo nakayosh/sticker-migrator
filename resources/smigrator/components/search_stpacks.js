@@ -1,23 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import { ScrollContainer } from 'react-router-scroll-4';
 import { FormattedMessage } from 'react-intl';
 
-import SearchForm from '../../containers/search_form_container';
-import CompactStpack from '../../containers/compact_stpack_container';
-import LoadingIndicator from '../../components/loading_indicator';
+import SearchForm from '../containers/search_form_container';
+import CompactStpack from '../containers/compact_stpack_container';
+import LoadingIndicator from '../components/loading_indicator';
 
-const mapStateToProps = state => ({
-  value: state.getIn(['search_stpacks', 'value']),
-  results: state.getIn(['search_stpacks', 'results']),
-  hasMore: state.getIn(['search_stpacks', 'next']) !== null,
-  submitting: state.getIn(['search_stpacks', 'submitting']),
-});
-
-@connect(mapStateToProps)
 export default class SearchStpacks extends ImmutablePureComponent {
 
   static propTypes = {
