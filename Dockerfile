@@ -6,7 +6,7 @@ LABEL maintainer="https://gitlab.com/nijipico/sticker_migrator" \
 ENV NODE_ENV=production \
     COMPOSER_ALLOW_SUPERUSER=true
 
-EXPOSE 8080
+EXPOSE 3000
 
 WORKDIR /smigrator
 
