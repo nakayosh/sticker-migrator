@@ -8,10 +8,14 @@ use App\Lib\Imagedownloader\Line;
 use App\Stpack;
 use App\Lib\ImageResizer\Image;
 use App\Lib\ImageUploader\Telegram;
+use App\Events;
+use App\Lib\Constants\StpackStatus;
+use Exception;
 
 class StpacksController extends Controller
 {
-    public function getStpack(Request $request, $stpack_id){
+    public function getStpack(Request $request, $stpack_id)
+    {
         [$stpack, $return_code] = $this->getStpackData($stpack_id);
         return response()->json($stpack, $return_code ?: 500);
     }
@@ -29,7 +33,8 @@ class StpacksController extends Controller
         return response()->json($stpacks);
     }
 
-    public function recentStpack(Request $request){
+    public function recentStpack(Request $request)
+    {
         $validatedData = $request->validate([
             'limit' => 'integer',
             'offset' => 'integer',
@@ -40,7 +45,8 @@ class StpacksController extends Controller
         return response()->json($stpacks);
     }
 
-    public function test(Request $request, $stpack_id){
+    private function migrate(Request $request, $stpack_id)
+    {
         [$stpack, $return_code] = $this->getStpackData($stpack_id);
         if ($stpack['error']) {
             return response()->json($stpack, $return_code);
@@ -48,48 +54,56 @@ class StpacksController extends Controller
         if (!is_null($stpack['url'])) {
             return redirect()->route('api_stpack', ['stpack_id' => $stpack_id]);
         }
-        ini_set("max_execution_time", 0);
-        header('Content-type: text/html; charset=utf-8');
-        echo str_pad('',4096).PHP_EOL;
-        echo 'Downloading stpack data from LINE server...<br>'.PHP_EOL;
-        ob_flush();
-        flush();
-        $resizer = new Image();
-        $stickers = $stpack['stickers'];
-        $all_sticker_count = count($stickers);
-        echo 'sticker short name is '.$stpack['short_name'].'<br>'.PHP_EOL;
-        echo 'Resizing stickers...<br>'.PHP_EOL;
-        ob_flush();
-        flush();
-        $count = 1;
-        foreach ($stickers as $sticker) {
-            $resizer->resize($sticker['original_url'], 'resized_stickers', $sticker['id_str']);
-            echo $count.' of '.$all_sticker_count.' were resized...<br>';
-            ob_flush();
-            flush();
-            $count++;
+        try {
+            $stpack = $this->_migrate_compile($stpack);
+            $stpack = $this->_migrate_upload($stpack);
+        } catch (Exception $e) {
+            $stpack->status = StpackStatus::FAILED;
+            $stpack->save();
+            event(new Events\StickerUploadFailed($stpack));
+            $telegram = new Telegram();
+            $telegram->upload_rollback($stpack);
         }
-        $telegram = new Telegram();
-        echo PHP_EOL.'uploading sticker to telegram...<br>'.PHP_EOL;
-        ob_flush();
-        flush();
-        foreach ($telegram->upload($stpack) as $uploaded_count) {
-            echo $uploaded_count.' of '.$all_sticker_count.' stickers were uploaded.<br>';
-            ob_flush();
-            flush();
-        }
-        echo PHP_EOL.'upload finished!<br>'.PHP_EOL;
-        $url = 'https://t.me/addstickers/'.$stpack['short_name'];
-        echo 'let\'s download sticker from <a href="'.$url.'">'.$url.'</a><br>'.PHP_EOL;
-        ob_flush();
-        flush();
-        $stpack = Stpack::where('id', $stpack_id)->first();
-        $stpack->url = $url;
-        $stpack->save();
         return redirect()->route('api_stpack', ['stpack_id' => $stpack_id]);
     }
 
-    private function getStpackData(Int $stpack_id){
+    private function _migrate_compile(Stpack $stpack)
+    {
+        $resizer = new Image();
+        $stickers = $stpack['stickers'];
+        $stpack->status = StpackStatus::COMPILING;
+        $stpack->save();
+        event(new Events\StickerCompileStarting($stpack));
+        $count = 1;
+        foreach ($stickers as $sticker) {
+            $resizer->resize($sticker['original_url'], 'resized_stickers', $sticker['id_str']);
+            event(new Events\StickerCompiling($stpack, $count));
+            $count++;
+        }
+        event(new Events\StickerCompiled($stpack));
+        return $stpack;
+    }
+
+    private function _migrate_upload(Stpack $stpack)
+    {
+        $telegram = new Telegram();
+        $stpack->status = StpackStatus::UPLOADING;
+        $stpack->save();
+        event(new Events\StickerUploadStarting($stpack));
+        foreach ($telegram->upload($stpack) as $uploaded_count) {
+            event(new Events\StickerUploading($stpack, $uploaded_count));
+        }
+        $url = 'https://t.me/addstickers/'.$stpack['short_name'];
+        $stpack = Stpack::where('id', $stpack_id)->first();
+        $stpack->url = $url;
+        $stpack->status = StpackStatus::UPLOADED;
+        $stpack->save();
+        event(new Events\StickerUploaded($stpack));
+        return $stpack;
+    }
+
+    private function getStpackData(Int $stpack_id)
+    {
         $stpack_model = Stpack::where('id', $stpack_id);
         $return_code  = 200;
 
