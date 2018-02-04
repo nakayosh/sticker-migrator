@@ -43,12 +43,8 @@ class MigrateStickers implements ShouldQueue
     private function migrate(Int $stpack_id)
     {
         $stpack = Stpack::with('stickers')->where('id', $stpack_id)->first();
-        try {
-            $stpack = $this->_migrate_compile($stpack);
-            $stpack = $this->_migrate_upload($stpack);
-        } catch (Exception $e) {
-            $this->_migrate_failed($stpack);
-        }
+        $stpack = $this->_migrate_compile($stpack);
+        $stpack = $this->_migrate_upload($stpack);
         return $stpack;
     }
 
@@ -94,5 +90,12 @@ class MigrateStickers implements ShouldQueue
         event(new Events\StickerUploadFailed($stpack));
         $telegram = new Telegram();
         $telegram->upload_rollback($stpack);
+    }
+
+    public function failed(Exception $exception)
+    {
+        $stpack = Stpack::with('stickers')->where('id', $stpack_id)->first();
+        $this->_migrate_failed($stpack);
+        return $stpack;
     }
 }
