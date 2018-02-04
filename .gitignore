@@ -13,6 +13,7 @@ yarn-error.log
 .env
 
 /mariadb
+/redis
 
 .env
 *.log

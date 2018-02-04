@@ -48,7 +48,6 @@
     "lodash": "^4.17.4",
     "node-sass": "^4.7.2",
     "prop-types": "^15.6.0",
-    "pusher-js": "^4.2.2",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-immutable-proptypes": "^2.1.0",
