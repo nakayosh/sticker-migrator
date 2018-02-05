@@ -15,7 +15,6 @@ import ja from 'react-intl/locale-data/ja';
 import {
   Home,
   Stpacks,
-  Compose,
   MobileHome,
   MobileRecentStpacks,
   MobileSearchStpacks,
@@ -50,7 +49,6 @@ export default class App extends React.Component {
             <WrappedRoute path='/search' component={MobileSearchStpacks} />
 
             <WrappedRoute path='/stpacks/:id' component={Stpacks} />
-            <WrappedRoute path='/stpacks/:id/compose' component={Compose} />
           </Switch>
 
           <ModalContaienr />

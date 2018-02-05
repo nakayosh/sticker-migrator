@@ -6,9 +6,6 @@ const mapStateToProps = (state, { id }) => ({
   stpack: state.getIn(['stpacks', id], null),
 });
 
-// const mapDispatchToProps = dispatch => ({
-// });
-
 export default injectIntl(connect(
   mapStateToProps,
 )(Stpack));

@@ -1,8 +1,11 @@
-import { List as ImmutableList, fromJS } from 'immutable';
-import { STICKER_FETCH_SUCCESS } from '../actions/stickers';
+import { Map as ImmutableMap, fromJS } from 'immutable';
+import {
+  STICKER_FETCH_SUCCESS,
+  STICKER_CHANGE_EMOJI,
+} from '../actions/stickers';
 import {
   STPACK_FETCH_SUCCESS,
-  STPACK_UPDATE_SUCCESS,
+  STPACK_UPDATE,
 } from '../actions/stpacks';
 import {
   RECENT_STPACKS_REFRESH_SUCCESS,
@@ -41,14 +44,16 @@ const normalizeStickerFromStpackList = (state, stpackList) => {
   return state;
 };
 
-const initialState = ImmutableList();
+const initialState = ImmutableMap();
 
 export default function sitckers(state = initialState, action) {
   switch(action.type) {
+  case STICKER_CHANGE_EMOJI:
+    return state.setIn([action.id, 'emojis'], action.emoji);
   case STICKER_FETCH_SUCCESS:
     return normalizeSticker(state, action.sticker);
   case STPACK_FETCH_SUCCESS:
-  case STPACK_UPDATE_SUCCESS:
+  case STPACK_UPDATE:
     return normalizeStickerFromStpack(state, action.stpack);
   case RECENT_STPACKS_REFRESH_SUCCESS:
   case RECENT_STPACKS_EXPAND_SUCCESS:

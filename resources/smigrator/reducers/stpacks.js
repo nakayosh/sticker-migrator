@@ -1,7 +1,8 @@
 import { Map as ImmutableMap, fromJS } from 'immutable';
 import {
   STPACK_FETCH_SUCCESS,
-  STPACK_UPDATE_SUCCESS,
+  STPACK_PATCH_SUCCESS,
+  STPACK_UPDATE,
 } from '../actions/stpacks';
 import {
   RECENT_STPACKS_REFRESH_SUCCESS,
@@ -33,7 +34,8 @@ const initialState = ImmutableMap();
 export default function stpacks(state = initialState, action) {
   switch(action.type) {
   case STPACK_FETCH_SUCCESS:
-  case STPACK_UPDATE_SUCCESS:
+  case STPACK_PATCH_SUCCESS:
+  case STPACK_UPDATE:
     return normalizeStpack(state, action.stpack);
   case RECENT_STPACKS_REFRESH_SUCCESS:
   case RECENT_STPACKS_EXPAND_SUCCESS:

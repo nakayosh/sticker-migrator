@@ -6,9 +6,9 @@ const mapStateToProps = (state, { stickerId }) => ({
   sticker: state.getIn(['stickers', stickerId]),
 });
 
-const mapDispatchToProps = ( dispatch, { stickerId }) => ({
+const mapDispatchToProps = (dispatch, { stickerId }) => ({
 
-  onClick() {
+  onOpenModal() {
     dispatch(openModal('STICKER_PREVIEW_MODAL', { stickerId }));
   },
 
