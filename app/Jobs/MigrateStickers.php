@@ -75,7 +75,7 @@ class MigrateStickers implements ShouldQueue
             event(new Events\StickerUploading($stpack, $uploaded_count));
         }
         $url = 'https://t.me/addstickers/'.$stpack['short_name'];
-        $stpack = Stpack::where('id', $stpack_id)->first();
+        $stpack = Stpack::where('id', $this->stpack_id)->first();
         $stpack->url = $url;
         $stpack->status = StpackStatus::UPLOADED;
         $stpack->save();
