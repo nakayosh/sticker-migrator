@@ -31,4 +31,12 @@ class Sticker extends Model
     public function getStpackIdStrAttribute(){
         return (string)$this->stpack_id;
     }
+
+    public function getEmojisAttribute($value){
+        return str_split($value);
+    }
+
+    public function setEmojisAttribute($value){
+        return implode($value);
+    }
 }
