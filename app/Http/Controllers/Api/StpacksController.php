@@ -8,6 +8,7 @@ use App\Lib\ImageDownloader\Line;
 use App\Stpack;
 use DB;
 use App\Jobs\MigrateStickers;
+use Exception;
 
 class StpacksController extends Controller
 {
@@ -59,13 +60,16 @@ class StpacksController extends Controller
     public function patchStpack(Request $request, $stpack_id)
     {
         $validatedData = $request->validate([
-            'stickers' => 'required|json',
+            'stickers' => 'required|array',
         ]);
         $stpack_id = (integer)$stpack_id;
-        $stickers = json_decode($request->input('stickers'), true);
+        $stickers = $request->input('stickers');
         [$stpack, $return_code] = $this->_getStpackData($stpack_id);
         if ($stpack['error']) {
             return response()->json($stpack, $return_code);
+        }
+        if (count($stickers) != count($stpack->stickers)) {
+            throw new Exception('stickers length invailed');
         }
         DB::transaction(function () use ($stpack, $stickers){
             $count = 0;
