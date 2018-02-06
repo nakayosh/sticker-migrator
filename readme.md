@@ -32,7 +32,9 @@ cp .env.example .env
 つぎに，データベースのイニシャライズ，依存関係のインストール，アセットのビルドを行います．これには時間が掛かる場合があります．
 
 ```
-docker-compose run --rm web ash -c "php artisan key:generate \
+docker-compose run --rm web ash -c "composer install --no-progress \
+ && yarn install --pure-lockfile \
+ && php artisan key:generate \
  && php artisan migrate \
  && yarn run prod"
 ```

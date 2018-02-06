@@ -39,5 +39,4 @@ services:
       - db
       - redis
     volumes:
-      - ./public:/smigrator/public
-      - ./storage/smigrator/storage
+      - .:/smigrator

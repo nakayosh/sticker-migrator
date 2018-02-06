@@ -1,5 +1,5 @@
 import api from '../api';
-import echo from 'laravel-echo';
+import Echo from 'laravel-echo';
 
 export const STPACK_FETCH_REQUEST = 'STPACK_FETCH_REQUEST';
 export const STPACK_FETCH_SUCCESS = 'STPACK_FETCH_SUCCESS';
@@ -66,18 +66,18 @@ export function patchStpack(id) {
     api(getState).patch(`/api/stpacks/${id}`, data).then(response => {
       dispatch(patchStpackRequest(response.data));
 
-      const echo = new echo({
+      const Echo = new Echo({
         broadcaster: 'socket.io',
         host: window.location.hostname + ':4000',
       });
 
-      echo.private(`stpacks-${id}`).listen('StickerComlileStarting', e => console.log(e));
-      echo.private(`stpacks-${id}`).listen('StickerCompiling',       e => console.log(e));
-      echo.private(`stpacks-${id}`).listen('StickerCompiled',        e => console.log(e));
-      echo.private(`stpacks-${id}`).listen('StickerUploadStarting',  e => console.log(e));
-      echo.private(`stpacks-${id}`).listen('StickerUploading',       e => console.log(e));
-      echo.private(`stpacks-${id}`).listen('StickerUploaded',        e => console.log(e));
-      echo.private(`stpacks-${id}`).listen('StickerUploadFailed',    e => console.log(e));
+      Echo.private(`stpacks.${id}`).listen('StickerComlileStarting', e => dispatch(updateStpack(e.data)));
+      Echo.private(`stpacks.${id}`).listen('StickerCompiling',       e => dispatch(updateStpack(e.data)));
+      Echo.private(`stpacks.${id}`).listen('StickerCompiled',        e => dispatch(updateStpack(e.data)));
+      Echo.private(`stpacks.${id}`).listen('StickerUploadStarting',  e => dispatch(updateStpack(e.data)));
+      Echo.private(`stpacks.${id}`).listen('StickerUploading',       e => dispatch(updateStpack(e.data)));
+      Echo.private(`stpacks.${id}`).listen('StickerUploaded',        e => dispatch(updateStpack(e.data)));
+      Echo.private(`stpacks.${id}`).listen('StickerUploadFailed',    e => dispatch(updateStpack(e.data)));
     }).catch(error => {
       dispatch(patchStpackFail(error));
     });

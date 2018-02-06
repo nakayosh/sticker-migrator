@@ -36,6 +36,7 @@ RUN apk -U upgrade \
  && pecl channel-update pecl.php.net \
  && pecl install memcached \
  && docker-php-ext-enable memcached \
+ && npm install -g laravel-echo-server \
  && mkdir -p /var/log/nginx /var/log/supervisor \
  && rm -rf /var/cache/apk/*
 
@@ -48,11 +49,8 @@ COPY . /smigrator
 
 RUN mkdir -p /smigrator/storage /smigrator/bootstrap/cache \
  && chmod -R 777 /smigrator/storage /smigrator/bootstrap/cache \
- && chmod +x /usr/local/bin/composer; sync \
- && composer install --no-progress \
- && yarn install --pure-lockfile \
- && yarn cache clean
+ && chmod +x /usr/local/bin/composer; sync
 
-VOLUME /smigrator/public /smigrator/storage
+VOLUME /smigrator
 
 CMD ["supervisord"]

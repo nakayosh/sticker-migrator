@@ -1,10 +1,6 @@
 bootstrap/cache
-**/*node_modules
-
-vendor/**/test*
-vendor/**/tests*
-vendor/**/Tests*
-
+node_modules
+vendor
 logs
 
 .idea
