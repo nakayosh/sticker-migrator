@@ -34,6 +34,6 @@ class StickerUploadFailed
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('stpacks-'.$this->stpack->id);
+        return new PrivateChannel('stpacks.'.$this->stpack->id);
     }
 }
