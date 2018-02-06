@@ -19,3 +19,5 @@ yarn-error.log
 *.pid
 !.keep
 !.gitkeep
+
+*.code-workspace
