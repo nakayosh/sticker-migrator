@@ -67,7 +67,7 @@ class StpacksController extends Controller
         if ($stpack['error']) {
             return response()->json($stpack, $return_code);
         }
-        DB:transaction(function () use ($stpack, $stickers){
+        DB::transaction(function () use ($stpack, $stickers){
             $count = 0;
             foreach ($stpack->stickers as $sticker) {
                 $sticker->emojis = $stickers[$count]['emojis'];
