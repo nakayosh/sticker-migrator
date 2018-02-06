@@ -1,0 +1,77 @@
+.module {
+  margin: 0 8px 24px;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid $p500;
+  background-color: $p000;
+  height: 100%;
+
+  @media screen and (min-width: 700px) {
+    padding: 24px 36px;
+    height: auto;
+  }
+}
+
+.module__header {
+  position: relative;
+  padding-bottom: 8px;
+  box-sizing: border-box;
+  border-bottom: 1px solid $p500;
+
+  &--focused {
+    .module__title {
+      opacity: 0;
+    }
+
+    .module__input-wrapper {
+      width: 100%;
+    }
+  }
+}
+
+.module__title {
+  margin: 4px auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: 0.3s ease-out;
+  font-size: 18px;
+
+  @media screen and (min-width: 700px) {
+    font-size: 24px;
+  }
+}
+
+.module-scrollable-content {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(-180deg, transparent 95%, #fff 100%);
+    pointer-events: none;
+  }
+}
+
+.module-scrollable-content__inner {
+  overflow-y: scroll;
+  height: calc(100vh - 200px);
+
+  @media screen and (min-width: 700px) {
+    height: 700px;
+  }
+}
+
+.module-scrollable-content__empty {
+  line-height: 1.2;
+  padding: 8px 0;
+  color: $t100;
+}

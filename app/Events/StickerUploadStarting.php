@@ -24,7 +24,7 @@ class StickerUploadStarting
      */
     public function __construct(Stpack $stpack)
     {
-        $this->stpack = $stpack;
+        $this->stpack = $stpack->replicate();
         $this->stpack['uploaded_stickers_count'] = 0;
     }
 

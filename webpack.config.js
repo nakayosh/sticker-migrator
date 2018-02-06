@@ -1,10 +1,10 @@
+require('dotenv').config();
 const webpack = require('webpack');
 const path    = require('path');
-const { env } = require('process');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 
-const isProd = env.NODE_ENV === 'production';
+const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
 
@@ -77,6 +77,9 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        PUSHER_APP_ID: JSON.stringify(process.env.PUSHER_APP_ID),
+        PUSHER_APP_KEY: JSON.stringify(process.env.PUSHER_APP_KEY),
+        PUSHER_APP_CLUSTER: JSON.stringify(process.env.PUSHER_APP_CLUSTER),
       },
     }),
 

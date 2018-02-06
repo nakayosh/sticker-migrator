@@ -24,7 +24,7 @@ class StickerUploadFailed
      */
     public function __construct(Stpack $stpack)
     {
-        $this->stpack = $stpack;
+        $this->stpack = $stpack->replicate();
     }
 
     /**

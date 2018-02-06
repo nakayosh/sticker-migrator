@@ -1,10 +1,33 @@
 .general-header {
-  margin: 24px auto;
+  position: fixed;
+  padding: 8px;
+  box-sizing: border-box;
+  height: 60px;
+  width: 100%;
+  background-color: $p000;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.26);
+  z-index: 500;
+
+  @media screen and (min-width: 700px) {
+    padding: 8px 16px;
+  }
+}
+
+.general-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+
+  @media screen and (min-width: 700px) {
+    max-width: 700px;
+  }
 
   h1 {
-    display: flex;
-    height: 120px;
-    justify-content: center;
-    align-items: center;
+    margin: 0;
+    color: $white;
+    font-size: 18px;
   }
 }

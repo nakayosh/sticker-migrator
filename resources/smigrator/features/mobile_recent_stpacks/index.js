@@ -4,8 +4,9 @@ import Page from '../app/components/page';
 import Content from '../app/components/content';
 
 import GeneralHeader from '../general_header';
+import RecentStpacks from '../../containers/recent_stpacks_container';
 
-export default class Home extends React.PureComponent {
+export default class MobileRecentStpacks extends React.PureComponent {
 
   render () {
     return (
@@ -13,7 +14,7 @@ export default class Home extends React.PureComponent {
         <GeneralHeader />
 
         <Content>
-          Compose
+          <RecentStpacks />
         </Content>
       </Page>
     );

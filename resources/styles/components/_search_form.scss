@@ -1,0 +1,25 @@
+.search-form {
+  position: relative;
+  margin: 0 8px 24px;
+  padding: 8px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  border: 1px solid $p500;
+  background-color: $p000;
+}
+
+.search-form__input {
+  display: block;
+  width: 100%;
+  font-size: 21px;
+}
+
+.search-form__button {
+  position: absolute;
+  margin-right: 16px;
+  top: 0;
+  right: 0;
+  height: 100%;
+  color: $t100;
+  font-size: 21px;
+}

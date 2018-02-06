@@ -24,7 +24,7 @@ class StickerCompiled
      */
     public function __construct(Stpack $stpack)
     {
-        $this->stpack = $stpack;
+        $this->stpack = $stpack->replicate();
         $this->stpack['compiled_stickers_count'] = count($stpack['stickers']);
     }
 

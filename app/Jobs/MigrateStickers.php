@@ -57,7 +57,7 @@ class MigrateStickers implements ShouldQueue
         event(new Events\StickerCompileStarting($stpack));
         $count = 1;
         foreach ($stickers as $sticker) {
-            $resizer->resize($sticker['original_url'], 'resized_stickers', $sticker['id_str']);
+            $resizer->resize($sticker['original_url'], 'resized_stickers', $sticker['id_str'].'.png');
             event(new Events\StickerCompiling($stpack, $count));
             $count++;
         }
@@ -75,7 +75,7 @@ class MigrateStickers implements ShouldQueue
             event(new Events\StickerUploading($stpack, $uploaded_count));
         }
         $url = 'https://t.me/addstickers/'.$stpack['short_name'];
-        $stpack = Stpack::where('id', $stpack_id)->first();
+        $stpack = Stpack::where('id', $this->stpack_id)->first();
         $stpack->url = $url;
         $stpack->status = StpackStatus::UPLOADED;
         $stpack->save();
@@ -94,7 +94,7 @@ class MigrateStickers implements ShouldQueue
 
     public function failed(Exception $exception)
     {
-        $stpack = Stpack::with('stickers')->where('id', $stpack_id)->first();
+        $stpack = Stpack::with('stickers')->where('id', $this->stpack_id)->first();
         $this->_migrate_failed($stpack);
         return $stpack;
     }

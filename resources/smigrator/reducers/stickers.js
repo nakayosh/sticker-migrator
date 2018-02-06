@@ -1,37 +1,65 @@
-import { List as ImmutableList, fromJS } from 'immutable';
-import { STICKER_FETCH_SUCCESS } from '../actions/stickers';
+import { Map as ImmutableMap, fromJS } from 'immutable';
+import {
+  STICKER_FETCH_SUCCESS,
+  STICKER_CHANGE_EMOJI,
+} from '../actions/stickers';
 import {
   STPACK_FETCH_SUCCESS,
-  STPACK_UPDATE_SUCCESS,
+  STPACK_UPDATE,
 } from '../actions/stpacks';
+import {
+  RECENT_STPACKS_REFRESH_SUCCESS,
+  RECENT_STPACKS_EXPAND_SUCCESS,
+} from '../actions/recent_stpacks';
+import {
+  SEARCH_STPACKS_REFRESH_SUCCESS,
+  SEARCH_STPACKS_EXPAND_SUCCESS,
+} from '../actions/search_stpacks';
 
-function normalizeSticker(state, sticker) {
-  return state.set(sticker.id, fromJS(sticker));
-}
+const normalizeSticker = (state, sticker) => {
+  sticker = { ...sticker };
 
-function normalizeStickers(state, stickers) {
-  state = stickers.forEach(sticker => {
+  return state.set(sticker.id_str, fromJS(sticker));
+};
+
+const normalizeStickers = (state, stickers) => {
+  stickers.forEach(sticker => {
     state = normalizeSticker(state, sticker);
   });
 
   return state;
-}
+};
 
-function normalizeStickerFromStpack(state, stpack) {
+const normalizeStickerFromStpack = (state, stpack) => {
   state = normalizeStickers(state, stpack.stickers);
 
   return state;
-}
+};
 
-const initialState = ImmutableList();
+const normalizeStickerFromStpackList = (state, stpackList) => {
+  stpackList.results.forEach(stpack => {
+    state = normalizeStickerFromStpack(state, stpack);
+  });
+
+  return state;
+};
+
+const initialState = ImmutableMap();
 
 export default function sitckers(state = initialState, action) {
   switch(action.type) {
+  case STICKER_CHANGE_EMOJI:
+    return state.setIn([action.id, 'emojis'], action.emoji);
   case STICKER_FETCH_SUCCESS:
     return normalizeSticker(state, action.sticker);
   case STPACK_FETCH_SUCCESS:
-  case STPACK_UPDATE_SUCCESS:
+  case STPACK_UPDATE:
     return normalizeStickerFromStpack(state, action.stpack);
+  case RECENT_STPACKS_REFRESH_SUCCESS:
+  case RECENT_STPACKS_EXPAND_SUCCESS:
+  case SEARCH_STPACKS_REFRESH_SUCCESS:
+  case SEARCH_STPACKS_EXPAND_SUCCESS:
+    return normalizeStickerFromStpackList(state, action.stpackList);
   default:
     return state;
   }
