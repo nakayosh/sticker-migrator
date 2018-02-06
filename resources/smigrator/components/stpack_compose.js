@@ -16,16 +16,16 @@ export default class StapckCompose extends ImmutablePureComponent {
     intl: PropTypes.object.isRequired,
     stpack: ImmtuablePropTypes.map,
     targetNode: PropTypes.node,
-    onChangeStickerEmoji: PropTypes.func.isRequired,
+    onappendStickerEmoji: PropTypes.func.isRequired,
     onExpandStickerEmojiPicker: PropTypes.func.isRequired,
   }
 
-  handleChangeStickerEmoji = emoji => {
+  handleappendStickerEmoji = emoji => {
     const stickerId  = this.props.targetNode.getAttribute('data-sticker-id');
     const { native } = emoji;
 
     if ( stickerId && native ) {
-      this.props.onChangeStickerEmoji(stickerId, native);
+      this.props.onappendStickerEmoji(stickerId, native);
     }
   }
 
@@ -97,7 +97,7 @@ export default class StapckCompose extends ImmutablePureComponent {
             set='apple'
             color={false}
             showPreview={false}
-            onClick={this.handleChangeStickerEmoji}
+            onClick={this.handleappendStickerEmoji}
             emojiTooltip
           />
         </Overlay>

@@ -9,7 +9,9 @@ import Page from '../app/components/page';
 import Content from '../app/components/content';
 import GeneralHeader from '../general_header';
 import LoadingIndicator from '../../components/loading_indicator';
+
 import StpackContainer from '../../containers/stpack_container';
+import StpackProgressContainer from '../../containers/stpack_progress_container';
 import StpackComposeContainer from '../../containers/stpack_compose_container';
 
 const mapStateToProps = (state, { match }) => ({
@@ -54,7 +56,7 @@ export default class Stpacks extends ImmutablePureComponent {
       return <StpackComposeContainer id={id} />;
     case 'compiling':
     case 'uploading':
-      return <StpackProgressContainer id={id} />;
+      return <div>in progress</div>;
     case 'uploaded':
       return <StpackContainer id={id} />;
     case 'failed':
