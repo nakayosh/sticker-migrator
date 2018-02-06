@@ -21,6 +21,8 @@
 
     {{--  Prefetch  --}}
     <link as="script" crossorigin="anonymous" href="{{ mix('/features/home.js', '/packs') }}" rel="preload">
+    <link as="script" crossorigin="anonymous" href="{{ mix('/features/stpacks.js', '/packs') }}" rel="preload">
+    <link as="script" crossorigin="anonymous" href="{{ mix('/features/mobile_home.js', '/packs') }}" rel="preload">
   </head>
 
   <body class="" role="application">

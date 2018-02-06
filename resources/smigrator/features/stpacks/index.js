@@ -48,6 +48,23 @@ export default class Stpacks extends ImmutablePureComponent {
     }
   }
 
+  renderContent (id, status) {
+    switch(status) {
+    case 'downloaded':
+      return <StpackComposeContainer id={id} />;
+    case 'compiling':
+    case 'uploading':
+      return <StpackProgressContainer id={id} />;
+    case 'uploaded':
+      return <StpackContainer id={id} />;
+    case 'failed':
+    default:
+      return (
+        <div>Unexpected error occured</div>
+      );
+    }
+  }
+
   render () {
     const { id } = this.props.match.params;
     const { stpack } = this.props;
@@ -63,13 +80,7 @@ export default class Stpacks extends ImmutablePureComponent {
         <GeneralHeader />
 
         <Content>
-          {
-            status === 'uploaded' ? (
-              <StpackContainer id={id} />
-            ) : (
-              <StpackComposeContainer id={id} />
-            )
-          }
+          { this.renderContent(id, status) }
         </Content>
       </Page>
     );

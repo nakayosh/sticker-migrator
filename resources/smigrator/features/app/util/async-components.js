@@ -7,13 +7,13 @@ export function Stpacks () {
 }
 
 export function MobileHome () {
-  return import(/* webpackChunkName: "features/home" */'../../mobile_home');
+  return import(/* webpackChunkName: "features/mobile_home" */'../../mobile_home');
 }
 
 export function MobileRecentStpacks () {
-  return import(/* webpackChunkName: "features/home" */'../../mobile_recent_stpacks');
+  return import(/* webpackChunkName: "features/mobile_recent_stpacks" */'../../mobile_recent_stpacks');
 }
 
 export function MobileSearchStpacks () {
-  return import(/* webpackChunkName: "features/home" */'../../mobile_search_stpacks');
+  return import(/* webpackChunkName: "features/mobile_search_stpacks" */'../../mobile_search_stpacks');
 }
