@@ -37,6 +37,6 @@ class Sticker extends Model
     }
 
     public function setEmojisAttribute($value){
-        return implode($value);
+        $this->attributes['emojis'] = implode($value);
     }
 }
