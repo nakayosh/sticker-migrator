@@ -26,7 +26,7 @@ export default class Stapck extends ImmutablePureComponent {
   handleDownload = e => {
     e.preventDefault();
 
-    const url        = this.props.stapck.get('url');
+    const url        = this.props.stpack.get('url');
     const short_name = this.props.stpack.get('short_name');
 
     setTimeout(() => {
@@ -54,7 +54,7 @@ export default class Stapck extends ImmutablePureComponent {
     ];
 
     return (
-      <article className='stpack'>
+      <article className='stpack module'>
         <div className='stpack__letter-head'>
           <div className='stpack__thumbnail'>
             <img src={stpack.get('thumbnail_url')} alt={stpack.get('name')} />
