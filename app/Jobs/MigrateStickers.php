@@ -8,7 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Stpack;
-use App\Lib\Constsnts\StpackStatus;
+use App\Lib\Constants\StpackStatus;
 use App\Events;
 use Exception;
 use App\Lib\ImageResizer\Image;
@@ -94,7 +94,7 @@ class MigrateStickers implements ShouldQueue
 
     public function failed(Exception $exception)
     {
-        $stpack = Stpack::with('stickers')->where('id', $stpack_id)->first();
+        $stpack = Stpack::with('stickers')->where('id', $this->stpack_id)->first();
         $this->_migrate_failed($stpack);
         return $stpack;
     }
