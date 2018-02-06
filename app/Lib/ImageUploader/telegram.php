@@ -18,7 +18,7 @@ class Telegram
     public function upload(Stpack $stpack){
         $stickers = $stpack['stickers'];
         $first_sticker = $stickers[0];
-        $uploaded_sticker = $this->api->sticker->uploadStickerFile('app/resized_stickers/'.$first_sticker['id_str']);
+        $uploaded_sticker = $this->api->sticker->uploadStickerFile('app/resized_stickers/'.$first_sticker['id_str'].'.png');
         $sticker_set = $this->api->sticker->createNewStickerSet($this->user_id, $stpack['short_name'], $stpack['name'], $uploaded_sticker['file_id'], implode($first_sticker['emojis'] ?? '☺'));
         $first_sticker->file_id = $uploaded_sticker['file_id'];
         $first_sticker->save();
@@ -32,7 +32,7 @@ class Telegram
     }
 
     public function addStickerToStickerSet($sticker_set_name, $sticker){
-        $uploaded_sticker = $this->api->sticker->uploadStickerFile('app/resized_stickers/'.$sticker['id_str']);
+        $uploaded_sticker = $this->api->sticker->uploadStickerFile('app/resized_stickers/'.$sticker['id_str'].'.png');
         $sticker->file_id = $uploaded_sticker['file_id'];
         $sticker->save();
         return $this->api->sticker->addStickerToSet($this->user_id, $sticker_set_name, $uploaded_sticker['file_id'], implode($sticker['emojis'] ?? '☺'));

@@ -57,7 +57,7 @@ class MigrateStickers implements ShouldQueue
         event(new Events\StickerCompileStarting($stpack));
         $count = 1;
         foreach ($stickers as $sticker) {
-            $resizer->resize($sticker['original_url'], 'resized_stickers', $sticker['id_str']);
+            $resizer->resize($sticker['original_url'], 'resized_stickers', $sticker['id_str'].'.png');
             event(new Events\StickerCompiling($stpack, $count));
             $count++;
         }
