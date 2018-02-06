@@ -33,13 +33,13 @@ cp .env.example .env
 
 ```
 docker-compose run --rm web ash -c "composer install --no-progress \
- && yarn install --pure-lockfile \
  && php artisan key:generate \
  && php artisan migrate \
+ && yarn install --pure-lockfile \
  && yarn run prod"
 ```
 
-最後に，コンテナを起動し，ホストに公開します．デフォルトでは `8080` 番に公開されているので，ホスト側でプロキシの設定を行うことでアクセスできるようになります．ローカル環境の場合，`localhost:8080` からもアクセスできます．
+最後に，コンテナを起動し，ホストに公開します．デフォルトでは `:3000` 番に公開されているので，ホスト側でプロキシの設定を行うことでアクセスできるようになります．ローカル環境の場合，`localhost:3000` からもアクセスできます．画像のリサイズのプログレスをストリームするAPIも同様に `:4000` 番で公開されているので，こちらも同様にプロキシの設定を行ってください．
 ```bash
 docker-compose up
 ```
