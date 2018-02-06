@@ -33,7 +33,7 @@ class Sticker extends Model
     }
 
     public function getEmojisAttribute($value){
-        return str_split($value);
+        return preg_split('//u', $value, null, PREG_SPLIT_NO_EMPTY);
     }
 
     public function setEmojisAttribute($value){
