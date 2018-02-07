@@ -6,6 +6,7 @@ logs
 .idea
 .vagrant
 .git
+.env
 
 mariadb
 redis
