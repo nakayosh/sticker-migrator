@@ -94,21 +94,17 @@ module.exports = {
       basePath: '/',
       writeToFileEmit: true,
     }),
+
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: isProduction,
+      mangle: isProduction,
+      compress: {
+        warnings: !isProduction,
+      },
+      output: {
+        comments: !isProduction,
+      },
+    }),
   ],
 
 };
-
-if ( isProduction ) {
-  module.exports.plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      mangle: true,
-      compress: {
-        warnings: false,
-      },
-      output: {
-        comments: false,
-      },
-    }),
-  );
-}
