@@ -11,7 +11,7 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use App\Stpack;
 
-class StickerUploadStarting
+class StickerUploadStarting implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
