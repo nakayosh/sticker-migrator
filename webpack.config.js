@@ -96,13 +96,13 @@ module.exports = {
     }),
 
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: isProduction,
-      mangle: isProduction,
+      sourceMap: isProduction && true,
+      mangle: isProduction && true,
       compress: {
-        warnings: !isProduction,
+        warnings: isProduction && false,
       },
       output: {
-        comments: !isProduction,
+        comments: isProduction && false,
       },
     }),
   ],
