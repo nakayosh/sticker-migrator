@@ -80,7 +80,7 @@ class StpacksController extends Controller
             }
         });
         $stpack = Stpack::with('stickers')->where('id', $stpack_id)->first();
-        dispatch(new MigrateStickers($stpack_id));
+        dispatch((new MigrateStickers($stpack_id))->onQueue('migrate'));
         return response()->json($stpack);
     }
 
