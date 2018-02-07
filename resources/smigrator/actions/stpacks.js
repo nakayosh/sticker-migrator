@@ -74,13 +74,13 @@ export function patchStpack(id) {
       });
 
       window.Echo.channel(`stpacks.${id}`)
-        .listen('.StickerComlileStarting', e => console.log(e))
-        .listen('.StickerCompiling',       e => console.log(e))
-        .listen('.StickerCompiled',        e => console.log(e))
-        .listen('.StickerUploadStarting',  e => console.log(e))
-        .listen('.StickerUploading',       e => console.log(e))
-        .listen('.StickerUploaded',        e => console.log(e))
-        .listen('.StickerUploadFailed',    e => console.log(e));
+        .listen('StickerComlileStarting', e => console.log(e))
+        .listen('StickerCompiling',       e => console.log(e))
+        .listen('StickerCompiled',        e => console.log(e))
+        .listen('StickerUploadStarting',  e => console.log(e))
+        .listen('StickerUploading',       e => console.log(e))
+        .listen('StickerUploaded',        e => console.log(e))
+        .listen('StickerUploadFailed',    e => console.log(e));
 
       // .listen('StickerComlileStarting', e => dispatch(updateStpack(e.data)))
       // .listen('StickerCompiling',       e => dispatch(updateStpack(e.data)))
