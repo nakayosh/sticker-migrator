@@ -26,6 +26,16 @@ export default class StickerEmojiSelector extends ImmutablePureComponent {
     this.props.onExpandEmojiPicker(this.node);
   }
 
+  renderEmojiButton = emoji => {
+    return (
+      <li className='sticker-emoji'>
+        <button className='sticker-emoji-button'>
+          { emoji }
+        </button>
+      </li>
+    );
+  }
+
   render () {
     const { sticker } = this.props;
 
@@ -37,12 +47,9 @@ export default class StickerEmojiSelector extends ImmutablePureComponent {
       <div className='sticker sticker-emoji-selector button' ref={this.setRef} data-sticker-id={sticker.get('id')}>
         <img src={sticker.get('original_url')} alt={sticker.get('emojis', '😀')} />
 
-        <input
-          className='sticker_emojis rich-input input'
-          type='text'
-          value={sticker.get('emojis', '😀')}
-          onChange={this.handleChangeEmoji}
-        />
+        <ul className='sticker-emojis'>
+          { sticker.get('emojis').map(emoji => this.renderEmojiButton(emoji)) }
+        </ul>
 
         <IconButton
           className='sticker_add-emojis rich-button button'

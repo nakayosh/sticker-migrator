@@ -46,6 +46,8 @@ export function fetchStpackFail(error) {
 
 
 export function updateStpack(stpack) {
+  console.log(stpack);
+
   return {
     type: STPACK_UPDATE,
     stpack,
@@ -66,18 +68,27 @@ export function patchStpack(id) {
     api(getState).patch(`/api/stpacks/${id}`, data).then(response => {
       dispatch(patchStpackRequest(response.data));
 
-      const Echo = new Echo({
+      window.Echo = new Echo({
         broadcaster: 'socket.io',
         host: window.location.hostname + ':4000',
       });
 
-      Echo.private(`stpacks.${id}`).listen('StickerComlileStarting', e => dispatch(updateStpack(e.data)));
-      Echo.private(`stpacks.${id}`).listen('StickerCompiling',       e => dispatch(updateStpack(e.data)));
-      Echo.private(`stpacks.${id}`).listen('StickerCompiled',        e => dispatch(updateStpack(e.data)));
-      Echo.private(`stpacks.${id}`).listen('StickerUploadStarting',  e => dispatch(updateStpack(e.data)));
-      Echo.private(`stpacks.${id}`).listen('StickerUploading',       e => dispatch(updateStpack(e.data)));
-      Echo.private(`stpacks.${id}`).listen('StickerUploaded',        e => dispatch(updateStpack(e.data)));
-      Echo.private(`stpacks.${id}`).listen('StickerUploadFailed',    e => dispatch(updateStpack(e.data)));
+      window.Echo.channel(`stpacks.${id}`)
+        .listen('StickerComlileStarting', e => console.log(e))
+        .listen('StickerCompiling',       e => console.log(e))
+        .listen('StickerCompiled',        e => console.log(e))
+        .listen('StickerUploadStarting',  e => console.log(e))
+        .listen('StickerUploading',       e => console.log(e))
+        .listen('StickerUploaded',        e => console.log(e))
+        .listen('StickerUploadFailed',    e => console.log(e));
+
+      // .listen('StickerComlileStarting', e => dispatch(updateStpack(e.data)))
+      // .listen('StickerCompiling',       e => dispatch(updateStpack(e.data)))
+      // .listen('StickerCompiled',        e => dispatch(updateStpack(e.data)))
+      // .listen('StickerUploadStarting',  e => dispatch(updateStpack(e.data)))
+      // .listen('StickerUploading',       e => dispatch(updateStpack(e.data)))
+      // .listen('StickerUploaded',        e => dispatch(updateStpack(e.data)))
+      // .listen('StickerUploadFailed',    e => dispatch(updateStpack(e.data)));
     }).catch(error => {
       dispatch(patchStpackFail(error));
     });

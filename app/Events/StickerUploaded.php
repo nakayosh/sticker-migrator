@@ -35,6 +35,6 @@ class StickerUploaded implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('stpacks.'.$this->stpack->id);
+        return new Channel('stpacks.'.$this->stpack->id);
     }
 }

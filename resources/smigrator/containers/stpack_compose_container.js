@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 import { patchStpack } from '../actions/stpacks';
 import {
-  changeStickerEmoji,
+  appendStickerEmoji,
   expandStickerEmojiPicker,
 } from '../actions/stickers';
 import StpackCompose from '../components/stpack_compose';
@@ -22,8 +22,8 @@ const mapDispatchToProps = (dispatch, { id }) => ({
     dispatch(expandStickerEmojiPicker(node));
   },
 
-  onChangeStickerEmoji(stickerId, emoji) {
-    dispatch(changeStickerEmoji(stickerId, emoji));
+  onappendStickerEmoji(stickerId, emoji) {
+    dispatch(appendStickerEmoji(stickerId, emoji));
   },
 
 });
