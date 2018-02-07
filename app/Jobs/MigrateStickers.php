@@ -55,14 +55,15 @@ class MigrateStickers implements ShouldQueue
         $stickers = $stpack['stickers'];
         $stpack->status = StpackStatus::COMPILING;
         $stpack->save();
-        event(new Events\StickerCompileStarting($stpack));
+        $stpack_arr = $stpack->toArray();
+        event(new Events\StickerCompileStarting($stpack_arr));
         $count = 1;
         foreach ($stickers as $sticker) {
             $resizer->resize($sticker['original_url'], 'resized_stickers', $sticker['id_str']);
-            event(new Events\StickerCompiling($stpack, $count));
+            event(new Events\StickerCompiling($stpack_arr, $count));
             $count++;
         }
-        event(new Events\StickerCompiled($stpack));
+        event(new Events\StickerCompiled($stpack_arr));
         return $stpack;
     }
 
@@ -71,16 +72,17 @@ class MigrateStickers implements ShouldQueue
         $telegram = new Telegram();
         $stpack->status = StpackStatus::UPLOADING;
         $stpack->save();
-        event(new Events\StickerUploadStarting($stpack));
+        $stpack_arr = $stpack->toArray();
+        event(new Events\StickerUploadStarting($stpack_arr));
         foreach ($telegram->upload($stpack) as $uploaded_count) {
-            event(new Events\StickerUploading($stpack, $uploaded_count));
+            event(new Events\StickerUploading($stpack_arr, $uploaded_count));
         }
         $url = 'https://t.me/addstickers/'.$stpack['short_name'];
         $stpack = Stpack::where('id', $this->stpack_id)->first();
         $stpack->url = $url;
         $stpack->status = StpackStatus::UPLOADED;
         $stpack->save();
-        event(new Events\StickerUploaded($stpack));
+        event(new Events\StickerUploaded($stpack_arr));
         return $stpack;
     }
 
@@ -88,7 +90,8 @@ class MigrateStickers implements ShouldQueue
     {
         $stpack->status = StpackStatus::FAILED;
         $stpack->save();
-        event(new Events\StickerUploadFailed($stpack));
+        $stpack_arr = $stpack->toArray();
+        event(new Events\StickerUploadFailed($stpack_arr));
         $telegram = new Telegram();
         $telegram->upload_rollback($stpack);
     }
