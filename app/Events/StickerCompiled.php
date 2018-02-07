@@ -9,7 +9,6 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use App\Stpack;
 
 class StickerCompiled implements ShouldBroadcast
 {
@@ -22,9 +21,9 @@ class StickerCompiled implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(Stpack $stpack)
+    public function __construct(Array $stpack)
     {
-        $this->stpack = $stpack->replicate();
+        $this->stpack = $stpack;
         $this->stpack['compiled_stickers_count'] = count($stpack['stickers']);
     }
 
@@ -35,6 +34,6 @@ class StickerCompiled implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('stpacks.'.$this->stpack->id);
+        return new Channel('stpacks.'.$this->stpack['id']);
     }
 }

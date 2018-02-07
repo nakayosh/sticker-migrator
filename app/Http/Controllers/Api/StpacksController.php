@@ -29,7 +29,7 @@ class StpacksController extends Controller
         $q = $request->input('q');
         $limit = (integer)($request->input('limit') ?? 15);
         $offset = (integer)($request->input('offset') ?? 0);
-        $query = Stpack::with('stickers')->where('name', 'LIKE', '%'.$q.'%');
+        $query = Stpack::with('stickers')->where('status', 3)->where('name', 'LIKE', '%'.$q.'%');
         $stpacks = $query->skip($offset)->take($limit)->get();
         $retval = [
             'results' => $stpacks,
@@ -47,7 +47,7 @@ class StpacksController extends Controller
         ]);
         $limit = (integer)($request->input('limit') ?? 15);
         $offset = (integer)($request->input('offset') ?? 0);
-        $query = Stpack::with('stickers')->orderBy('created_at', 'desc');
+        $query = Stpack::with('stickers')->where('status', 3)->orderBy('created_at', 'desc');
         $stpacks = $query->skip($offset)->take($limit)->get();
         $retval = [
             'results' => $stpacks,
