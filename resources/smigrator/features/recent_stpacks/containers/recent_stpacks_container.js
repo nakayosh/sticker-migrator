@@ -3,7 +3,7 @@ import {
   refreshRecentStpacks,
   expandRecentStpacks,
 } from '@/actions/recent_stpacks';
-import RecentStpacks from '@/components/recent_stpacks';
+import RecentStpacks from '@/features/recent_stpacks/components/recent_stpacks';
 
 const mapStateToProps = state => ({
   results: state.getIn(['recent_stpacks', 'results']),

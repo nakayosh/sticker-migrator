@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import IconButton from '@/components/icon_button';
 
 export default class SearchForm extends React.PureComponent {
