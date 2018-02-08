@@ -3,14 +3,18 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
-import { fetchStpack } from '@/actions/stpacks';
+import {
+  fetchStpack,
+  connectStpack,
+  disconnectStpack,
+} from '@/actions/stpacks';
 
 import Page from '@/features/app/components/page';
 import Content from '@/features/app/components/content';
 import GeneralHeader from '@/features/general_header';
 import LoadingIndicator from '@/components/loading_indicator';
 import StpackContainer from '@/features/stpacks/containers/stpack_container';
-import StpackProgressContainer from '@/features/stpacks/containers/stpack_progress_container';
+// import StpackProgressContainer from '@/features/stpacks/containers/stpack_progress_container';
 import StpackComposeContainer from '@/features/stpacks/containers/stpack_compose_container';
 
 const mapStateToProps = (state, { match }) => ({
@@ -27,9 +31,15 @@ export default class Stpacks extends ImmutablePureComponent {
   }
 
   componentWillMount () {
+    this.props.dispatch(connectStpack(this.props.match.params.id));
+
     if ( !this.props.stpack ) {
       this.props.dispatch(fetchStpack(this.props.match.params.id));
     }
+  }
+
+  componentWillReceiveProps () {
+    this.props.dispatch(disconnectStpack(this.props.match.params.id));
   }
 
   _getStatus(status) {
