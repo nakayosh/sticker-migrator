@@ -20,7 +20,7 @@
     <link rel="manifest" href="/manifest.json">
 
     {{--  Socket.io  --}}
-    <script src="//{{ Request::getHost() }}:4000/socket.io/socket.io.js"></script>
+    <script src="/api/streaming/socket.io/socket.io.js"></script>
   </head>
 
   <body class="" role="application">
