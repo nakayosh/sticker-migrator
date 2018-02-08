@@ -116,7 +116,7 @@ if ( isProduction ) {
     }),
 
     new OfflinePlugin({
-      publicPath: '/packs/',
+      publicPath: '/',
       caches: {
         main: [':rest:'],
         additional: [':externals:'],
@@ -131,6 +131,8 @@ if ( isProduction ) {
         '/',
       ],
       ServiceWorker: {
+        output: '../packs/sw.js',
+        publicPath: '/sw.js',
         cacheName: 'smigrator',
         minify: true,
       },

@@ -20,7 +20,7 @@
     <link rel="manifest" href="/manifest.json">
 
     {{--  Socket.io  --}}
-    <script src="/api/streaming/socket.io/socket.io.js"></script>
+    <script src="//ws.smigrator.tk/socket.io/socket.io.js"></script>
   </head>
 
   <body class="" role="application">
