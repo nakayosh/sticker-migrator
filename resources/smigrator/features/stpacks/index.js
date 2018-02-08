@@ -35,18 +35,10 @@ export default class Stpacks extends ImmutablePureComponent {
 
     if ( !this.props.stpack ) {
       this.props.dispatch(fetchStpack(this.props.match.params.id));
-    } else if ( this.props.stpack.get('status') !== 3 ) {
-      this.props.dispatch(connectStpack(this.props.match.params.id));
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-    if ( this.props.stpack.get('status') !== 3 && nextProps.stpack.get('status') === 3 ) {
-      this.props.dispatch(disconnectStpack(this.props.match.params.id));
-    }
-  }
-
-  componentWillReceiveProps () {
+  componentWillUnmount () {
     this.props.dispatch(disconnectStpack(this.props.match.params.id));
   }
 
