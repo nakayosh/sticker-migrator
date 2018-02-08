@@ -70,7 +70,7 @@ export function patchStpack(id) {
 
       window.Echo = new Echo({
         broadcaster: 'socket.io',
-        host: window.location.hostname + ':4000',
+        host: `${window.location.hostname}:4000`,
       });
 
       window.Echo.channel(`stpacks.${id}`)
