@@ -72,13 +72,13 @@ class StpacksController extends Controller
             throw new Exception('stickers length invalid');
         }
         DB::transaction(function () use ($stpack, $stickers){
-            foreach ($stpack->stickers as $key=>$sticker) {
-                $sticker->emojis = $stickers[$key]['emojis'];
+            foreach ($stpack->stickers as $count => $sticker) {
+                $sticker->emojis = $stickers[$count]['emojis'];
                 $sticker->save();
             }
         });
         $stpack = Stpack::with('stickers')->where('id', $stpack_id)->first();
-        dispatch(new MigrateStickers($stpack_id));
+        dispatch((new MigrateStickers($stpack_id)));
         return response()->json($stpack);
     }
 
