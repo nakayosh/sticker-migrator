@@ -13,5 +13,5 @@
   "background_color": "#D35400",
   "display": "standalone",
   "start_url": "/home",
-  "scope": "https://192.168.1.7:8080/"
+  "scope": "https://smigrator.tk/"
 }

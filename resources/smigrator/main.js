@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ready from './ready';
 import Smigrator from './containers/smigrator';
-import OfflinePlugin from 'offline-plugin/runtime';
+import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 import 'font-awesome/css/font-awesome.css';
 
-OfflinePlugin.install();
+OfflinePluginRuntime.install();
 
 ready(() => {
   const mountNode = document.getElementById('root');

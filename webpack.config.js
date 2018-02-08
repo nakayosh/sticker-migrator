@@ -115,23 +115,23 @@ if ( isProduction ) {
     new OfflinePlugin({
       publicPath: '/packs/',
       caches: {
-        main: [':rest:'],
-        additional: [':externals:'],
+        main: [
+          '*.css',
+          '*.js',
+        ],
+        additional: [
+          ':externals:',
+        ],
         optional: [
-          '**/*.woff2',
-          '**/*.png',
-          '**/*.jpg',
-          '**/*.jpeg',
-          '**/*.svg',
+          ':rest:',
         ],
       },
-      excludes: [
-        '**/*.map',
-        '**/*.eot',
-        '**/*.ttf',
-        '**/*-webfont-*.svg',
-        '**/*.woff',
+      externals: [
+        '/',
       ],
+      ServiceWorker: {
+        navigateFallbackURL: '/',
+      },
     }),
   );
 }
