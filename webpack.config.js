@@ -1,12 +1,13 @@
 require('dotenv').config();
 const webpack = require('webpack');
-const path    = require('path');
+const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const OfflinePlugin = require('offline-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-module.exports = {
+const config = {
 
   stats: isProduction ? 'normal' : { errorDetails: true },
 
@@ -94,17 +95,49 @@ module.exports = {
       basePath: '/',
       writeToFileEmit: true,
     }),
-
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: isProduction && true,
-      mangle: isProduction && true,
-      compress: {
-        warnings: isProduction && false,
-      },
-      output: {
-        comments: isProduction && false,
-      },
-    }),
   ],
 
 };
+
+if ( isProduction ) {
+  config.plugins.push(
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      mangle: true,
+      compress: {
+        warnings: false,
+      },
+      output: {
+        comments: false,
+      },
+    }),
+
+    new OfflinePlugin({
+      publicPath: '/packs/',
+      caches: {
+        main: [':rest:'],
+        additional: [':externals:'],
+        optional: [
+          '**/*.woff2',
+          '**/*.png',
+          '**/*.jpg',
+          '**/*.jpeg',
+          '**/*.svg',
+        ],
+      },
+      externals: [
+        '/emoji/1f602.svg', // used for emoji picker dropdown
+        '/emoji/sheet.png', // used in emoji-mart
+      ],
+      excludes: [
+        '**/*.map',
+        '**/*.eot',
+        '**/*.ttf',
+        '**/*-webfont-*.svg',
+        '**/*.woff',
+      ],
+    }),
+  );
+}
+
+module.exports = config;
