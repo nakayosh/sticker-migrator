@@ -5,7 +5,6 @@ import ImmutablePureComponent from 'react-immutable-pure-component';
 import { ScrollContainer } from 'react-router-scroll-4';
 import { FormattedMessage } from 'react-intl';
 
-import SearchForm from '../containers/search_form_container';
 import CompactStpack from '../containers/compact_stpack_container';
 import LoadingIndicator from '../components/loading_indicator';
 
@@ -31,7 +30,6 @@ export default class SearchStpacks extends ImmutablePureComponent {
 
     return (
       <div className='module'>
-        <SearchForm />
 
         <header className='module__header'>
           <h2 className='module__title'>

@@ -4,9 +4,9 @@ import laravelEchoServer from '../../laravel-echo-server.json';
 
 const echo = new Echo({
   authEndpoint: laravelEchoServer.authEndpoint,
-  broadcaster: 'socket.io',
-  host: `${window.location.hostname}:4000/api/streaming`,
-  key: laravelEchoServer.clients.key,
+  broadcaster:  'socket.io',
+  host:         `${window.location.hostname}/api/streaming`,
+  key:          laravelEchoServer.clients.key,
   csrfToken,
 });
 

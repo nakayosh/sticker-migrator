@@ -1,5 +1,5 @@
 import api from '../api';
-import Echo from 'laravel-echo';
+import echo from '../echo';
 
 export const STPACK_FETCH_REQUEST = 'STPACK_FETCH_REQUEST';
 export const STPACK_FETCH_SUCCESS = 'STPACK_FETCH_SUCCESS';
@@ -46,8 +46,6 @@ export function fetchStpackFail(error) {
 
 
 export function updateStpack(stpack) {
-  console.log(stpack);
-
   return {
     type: STPACK_UPDATE,
     stpack,
@@ -67,28 +65,6 @@ export function patchStpack(id) {
 
     api(getState).patch(`/api/stpacks/${id}`, data).then(response => {
       dispatch(patchStpackRequest(response.data));
-
-      window.Echo = new Echo({
-        broadcaster: 'socket.io',
-        host: `${window.location.hostname}:4000`,
-      });
-
-      window.Echo.channel(`stpacks.${id}`)
-        .listen('StickerComlileStarting', e => console.log(e))
-        .listen('StickerCompiling',       e => console.log(e))
-        .listen('StickerCompiled',        e => console.log(e))
-        .listen('StickerUploadStarting',  e => console.log(e))
-        .listen('StickerUploading',       e => console.log(e))
-        .listen('StickerUploaded',        e => console.log(e))
-        .listen('StickerUploadFailed',    e => console.log(e));
-
-      // .listen('StickerComlileStarting', e => dispatch(updateStpack(e.data)))
-      // .listen('StickerCompiling',       e => dispatch(updateStpack(e.data)))
-      // .listen('StickerCompiled',        e => dispatch(updateStpack(e.data)))
-      // .listen('StickerUploadStarting',  e => dispatch(updateStpack(e.data)))
-      // .listen('StickerUploading',       e => dispatch(updateStpack(e.data)))
-      // .listen('StickerUploaded',        e => dispatch(updateStpack(e.data)))
-      // .listen('StickerUploadFailed',    e => dispatch(updateStpack(e.data)));
     }).catch(error => {
       dispatch(patchStpackFail(error));
     });
@@ -113,5 +89,25 @@ export function patchStpackFail(error) {
   return {
     type: STPACK_PATCH_FAIL,
     error,
+  };
+}
+
+
+export function connectStpack(id) {
+  return dispatch => {
+    echo.channel(`stpacks.${id}`)
+      .listen('StickerComlileStarting', e => dispatch(updateStpack(e.stpack)))
+      .listen('StickerCompiling',       e => dispatch(updateStpack(e.stpack)))
+      .listen('StickerCompiled',        e => dispatch(updateStpack(e.stpack)))
+      .listen('StickerUploadStarting',  e => dispatch(updateStpack(e.stpack)))
+      .listen('StickerUploading',       e => dispatch(updateStpack(e.stpack)))
+      .listen('StickerUploaded',        e => dispatch(updateStpack(e.stpack)))
+      .listen('StickerUploadFailed',    e => dispatch(updateStpack(e.stpack)));
+  };
+}
+
+export function disconnectStpack(id) {
+  return () => {
+    echo.leave(`stpacks.${id}`);
   };
 }

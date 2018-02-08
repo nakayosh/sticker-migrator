@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import MessageContainer from '../../containers/message_container';
 import logo_large_black from '../../../images/logo_large_black.png';
 

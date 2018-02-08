@@ -9,7 +9,6 @@ import Page from '../app/components/page';
 import Content from '../app/components/content';
 import GeneralHeader from '../general_header';
 import LoadingIndicator from '../../components/loading_indicator';
-
 import StpackContainer from '../../containers/stpack_container';
 import StpackProgressContainer from '../../containers/stpack_progress_container';
 import StpackComposeContainer from '../../containers/stpack_compose_container';
