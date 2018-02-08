@@ -69,7 +69,7 @@ class StpacksController extends Controller
             return response()->json($stpack, $return_code);
         }
         if (count($stickers) != count($stpack->stickers)) {
-            throw new Exception('stickers length invailed');
+            throw new Exception('stickers length invalid');
         }
         DB::transaction(function () use ($stpack, $stickers){
             foreach ($stpack->stickers as $key=>$sticker) {
