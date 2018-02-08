@@ -15,7 +15,7 @@
 		}
 	},
 	"devMode": false,
-	"host": null,
+	"host": "ws.smigrator.tk",
 	"port": "4000",
 	"protocol": "http",
 	"socketio": {},
