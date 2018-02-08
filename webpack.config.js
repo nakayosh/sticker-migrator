@@ -76,6 +76,9 @@ const config = {
 
   resolve: {
     extensions: ['.js'],
+    alias: {
+      '@': __dirname + '/resources/smigrator',
+    },
   },
 
   plugins: [

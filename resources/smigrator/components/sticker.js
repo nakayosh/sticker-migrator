@@ -4,7 +4,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import { Emoji } from 'emoji-mart';
 
-import IconButton from '../components/icon_button';
+import IconButton from '@/components/icon_button';
 
 export default class Sticker extends ImmutablePureComponent {
 

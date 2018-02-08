@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
-import { fetchStpack } from '../../actions/stpacks';
+import { fetchStpack } from '@/actions/stpacks';
 
-import Page from '../app/components/page';
-import Content from '../app/components/content';
-import GeneralHeader from '../general_header';
-import LoadingIndicator from '../../components/loading_indicator';
-import StpackContainer from '../../containers/stpack_container';
-import StpackProgressContainer from '../../containers/stpack_progress_container';
-import StpackComposeContainer from '../../containers/stpack_compose_container';
+import Page from '@/features/app/components/page';
+import Content from '@/features/app/components/content';
+import GeneralHeader from '@/features/general_header';
+import LoadingIndicator from '@/components/loading_indicator';
+import StpackContainer from '@/containers/stpack_container';
+import StpackProgressContainer from '@/containers/stpack_progress_container';
+import StpackComposeContainer from '@/containers/stpack_compose_container';
 
 const mapStateToProps = (state, { match }) => ({
   stpack: state.getIn(['stpacks', match.params.id]),

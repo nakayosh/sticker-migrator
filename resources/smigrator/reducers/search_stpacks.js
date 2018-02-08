@@ -10,7 +10,7 @@ import {
   SEARCH_STPACKS_EXPAND_REQUEST,
   SEARCH_STPACKS_EXPAND_SUCCESS,
   SEARCH_STPACKS_EXPAND_FAIL,
-} from '../actions/search_stpacks';
+} from '@/actions/search_stpacks';
 
 function normalizeSearchStpacks(state, stpackList) {
   stpackList = { ...stpackList };

@@ -1,6 +1,6 @@
 import Echo from 'laravel-echo';
-import csrfToken from './csrf_token';
-import laravelEchoServer from '../../laravel-echo-server.json';
+import csrfToken from '@/csrf_token';
+import laravelEchoServer from '@/../../laravel-echo-server.json';
 
 const echo = new Echo({
   authEndpoint: laravelEchoServer.authEndpoint,

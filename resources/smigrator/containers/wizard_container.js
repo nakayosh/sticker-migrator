@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { injectIntl } from 'react-intl';
-import Wizard from '../components/wizard';
+import Wizard from '@/components/wizard';
 
 const mapStateToProps = state => ({
   value: state.getIn(['wizard', 'value']),

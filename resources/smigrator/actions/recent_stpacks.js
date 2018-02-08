@@ -1,4 +1,4 @@
-import api from '../api';
+import api from '@/api';
 
 export const RECENT_STPACKS_REFRESH_REQUEST = 'RECENT_STPACKS_REFRESH_REQUEST';
 export const RECENT_STPACKS_REFRESH_SUCCESS = 'RECENT_STPACKS_REFRESH_SUCCESS';

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { openModal } from '../actions/modal';
-import Sticker from '../components/sticker';
+import { openModal } from '@/actions/modal';
+import Sticker from '@/components/sticker';
 
 const mapStateToProps = (state, { stickerId }) => ({
   sticker: state.getIn(['stickers', stickerId]),

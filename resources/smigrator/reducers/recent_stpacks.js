@@ -6,7 +6,7 @@ import {
   RECENT_STPACKS_EXPAND_REQUEST,
   RECENT_STPACKS_EXPAND_SUCCESS,
   RECENT_STPACKS_EXPAND_FAIL,
-} from '../actions/recent_stpacks';
+} from '@/actions/recent_stpacks';
 
 function normalizeRecentStpacks(state, stpackList) {
   stpackList = { ...stpackList };

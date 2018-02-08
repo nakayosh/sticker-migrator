@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Switch, Redirect } from 'react-router';
-import { WrappedRoute } from './util/react_router_helpers';
+import { WrappedRoute } from '@/features/app/util/react_router_helpers';
 import { ImmutableLoadingBar as LoadingBar } from 'react-redux-loading-bar';
-import ModalContaienr from './containers/modal_container';
-import { isMobile } from '../../is_mobile';
-import MobileMenu from '../mobile_menu';
+import ModalContaienr from '@/features/app/containers/modal_container';
+import { isMobile } from '@/is_mobile';
+import MobileMenu from '@/features/mobile_menu';
 import { addLocaleData, IntlProvider } from 'react-intl';
 import en from 'react-intl/locale-data/en';
 import ja from 'react-intl/locale-data/ja';
@@ -18,10 +18,10 @@ import {
   MobileHome,
   MobileRecentStpacks,
   MobileSearchStpacks,
-} from './util/async-components';
+} from '@/features/app/util/async-components';
 
 addLocaleData([...en, ...ja]);
-const messages = require.context('../../../locales/', false, /\.json$/);
+const messages = require.context('@/../locales/', false, /\.json$/);
 const messagesForLocale = locale => messages(`./${locale}.json`);
 
 const mapStateToProps = state => ({

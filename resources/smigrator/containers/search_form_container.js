@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import {
   changeSearchStpacks,
   clearSearchStpacks,
-} from '../actions/search_stpacks';
-import SeachForm from '../components/search_form';
+} from '@/actions/search_stpacks';
+import SeachForm from '@/components/search_form';
 
 const mapStateToProps = state => ({
   value: state.getIn(['search_stpacks', 'value']),

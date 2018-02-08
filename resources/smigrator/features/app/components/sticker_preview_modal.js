@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePureComponent from 'react-immutable-pure-component';
-import StickerContainer from '../../../containers/sticker_container';
+import StickerContainer from '@/containers/sticker_container';
 
 export default class StickerPreviewModal extends ImmutablePureComponent {
 

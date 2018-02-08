@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 import querystring from 'querystring';
 import { FormattedMessage, FormattedDate, defineMessages } from 'react-intl';
 
-import Dropdown from '../containers/dropdown_container';
-import LoadingIndicator from '../components/loading_indicator';
-import StickerContainer from '../containers/sticker_container';
+import Dropdown from '@/containers/dropdown_container';
+import LoadingIndicator from '@/components/loading_indicator';
+import StickerContainer from '@/containers/sticker_container';
 
 const messages = defineMessages({
   visit_original: { id: 'stpack.visit_original', defualtMessage: 'Visit original' },

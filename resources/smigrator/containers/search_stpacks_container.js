@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import SearchStpacks from '../components/search_stpacks';
+import SearchStpacks from '@/components/search_stpacks';
 
 const mapStateToProps = state => ({
   value: state.getIn(['search_stpacks', 'value']),

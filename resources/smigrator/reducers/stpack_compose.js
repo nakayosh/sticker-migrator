@@ -1,7 +1,7 @@
 import { Map as ImmutableMap } from 'immutable';
 import {
   STICKER_EXPAND_EMOJI_PICKER,
-} from '../actions/stickers';
+} from '@/actions/stickers';
 
 const initialState = ImmutableMap({
   targetNode: null,

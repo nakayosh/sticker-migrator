@@ -3,15 +3,15 @@ import {
   STPACK_FETCH_SUCCESS,
   STPACK_PATCH_SUCCESS,
   STPACK_UPDATE,
-} from '../actions/stpacks';
+} from '@/actions/stpacks';
 import {
   RECENT_STPACKS_REFRESH_SUCCESS,
   RECENT_STPACKS_EXPAND_SUCCESS,
-} from '../actions/recent_stpacks';
+} from '@/actions/recent_stpacks';
 import {
   SEARCH_STPACKS_REFRESH_SUCCESS,
   SEARCH_STPACKS_EXPAND_SUCCESS,
-} from '../actions/search_stpacks';
+} from '@/actions/search_stpacks';
 
 const normalizeStpack = (state, stpack) => {
   stpack = { ...stpack };

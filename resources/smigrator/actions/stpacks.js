@@ -1,5 +1,5 @@
-import api from '../api';
-import echo from '../echo';
+import api from '@/api';
+import echo from '@/echo';
 
 export const STPACK_FETCH_REQUEST = 'STPACK_FETCH_REQUEST';
 export const STPACK_FETCH_SUCCESS = 'STPACK_FETCH_SUCCESS';

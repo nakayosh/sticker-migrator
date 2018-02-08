@@ -7,8 +7,8 @@ import { FormattedMessage, FormattedDate } from 'react-intl';
 import { Picker as EmojiPicker } from 'emoji-mart';
 import Overlay from 'react-overlays/lib/Overlay';
 
-import LoadingIndicator from '../components/loading_indicator';
-import StickerEmojiSelector from '../containers/sticker_emoji_selector_container';
+import LoadingIndicator from '@/components/loading_indicator';
+import StickerEmojiSelector from '@/containers/sticker_emoji_selector_container';
 
 export default class StapckCompose extends ImmutablePureComponent {
 
@@ -47,7 +47,7 @@ export default class StapckCompose extends ImmutablePureComponent {
 
     if (!stpack) {
       return (
-        <article className='stpack'>
+        <article className='stpack module'>
           <LoadingIndicator />
         </article>
       );

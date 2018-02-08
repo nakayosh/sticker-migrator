@@ -1,4 +1,4 @@
-import api from '../api';
+import api from '@/api';
 import { debounce } from 'lodash';
 
 export const SEARCH_STPACKS_CHANGE = 'SEARCH_STPACKS_CHANGE';

@@ -1,4 +1,4 @@
-import { showMessage } from '../actions/message';
+import { showMessage } from '@/actions/message';
 
 const defaultFailSuffix = 'FAIL';
 

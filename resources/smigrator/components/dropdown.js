@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Overlay from 'react-overlays/lib/Overlay';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import detectPassiveEvents from 'detect-passive-events';
-import IconButton from '../components/icon_button';
+import IconButton from '@/components/icon_button';
 
 import Motion from 'react-motion/lib/Motion';
 import spring from 'react-motion/lib/spring';

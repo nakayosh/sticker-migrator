@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import {
   appendStickerEmoji,
   expandStickerEmojiPicker,
-} from '../actions/stickers';
-import StickerEmojiSelector from '../components/sticker_emoji_selector';
+} from '@/actions/stickers';
+import StickerEmojiSelector from '@/components/sticker_emoji_selector';
 
 const mapStateToProps = (state, { stickerId }) => ({
   sticker: state.getIn(['stickers', stickerId]),

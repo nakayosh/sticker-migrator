@@ -3,8 +3,8 @@ import { Provider } from 'react-redux';
 import { Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import { ScrollContext } from 'react-router-scroll-4';
-import configureStore from '../store/configureStore';
-import App from '../features/app';
+import configureStore from '@/store/configureStore';
+import App from '@/features/app';
 
 export const store = configureStore();
 

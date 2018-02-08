@@ -1,5 +1,5 @@
 import { Map as ImmutableMap } from 'immutable';
-import { LOCALE_CHANGE } from '../actions/settings';
+import { LOCALE_CHANGE } from '@/actions/settings';
 
 const supportedLocales = ['en', 'ja'];
 

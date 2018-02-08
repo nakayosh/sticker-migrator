@@ -1,4 +1,4 @@
-import api from '../api';
+import api from '@/api';
 
 export const STICKER_APPEND_EMOJI = 'STICKER_APPEND_EMOJI';
 export const STICKER_EXPAND_EMOJI_PICKER = 'STICKER_EXPAND_EMOJI_PICKER';

@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
-
-import BundleContainer from '../containers/bundle_container';
-import PageError from '../components/page_error';
-import PageLoading from '../components/page_loading';
+import BundleContainer from '@/features/app/containers/bundle_container';
+import PageError from '@/features/app/components/page_error';
+import PageLoading from '@/features/app/components/page_loading';
 
 export class WrappedRoute extends React.Component {
 
