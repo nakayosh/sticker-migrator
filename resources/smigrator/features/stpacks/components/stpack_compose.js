@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ImmtuablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import { Link } from 'react-router-dom';
-import { FormattedMessage, FormattedDate } from 'react-intl';
+import { FormattedDate } from 'react-intl';
 import { Picker as EmojiPicker } from 'emoji-mart';
 import Overlay from 'react-overlays/lib/Overlay';
 

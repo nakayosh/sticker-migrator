@@ -2,10 +2,10 @@ import React from 'react';
 import Page from '@/features/app/components/page';
 import Content from '@/features/app/components/content';
 import GeneralHeader from '@/features/general_header';
-import SearchStpacks from '@/features/search_stpacks/containers/search_stpacks_container';
+import SearchStpacksContainer from '@/features/search_stpacks/containers/search_stpacks_container';
 import SearchForm from '@/features/search_stpacks/containers/search_form_container';
 
-export default class MobileHome extends React.PureComponent {
+export default class SearchStpacks extends React.PureComponent {
 
   render () {
     return (
@@ -14,7 +14,7 @@ export default class MobileHome extends React.PureComponent {
 
         <Content>
           <SearchForm />
-          <SearchStpacks />
+          <SearchStpacksContainer />
         </Content>
       </Page>
     );

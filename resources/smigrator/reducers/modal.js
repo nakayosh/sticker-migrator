@@ -1,6 +1,6 @@
 import {
   MODAL_OPEN,
-  MODAL_CLOSE
+  MODAL_CLOSE,
 } from '@/actions/modal';
 
 const initialState = {
