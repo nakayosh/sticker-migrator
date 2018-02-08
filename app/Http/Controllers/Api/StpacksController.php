@@ -10,6 +10,7 @@ use DB;
 use App\Jobs\MigrateStickers;
 use Exception;
 use App\Lib\Constants\StpackStatus;
+use Emoji;
 
 class StpacksController extends Controller
 {
@@ -70,17 +71,41 @@ class StpacksController extends Controller
             return response()->json($stpack, $return_code);
         }
         if (count($stickers) != count($stpack->stickers)) {
-            throw new Exception('stickers length invalid');
+            return response()->json(
+                [
+                    'error' => 'Bad Request',
+                    'error_description' => 'stickers length invailed',
+                ],
+                400
+            );
         }
         if ($stpack->status == StpackStatus::UPLOADED) {
-            throw new Exception('stpack already uploaded');
+            return response()->json(
+                [
+                    'error' => 'Bad Request',
+                    'error_description' => 'stpack already uploaded',
+                ],
+                400
+            );
         }
-        DB::transaction(function () use ($stpack, $stickers){
-            foreach ($stpack->stickers as $count => $sticker) {
-                $sticker->emojis = $stickers[$count]['emojis'];
-                $sticker->save();
-            }
-        });
+        try{
+            DB::transaction(function () use ($stpack, $stickers){
+                foreach ($stpack->stickers as $count => $sticker) {
+                    foreach ($stickers[$count]['emojis'] as $emoji) {
+                        if (!Emoji\is_single_emoji($emoji)) {
+                            throw new Exception('invailed emoji');
+                        }
+                    }
+                    $sticker->emojis = $stickers[$count]['emojis'];
+                    $sticker->save();
+                }
+            });
+        } catch(Exception $e) {
+            return response()->json([
+                'error' => 'Bad Request',
+                'error_description' => 'invailed emoji',
+            ], 400);
+        }
         $stpack = Stpack::with('stickers')->where('id', $stpack_id)->first();
         dispatch(new MigrateStickers($stpack_id));
         return response()->json($stpack);
