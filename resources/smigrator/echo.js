@@ -1,18 +1,13 @@
 import Echo from 'laravel-echo';
+import csrfToken from './csrf_token';
+import laravelEchoServer from '../../laravel-echo-server.json';
 
-export function connectEcho(channel) {
-  return (dispatch, getState) => {
-    const echo = new Echo({
-      broadcaster: 'socket.io',
-      host: window.location.hostname + ':4000',
-    });
+const echo = new Echo({
+  authEndpoint: laravelEchoServer.authEndpoint,
+  broadcaster: 'socket.io',
+  host: `${window.location.hostname}:4000/api/streaming`,
+  key: laravelEchoServer.clients.key,
+  csrfToken,
+});
 
-    echo.private(channel).listen('StickerComlileStarting');
-    echo.private(channel).listen('StickerCompiling');
-    echo.private(channel).listen('StickerCompiled');
-    echo.private(channel).listen('StickerUploadStarting');
-    echo.private(channel).listen('StickerUploading');
-    echo.private(channel).listen('StickerUploaded');
-    echo.private(channel).listen('StickerUploadFailed');
-  };
-}
+export default echo;

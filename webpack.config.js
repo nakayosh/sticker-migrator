@@ -37,6 +37,10 @@ const config = {
         use: ['style-loader', 'css-loader'],
       },
       {
+        test: /\.json$/,
+        use: 'json-loader',
+      },
+      {
         test: /\.(scss|sass)$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
