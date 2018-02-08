@@ -125,10 +125,6 @@ if ( isProduction ) {
           '**/*.svg',
         ],
       },
-      externals: [
-        '/emoji/1f602.svg', // used for emoji picker dropdown
-        '/emoji/sheet.png', // used in emoji-mart
-      ],
       excludes: [
         '**/*.map',
         '**/*.eot',
