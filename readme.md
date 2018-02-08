@@ -44,5 +44,13 @@ docker-compose run --rm web ash -c "composer install --no-progress \
 docker-compose up
 ```
 
+## Update
+```
+docker-compose run --rm web ash -c "composer install --no-progress \
+ && yarn install --pure-lockfile \
+ && yarn run clear \
+ && yarn run prod"
+```
+
 ## Requirements
 - Docker

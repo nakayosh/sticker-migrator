@@ -5,7 +5,7 @@ import {
   appendStickerEmoji,
   expandStickerEmojiPicker,
 } from '@/actions/stickers';
-import StpackCompose from '@/components/stpack_compose';
+import StpackCompose from '@/features/stpacks/components/stpack_compose';
 
 const mapStateToProps = (state, { id }) => ({
   stpack: state.getIn(['stpacks', id], null),

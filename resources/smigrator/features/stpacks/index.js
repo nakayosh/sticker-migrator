@@ -9,9 +9,9 @@ import Page from '@/features/app/components/page';
 import Content from '@/features/app/components/content';
 import GeneralHeader from '@/features/general_header';
 import LoadingIndicator from '@/components/loading_indicator';
-import StpackContainer from '@/containers/stpack_container';
-import StpackProgressContainer from '@/containers/stpack_progress_container';
-import StpackComposeContainer from '@/containers/stpack_compose_container';
+import StpackContainer from '@/features/stpacks/containers/stpack_container';
+import StpackProgressContainer from '@/features/stpacks/containers/stpack_progress_container';
+import StpackComposeContainer from '@/features/stpacks/containers/stpack_compose_container';
 
 const mapStateToProps = (state, { match }) => ({
   stpack: state.getIn(['stpacks', match.params.id]),

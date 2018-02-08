@@ -16,8 +16,8 @@ import {
   Home,
   Stpacks,
   MobileHome,
-  MobileRecentStpacks,
-  MobileSearchStpacks,
+  RecentStpacks,
+  SearchStpacks,
 } from '@/features/app/util/async-components';
 
 addLocaleData([...en, ...ja]);
@@ -41,17 +41,17 @@ export default class App extends React.Component {
     return (
       <IntlProvider locale={locale} messages={messagesForLocale(locale)}>
         <div className='app' ref={this.setRef}>
+
           <Switch>
             <Redirect exact from='/' to='/home' />
-
             <WrappedRoute path='/home' component={isMobile(window.innerWidth) ? MobileHome : Home} />
-            <WrappedRoute path='/recent' component={MobileRecentStpacks} />
-            <WrappedRoute path='/search' component={MobileSearchStpacks} />
-
+            <WrappedRoute path='/recent' component={RecentStpacks} />
+            <WrappedRoute path='/search' component={SearchStpacks} />
             <WrappedRoute path='/stpacks/:id' component={Stpacks} />
           </Switch>
 
           <ModalContaienr />
+
           { isMobile(window.innerWidth) && <MobileMenu location={{ ...window.location }} /> }
 
           <LoadingBar className='loading-bar' />

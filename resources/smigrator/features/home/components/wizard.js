@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, defineMessages } from 'react-intl';
-import IconButton from './icon_button';
+import IconButton from '@/components/icon_button';
 
 const messages = defineMessages({
   submit: { id: 'wizard.submit', defaultMessage: 'Create' },
