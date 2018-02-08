@@ -80,6 +80,7 @@ class MigrateStickers implements ShouldQueue
         $stpack->url = $url;
         $stpack->status = StpackStatus::UPLOADED;
         $stpack->save();
+        $stpack_arr = $stpack->toArray();
         event(new Events\StickerUploaded($stpack_arr));
         return $stpack;
     }
