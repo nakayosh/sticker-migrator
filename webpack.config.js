@@ -116,24 +116,25 @@ if ( isProduction ) {
     }),
 
     new OfflinePlugin({
-      // publicPath: '/packs/',
+      publicPath: '/packs/',
       caches: {
-        main: [
-          '*.css',
-          '*.js',
-        ],
-        additional: [
-          ':externals:',
-        ],
+        main: [':rest:'],
+        additional: [':externals:'],
         optional: [
-          ':rest:',
+          '**/*.png',
+          '**/*.jpg',
+          '**/*.jpeg',
+          '**/*.svg',
         ],
       },
       externals: [
         '/',
       ],
       ServiceWorker: {
-        navigateFallbackURL: '/',
+        cacheName: 'smigrator',
+        output: '../packs/sw.js',
+        publicPath: '/sw.js',
+        minify: true,
       },
     }),
   );
