@@ -13,6 +13,7 @@
         "intervention/image": "^2.4",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
+        "p3k/emoji-detector": "^0.2.1",
         "predis/predis": "^1.1",
         "ramsey/uuid": "^3.7"
     },

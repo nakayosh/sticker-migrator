@@ -9,6 +9,7 @@ use App\Stpack;
 use DB;
 use App\Jobs\MigrateStickers;
 use Exception;
+use App\Lib\Constants\StpackStatus;
 
 class StpacksController extends Controller
 {
@@ -29,7 +30,7 @@ class StpacksController extends Controller
         $q = $request->input('q');
         $limit = (integer)($request->input('limit') ?? 15);
         $offset = (integer)($request->input('offset') ?? 0);
-        $query = Stpack::with('stickers')->where('status', 3)->where('name', 'LIKE', '%'.$q.'%');
+        $query = Stpack::with('stickers')->where('status', StpackStatus::UPLOADED)->where('name', 'LIKE', '%'.$q.'%');
         $stpacks = $query->skip($offset)->take($limit)->get();
         $retval = [
             'results' => $stpacks,
@@ -47,7 +48,7 @@ class StpacksController extends Controller
         ]);
         $limit = (integer)($request->input('limit') ?? 15);
         $offset = (integer)($request->input('offset') ?? 0);
-        $query = Stpack::with('stickers')->where('status', 3)->orderBy('created_at', 'desc');
+        $query = Stpack::with('stickers')->where('status', StpackStatus::UPLOADED)->orderBy('created_at', 'desc');
         $stpacks = $query->skip($offset)->take($limit)->get();
         $retval = [
             'results' => $stpacks,
@@ -70,6 +71,9 @@ class StpacksController extends Controller
         }
         if (count($stickers) != count($stpack->stickers)) {
             throw new Exception('stickers length invalid');
+        }
+        if ($stpack->status == StpackStatus::UPLOADED) {
+            throw new Exception('stpack already uploaded');
         }
         DB::transaction(function () use ($stpack, $stickers){
             foreach ($stpack->stickers as $count => $sticker) {
