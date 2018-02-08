@@ -10,6 +10,7 @@ use DB;
 use App\Jobs\MigrateStickers;
 use Exception;
 use App\Lib\Constants\StpackStatus;
+use Emoji;
 
 class StpacksController extends Controller
 {
@@ -77,6 +78,11 @@ class StpacksController extends Controller
         }
         DB::transaction(function () use ($stpack, $stickers){
             foreach ($stpack->stickers as $count => $sticker) {
+                foreach ($stickers[$count]['emojis'] as $emoji) {
+                    if (!Emoji\is_single_emoji($emoji)) {
+                        throw new Exception('invailed emoji');
+                    }
+                }
                 $sticker->emojis = $stickers[$count]['emojis'];
                 $sticker->save();
             }
