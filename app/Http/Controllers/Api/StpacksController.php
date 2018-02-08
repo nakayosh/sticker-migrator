@@ -72,6 +72,9 @@ class StpacksController extends Controller
         if (count($stickers) != count($stpack->stickers)) {
             throw new Exception('stickers length invailed');
         }
+        if ($stpack->status == StpackStatus::UPLOADED) {
+            throw new Exception('stpack already uploaded');
+        }
         DB::transaction(function () use ($stpack, $stickers){
             foreach ($stpack->stickers as $count => $sticker) {
                 $sticker->emojis = $stickers[$count]['emojis'];
