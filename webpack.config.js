@@ -1,4 +1,3 @@
-require('dotenv').config();
 const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -85,9 +84,6 @@ const config = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-        PUSHER_APP_ID: JSON.stringify(process.env.PUSHER_APP_ID),
-        PUSHER_APP_KEY: JSON.stringify(process.env.PUSHER_APP_KEY),
-        PUSHER_APP_CLUSTER: JSON.stringify(process.env.PUSHER_APP_CLUSTER),
       },
     }),
 
@@ -120,7 +116,7 @@ if ( isProduction ) {
     }),
 
     new OfflinePlugin({
-      publicPath: '/packs/',
+      // publicPath: '/packs/',
       caches: {
         main: [
           '*.css',
