@@ -111,9 +111,7 @@ if ( isProduction ) {
         comments: false,
       },
     }),
-  );
 
-  config.plugins.push(
     new OfflinePlugin({
       publicPath: '/packs/',
       caches: {

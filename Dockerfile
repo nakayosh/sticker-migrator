@@ -1,4 +1,4 @@
-FROM php:7.2.0-fpm-alpine3.6
+FROM php:7.2.2-fpm-alpine3.7
 
 LABEL maintainer="https://gitlab.com/nijipico/sticker_migrator" \
       description="Sticker Migrator from LINE to Telegram"
