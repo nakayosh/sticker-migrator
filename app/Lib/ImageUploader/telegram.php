@@ -27,7 +27,7 @@ class Telegram
         $body_stickers = $stickers->slice(1);
         foreach ($body_stickers as $count => $sticker) {
             $this->addStickerToStickerSet($stpack['short_name'], $sticker);
-            yield $count + 2;
+            yield $count + 1;
         }
     }
 
