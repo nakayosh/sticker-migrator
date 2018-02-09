@@ -8,6 +8,7 @@ export default class Sticker extends ImmutablePureComponent {
 
   static propTypes = {
     sticker: ImmutablePropTypes.map,
+    withEmojis: PropTypes.bool,
     onOpenModal: PropTypes.func.isRequired,
   }
 
@@ -17,7 +18,7 @@ export default class Sticker extends ImmutablePureComponent {
   }
 
   render () {
-    const { sticker } = this.props;
+    const { sticker, withEmojis } = this.props;
 
     if ( !sticker ) {
       return <p>no sticker specified</p>;
@@ -27,11 +28,15 @@ export default class Sticker extends ImmutablePureComponent {
       <button className='sticker button' onClick={this.handleOpenModal} >
         <img src={sticker.get('original_url')} alt={sticker.get('emojis', '')} />
 
-        <div className='sticker_emoji'>
-          <div className='sticker_emoji-list'>
-            <Emoji set='apple' emoji='santa' size={20} />
-          </div>
-        </div>
+        {
+          withEmojis && (
+            <div className='sticker_emoji'>
+              <div className='sticker_emoji-list'>
+                <Emoji set='apple' emoji='santa' size={20} />
+              </div>
+            </div>
+          )
+        }
       </button>
     );
   }

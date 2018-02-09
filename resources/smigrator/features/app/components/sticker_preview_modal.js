@@ -14,7 +14,7 @@ export default class StickerPreviewModal extends ImmutablePureComponent {
 
     return (
       <div className='modal modal-stikcer-preview'>
-        <StickerContainer stickerId={stickerId} />
+        <StickerContainer stickerId={stickerId} withEmojis />
       </div>
     );
   }

@@ -34,13 +34,13 @@ export default class LetterHead extends ImmutablePureComponent {
     }
 
     return (
-      <div className='stpack__letter-head'>
-        <div className='stpack__thumbnail'>
+      <div className='stpack-letter-head'>
+        <div className='stpack-letter-head__thumbnail'>
           <img src={stpack.get('thumbnail_url')} alt={stpack.get('name')} />
         </div>
 
-        <div className='stpack__meta'>
-          <time className='stpack__time' timestamp={stpack.get('created_at')}>
+        <div className='stpack-letter-head__meta'>
+          <time className='stpack-letter-head__time' timestamp={stpack.get('created_at')}>
             <i className='fa fa-clock-o' aria-hidden />
 
             <FormattedDate
@@ -54,21 +54,21 @@ export default class LetterHead extends ImmutablePureComponent {
             />
           </time>
 
-          <h2 className='stpack__title'>
+          <h2 className='stpack-letter-head__title'>
             <Link to={`/stpacks/${stpack.get('id_str')}`}>
               { stpack.get('name') }
             </Link>
           </h2>
 
-          <div className='stpack__buttons-wrapper'>
-            <div className='stpack__download-button'>
+          <div className='stpack-letter-head__buttons-wrapper'>
+            <div className='stpack-letter-head__download-button'>
               <a className='rich-button' href={stpack.get('url')} target='_blank' onClick={this.handleDownload}>
                 <i className='fa fa-plus' />
                 <FormattedMessage id='stpack.add' defaultMessage='Add on Telegram' />
               </a>
             </div>
 
-            <div className='stpack__dropdown-menu'>
+            <div className='stpack-letter-head__dropdown-menu'>
               <Dropdown
                 icon='fa fa-ellipsis-v rich-button'
                 items={items}

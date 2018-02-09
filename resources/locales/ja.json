@@ -8,10 +8,8 @@
   "stpack.share_line": "LINEでシェア",
   "stpack.share_telegram": "Telegramでシェア",
 
-  "stpack.progress.compile_starting": "画像のコンパイルを開始しています",
-  "stpack.progress.compiling": "画像のコンパイル中... {indicator}",
-  "stpack.progress.upload_starting": "アップロードを開始しています... {indicator}",
-  "stpack.progress.uploading": "アップロード中... {indicator}",
+  "stpack.progress.compiling": "ステッカーのコンパイル中... {percentage}%",
+  "stpack.progress.uploading": "ステッカーのアップロード中... {percentage}%",
   "stpack.progress.uploaded": "完了しました！",
   "stpack.progress.failed": "マイグレーションに失敗",
 

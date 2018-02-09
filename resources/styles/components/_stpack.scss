@@ -1,4 +1,4 @@
-.stpack__letter-head {
+.stpack-letter-head {
   display: flex;
   position: relative;
   align-items: flex-start;
@@ -7,7 +7,7 @@
   border-bottom: 1px solid $p500;
 }
 
-.stpack__thumbnail {
+.stpack-letter-head__thumbnail {
   flex-shrink: 0;
   width: 105px;
   height: auto;
@@ -18,11 +18,11 @@
   }
 }
 
-.stpack__meta {
+.stpack-letter-head__meta {
   flex-grow: 1;
 }
 
-.stpack__title {
+.stpack-letter-head__title {
   font-weight: bold;
   font-size: 18px;
 
@@ -35,7 +35,7 @@
   }
 }
 
-.stpack__time {
+.stpack-letter-head__time {
   color: $t100;
   font-size: 14px;
 
@@ -44,30 +44,17 @@
   }
 }
 
-.stpack__stickers {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.stpack__sticker {
-  flex-basis: 25%;
-  flex-grow: 1;
-  flex-shrink: 0;
-}
-
-.stpack__buttons-wrapper {
+.stpack-letter-head__buttons-wrapper {
   display: flex;
 }
 
-.stpack__dropdown-menu {
+.stpack-letter-head__dropdown-menu {
   button {
     font-size: 14px;
   }
 }
 
-.stpack__download-button {
+.stpack-letter-head__download-button {
   margin-right: 4px;
 
   i {
@@ -92,4 +79,30 @@
       font-size: 16px;
     }
   }
+}
+
+.stpack__stickers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.stpack__sticker {
+  flex-basis: 25%;
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+.stpack-progress-bar {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid $h100;
+  background-color: lighten($h100, 35%);
+}
+
+.stpack-progress-bar__tracker {
+  height: 18px;
+  border-radius: 6px;
+  background-image: linear-gradient(-180deg, $h100 0%, $h500 90%);
 }

@@ -8,6 +8,8 @@ import ProgressBar from '@/features/stpacks/components/progress_bar';
 import LoadingIndicator from '@/components/loading_indicator';
 import StickerContainer from '@/containers/sticker_container';
 
+import { UPLOADED } from '@/features/stpacks/util/constants';
+
 export default class Stapck extends ImmutablePureComponent {
 
   static propTypes = {
@@ -37,7 +39,8 @@ export default class Stapck extends ImmutablePureComponent {
             <div>
               <LetterHead stpack={stpack} />
 
-              { stpack.get('status') !== 3 && <ProgressBar stpack={stpack} /> }
+              <ProgressBar stpack={stpack} />
+              { stpack.get('status') !== UPLOADED && <ProgressBar stpack={stpack} /> }
 
               <ul className='stpack__stickers'>
                 {

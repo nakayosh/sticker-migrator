@@ -8,10 +8,8 @@
   "stpack.share_line": "Share with LINE",
   "stpack.share_telegram": "Share with Telegram",
 
-  "stpack.progress.compile_starting": "Starting to compile images",
-  "stpack.progress.compiling": "Compiling images... {indicator}",
-  "stpack.progress.upload_starting": "Starting to upload images... {indicator}",
-  "stpack.progress.uploading": "Uploading... {indicator}",
+  "stpack.progress.compiling": "Compiling stickers... {percentage}%",
+  "stpack.progress.uploading": "Uploading stickers... {percentage}%",
   "stpack.progress.uploaded": "Complete!",
   "stpack.progress.failed": "Failed to migration :(",
 
