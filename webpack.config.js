@@ -131,7 +131,7 @@ if ( isProduction ) {
         '/',
       ],
       ServiceWorker: {
-        output: '../packs/sw.js',
+        output: '../sw.js',
         publicPath: '/sw.js',
         cacheName: 'smigrator',
         minify: true,
