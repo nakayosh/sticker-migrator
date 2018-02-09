@@ -98,28 +98,31 @@
   margin-bottom: 16px;
   padding: 16px;
   border-radius: 6px;
-  border: 1px solid $h100;
-  background-color: lighten($h100, 35%);
+  border: 1px solid $p500;
+  background-color: $p100;
 }
 
 .stpack-progress-bar__title {
   margin-bottom: 12px;
 
   & > i {
+    color: $t100;
     margin-right: 0.5em;
   }
 }
 
 @keyframes beeping {
-  0% { opacity: 0.75; }
-  50% { opacity: 1; }
-  100% { opacity: 0.75; }
+  0% { opacity: 0.6; }
+  25% { opacity: 1; }
+  75% { opacity: 1; }
+  100% { opacity: 0.6; }
 }
 
 .stpack-progress-bar__backdrop {
   overflow: hidden;
   border-radius: 4px;
   box-sizing: border-box;
+  border: 1px solid $p500;
   background-image: linear-gradient(-180deg, $p100 0%, $p500 90%);
 }
 

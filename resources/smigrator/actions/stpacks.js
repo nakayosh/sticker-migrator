@@ -75,6 +75,7 @@ export function patchStpackRequest(data) {
   return {
     type: STPACK_PATCH_REQUEST,
     data,
+    skipLoading: true,
   };
 }
 

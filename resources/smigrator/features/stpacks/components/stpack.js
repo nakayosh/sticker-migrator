@@ -5,7 +5,7 @@ import LetterHead from '@/features/stpacks/components/letter_head';
 import ProgressBar from '@/features/stpacks/components/progress_bar';
 import StickerContainer from '@/containers/sticker_container';
 
-import { UPLOADED } from '@/features/stpacks/util/constants';
+import { COMPILING, UPLOADING, UPLOADED } from '@/features/stpacks/util/constants';
 
 export default class Stapck extends ImmutablePureComponent {
 
@@ -27,11 +27,13 @@ export default class Stapck extends ImmutablePureComponent {
 
         <ul className='stpack__stickers'>
           {
-            stpack.get('stickers').size && stpack.get('stickers').map(stickerId => (
-              <li className='stpack__sticker' key={stickerId}>
-                <StickerContainer stickerId={stickerId} />
-              </li>
-            ))
+            stpack.get('status') !== COMPILING && stpack.get('status') !==  UPLOADING && (
+              stpack.get('stickers').size && stpack.get('stickers').map(stickerId => (
+                <li className='stpack__sticker' key={stickerId}>
+                  <StickerContainer stickerId={stickerId} />
+                </li>
+              ))
+            )
           }
         </ul>
       </div>
