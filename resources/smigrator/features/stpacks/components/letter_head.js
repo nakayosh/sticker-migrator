@@ -4,8 +4,8 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import { Link } from 'react-router-dom';
 import { FormattedMessage, FormattedDate, defineMessages, injectIntl } from 'react-intl';
+import querystring from 'querystring';
 import Dropdown from '@/containers/dropdown_container';
-
 import { UPLOADED } from '@/features/stpacks/util/constants';
 
 const messages = defineMessages({
@@ -20,6 +20,19 @@ export default class LetterHead extends ImmutablePureComponent {
   static propTypes = {
     intl: PropTypes.object.isRequired,
     stpack: ImmutablePropTypes.map,
+  }
+
+  handleDownload = e => {
+    e.preventDefault();
+
+    const url        = this.props.stpack.get('url');
+    const short_name = this.props.stpack.get('short_name');
+
+    setTimeout(() => {
+      window.location = url;
+    }, 200);
+
+    window.location = `tg://addstickers?${querystring.encode({ set: short_name })}`;
   }
 
   render () {

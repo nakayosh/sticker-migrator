@@ -1,8 +1,6 @@
 import React from 'react';
 import ImmtuablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
-import querystring from 'querystring';
-
 import LetterHead from '@/features/stpacks/components/letter_head';
 import ProgressBar from '@/features/stpacks/components/progress_bar';
 import StickerContainer from '@/containers/sticker_container';
@@ -13,19 +11,6 @@ export default class Stapck extends ImmutablePureComponent {
 
   static propTypes = {
     stpack: ImmtuablePropTypes.map,
-  }
-
-  handleDownload = e => {
-    e.preventDefault();
-
-    const url        = this.props.stpack.get('url');
-    const short_name = this.props.stpack.get('short_name');
-
-    setTimeout(() => {
-      window.location = url;
-    }, 200);
-
-    window.location = `tg://addstickers?${querystring.encode({ set: short_name })}`;
   }
 
   render () {

@@ -26,5 +26,7 @@
   "search_stpacks.placeholder": "Type your keyword",
   "search_stpacks.empty": "Sorry, there is no such sticker set yet．If you need you can search about {line_store} in LINE STORE.",
 
+  "maintainers": "Maintainers",
+
   "loading_indicator.loading": "Loading..."
 }
