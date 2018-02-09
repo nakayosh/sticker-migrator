@@ -3,14 +3,15 @@
 namespace App\Http\ViewComposers;
 
 use Illuminate\View\View;
+use Config;
 use Exception;
 
-class WsHostComposer
+class EchoHostComposer
 {
     /**
      * @var str
      */
-    protected $ws_host;
+    protected $echo_host;
 
     /**
      * Create a new wshost composer.
@@ -19,13 +20,7 @@ class WsHostComposer
      */
     public function __construct()
     {
-        $path = base_path().'/laravel-echo-server.json';
-        $json = json_decode(file_get_contents($path), True);
-        try {
-            $this->ws_host = $json['host'];
-        } catch(Exception $e) {
-            $this->ws_host = 'ws.smigrator.tk';
-        }
+        $this->echo_host = Config::get('ECHO_HOST', 'localhost:4000');
     }
 
     /**
@@ -36,6 +31,6 @@ class WsHostComposer
      */
     public function compose(View $view)
     {
-        $view->with('websocket_host', $this->ws_host);
+        $view->with('echo_host', $this->echo_host);
     }
 }

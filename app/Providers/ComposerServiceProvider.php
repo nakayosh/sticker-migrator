@@ -14,7 +14,7 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('index', 'App\Http\ViewComposers\WsHostComposer');
+        View::composer('index', 'App\Http\ViewComposers\EchoHostComposer');
     }
 
     /**

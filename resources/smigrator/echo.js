@@ -4,16 +4,12 @@ import laravelEchoServer from '@/../../laravel-echo-server.json';
 
 let echo;
 
-if (process.env.NODE_ENV === 'production') {
-  echo = new Echo({
-    authEndpoint: laravelEchoServer.authEndpoint || '',
-    broadcaster:  'socket.io',
-    host:         'ws.smigrator.tk',
-    key:          laravelEchoServer.clients.key || '',
-    csrfToken,
-  });
-} else {
-  echo = () => null;
-}
+echo = new Echo({
+  authEndpoint: laravelEchoServer.authEndpoint || '',
+  broadcaster:  'socket.io',
+  host:         process.env.ECHO_HOST,
+  key:          laravelEchoServer.clients.key || '',
+  csrfToken,
+});
 
 export default echo;

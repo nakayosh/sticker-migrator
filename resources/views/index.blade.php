@@ -13,24 +13,27 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" id="csrf-token">
     <meta name="msapplication-config" content="/browserconfig.xml">
     <meta name="theme-color" content="#E67E22">
-    <link rel="stylesheet" href="{{ mix('style.css', '/packs') }}" />
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="{{ mix('style.css', '/packs') }}">
+    <link rel="shortcut icon" href="/favicon.ico">
     <link rel="mask-icon" href="/mask-icon.svg" color="#E67E22">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
     <link rel="manifest" href="/manifest.json">
 
-    {{-- Preloading --}}
-    <script src="{{ mix('/features/home.js', '/packs') }}"></script>
-    <script src="{{ mix('/features/mobile_home.js', '/packs') }}"></script>
-    <script src="{{ mix('/features/stpacks.js', '/packs') }}"></script>
-
     {{--  Socket.io  --}}
-    <script src="//{{ env('WS_HOST', 'localhost:4000') }}/socket.io/socket.io.js"></script>
+    <script src="//{{ $echo_host }}/socket.io/socket.io.js"></script>
   </head>
 
   <body class="" role="application">
+    {{--  Rendering target  --}}
     <div id="root" data-props='{}'></div>
+
+    {{--  Main Script  --}}
     <script src="{{ mix('/main.js', '/packs') }}"></script>
+
+    {{--  Prefetching  --}}
+    <script src="{{ mix('/features/home.js', '/packs') }}"></script>
+    <script src="{{ mix('/features/mobile_home.js', '/packs') }}"></script>
+    <script src="{{ mix('/features/stpacks.js', '/packs') }}"></script>
   </body>
 
 </html>
