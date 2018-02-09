@@ -116,6 +116,7 @@ export default class Dropdown extends React.PureComponent {
   };
 
   static propTypes = {
+    className: PropTypes.string,
     icon: PropTypes.string.isRequired,
     items: PropTypes.array.isRequired,
     title: PropTypes.string,
@@ -129,6 +130,7 @@ export default class Dropdown extends React.PureComponent {
   }
 
   static defaultProps = {
+    className: '',
     placement: 'bottom',
   }
 
@@ -195,19 +197,19 @@ export default class Dropdown extends React.PureComponent {
   }
 
   render() {
-    const { icon, items, title, placement, disabled, ...others } = this.props;
+    const { icon, items, title, placement, disabled, className } = this.props;
     const { expanded } = this.state;
 
     return (
       <div onKeyDown={this.handleKeyDown}>
         <IconButton
+          className={className}
           icon={icon}
           title={title}
           active={expanded}
           disabled={disabled}
           ref={this.setTargetRef}
           onClick={this.handleClick}
-          {...others}
         />
 
         <Overlay show={expanded} placement={placement} target={this.findTarget}>
