@@ -12,6 +12,8 @@
   "stpack.progress.uploading": "Uploading stickers... {percentage}%",
   "stpack.progress.uploaded": "Complete!",
   "stpack.progress.failed": "Failed to migration :(",
+  "stpack.progress.failed_description": "It is possible that Telegram has been restricting the application or the host is busy now. Please try again after a while.",
+  "stpack.progress.retry": "Retry",
 
   "sticker.tooltip": "Show with fullscreen",
 

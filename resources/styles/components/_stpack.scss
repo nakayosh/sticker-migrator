@@ -106,3 +106,19 @@
   border-radius: 6px;
   background-image: linear-gradient(-180deg, $h100 0%, $h500 90%);
 }
+
+.stpack-failed__text {
+  & > i {
+    margin-right: 0.25em;
+  }
+}
+
+.stpack-failed__description {
+  margin: 12px 0;
+  line-height: 1.2;
+}
+
+.stpack-failed__retry {
+  display: block;
+  margin: 0 0 0 auto;
+}

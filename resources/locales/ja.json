@@ -1,7 +1,7 @@
 {
   "wizard.title": "新しいステッカーセットを作成",
   "wizard.submit": "作成",
-  "wizard.description": "LINE STOREのURLを入力して新しいステッカーセットを作成します．既に存在する場合はそのステッカーセットのダウンロードページが表示されます",
+  "wizard.description": "LINE STOREのURLを入力して新しいステッカーセットを作成します。既に存在する場合はそのステッカーセットのダウンロードページが表示されます",
 
   "stpack.add": "Telegramで追加",
   "stpack.visit_original": "元ページを表示",
@@ -11,7 +11,10 @@
   "stpack.progress.compiling": "ステッカーのコンパイル中... {percentage}%",
   "stpack.progress.uploading": "ステッカーのアップロード中... {percentage}%",
   "stpack.progress.uploaded": "完了しました！",
-  "stpack.progress.failed": "マイグレーションに失敗",
+  "stpack.progress.failed": "マイグレーションに失敗しました",
+  "stpack.progress.failed_description": "ホストがビジー状態か、Telegramがアプリケーションに対して一時的な制限を行っている可能性があります。 申し訳ございませんが、しばらく時間を置いてからもう一度お試しください。",
+  "stpack.progress.retry": "再試行",
+
 
   "sticker.tooltip": "全画面で表示",
 
@@ -22,7 +25,7 @@
   "search_stpacks.submit": "検索",
   "search_stpacks.clear": "クリア",
   "search_stpacks.placeholder": "キーワードを入力",
-  "search_stpacks.empty": "申し訳ございませんが，そのようなステッカーセットはまだありません． 必要であればLINE STOREから{line_store}について検索することができます．",
+  "search_stpacks.empty": "申し訳ございませんが、そのようなステッカーセットはまだありません。 必要であればLINE STOREから{line_store}について検索することができます。",
 
   "loading_indicator.loading": "読み込み中..."
 }

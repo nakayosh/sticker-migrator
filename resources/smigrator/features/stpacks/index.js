@@ -15,6 +15,7 @@ import GeneralHeader from '@/features/general_header';
 import LoadingIndicator from '@/components/loading_indicator';
 import StpackContainer from '@/features/stpacks/containers/stpack_container';
 import StpackComposeContainer from '@/features/stpacks/containers/stpack_compose_container';
+import Failed from '@/features/stpacks/components/failed';
 
 import { DOWNLOADED, COMPILING, UPLOADING, UPLOADED, FAILED } from '@/features/stpacks/util/constants';
 
@@ -32,7 +33,7 @@ export default class Stpacks extends ImmutablePureComponent {
   }
 
   componentWillMount () {
-    this.props.dispatch(connectStpack(this.props.match.params.id));
+    // this.props.dispatch(connectStpack(this.props.match.params.id));
 
     if ( !this.props.stpack ) {
       this.props.dispatch(fetchStpack(this.props.match.params.id));
@@ -40,7 +41,7 @@ export default class Stpacks extends ImmutablePureComponent {
   }
 
   componentWillUnmount () {
-    this.props.dispatch(disconnectStpack(this.props.match.params.id));
+    // this.props.dispatch(disconnectStpack(this.props.match.params.id));
   }
 
   renderContent (id, status) {
@@ -53,9 +54,7 @@ export default class Stpacks extends ImmutablePureComponent {
       return <StpackContainer id={id} />;
     case FAILED:
     default:
-      return (
-        <div>Unexpected error occured</div>
-      );
+      return <Failed />;
     }
   }
 
