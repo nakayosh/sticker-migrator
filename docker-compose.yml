@@ -10,14 +10,33 @@ services:
     volumes:
       - ./mariadb:/var/lib/mysql
 
+  redis:
+    restart: always
+    image: redis:4.0-alpine
+    volumes:
+      - ./redis:/data
+
+  echo:
+    build: .
+    image: neetshin/smigrator
+    restart: always
+    env_file: .env
+    command: npm run start
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+      - redis
+
   web:
     build: .
     image: neetshin/smigrator
     restart: always
     env_file: .env
     ports:
-      - "8080:8080"
+      - "3000:3000"
     depends_on:
       - db
+      - redis
     volumes:
       - .:/smigrator

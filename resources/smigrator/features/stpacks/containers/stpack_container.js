@@ -1,13 +1,11 @@
 import { connect } from 'react-redux';
-import Stpack from '../components/stpack';
+import { injectIntl } from 'react-intl';
+import Stpack from '@/features/stpacks/components/stpack';
 
 const mapStateToProps = (state, { id }) => ({
   stpack: state.getIn(['stpacks', id], null),
 });
 
-// const mapDispatchToProps = dispatch => ({
-// });
-
-export default connect(
+export default injectIntl(connect(
   mapStateToProps,
-)(Stpack);
+)(Stpack));

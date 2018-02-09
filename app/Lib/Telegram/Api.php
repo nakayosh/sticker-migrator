@@ -39,7 +39,6 @@ class Api
         if ($res_data['ok']) {
             return $res_data['result'];
         } else {
-            dd($res_data);
             return $res_data;
         }
     }

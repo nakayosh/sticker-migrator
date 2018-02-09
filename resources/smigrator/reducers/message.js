@@ -1,7 +1,7 @@
 import {
   MESSAGE_SHOW,
   MESSAGE_HIDE,
-} from '../actions/message';
+} from '@/actions/message';
 
 import { Map as ImmutableMap } from 'immutable';
 

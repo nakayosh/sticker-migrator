@@ -149,3 +149,28 @@ h6 {
     outline: none;
   }
 }
+
+.rich-input {
+  padding: 4px 8px;
+  box-sizing: border-box;
+  color: $t500;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid $p500;
+  background-color: $p100;
+  transition: 0.1s ease-out;
+
+  @media screen and (min-width: 700px) {
+    font-size: 16px;
+  }
+
+  &:focus {
+    border-color: $h100;
+    background-color: lighten($h100, 40%);
+  }
+
+  &:invalid {
+    border-color: $red;
+    background-color: lighten($red, 40%);
+  }
+}

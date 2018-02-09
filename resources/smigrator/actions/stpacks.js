@@ -1,12 +1,15 @@
-import api from '../api';
+import api from '@/api';
+import echo from '@/echo';
 
 export const STPACK_FETCH_REQUEST = 'STPACK_FETCH_REQUEST';
 export const STPACK_FETCH_SUCCESS = 'STPACK_FETCH_SUCCESS';
 export const STPACK_FETCH_FAIL    = 'STPACK_FETCH_FAIL';
 
-export const STPACK_UPDATE_REQUEST = 'STPACK_UPDATE_REQUEST';
-export const STPACK_UPDATE_SUCCESS = 'STPACK_UPDATE_SUCCESS';
-export const STPACK_UPDATE_FAIL    = 'STPACK_UPDATE_FAIL';
+export const STPACK_UPDATE = 'STPACK_UPDATE';
+
+export const STPACK_PATCH_REQUEST = 'STPACK_PATCH_REQUEST';
+export const STPACK_PATCH_SUCCESS = 'STPACK_PATCH_SUCCESS';
+export const STPACK_PATCH_FAIL    = 'STPACK_PATCH_FAIL';
 
 export function fetchStpack(id) {
   return (dispatch, getState) => {
@@ -42,42 +45,69 @@ export function fetchStpackFail(error) {
 }
 
 
-export function updateStpack(id) {
-  return (dispatch, getState) => {
-    dispatch(updateStpackRequest(id));
-
-    const data = {};
-
-    data.id      = getState().getIn(['stpacks', 'id']);
-    data.stickes = getState().getIn(['stpacks', 'stickers']).map(id => {
-      getState().getIn(['stickers'], id);
-    }).toJS();
-
-    api(getState).patch('/api/stpacks', data).then(response => {
-      dispatch(updateStpackRequest(response.data));
-    }).catch(error => {
-      dispatch(updateStpackFail(error));
-    });
-  };
-}
-
-export function updateStpackRequest(data) {
+export function updateStpack(stpack) {
   return {
-    type: STPACK_UPDATE_REQUEST,
-    data,
-  };
-}
-
-export function updateStpackSuccess(stpack) {
-  return {
-    type: STPACK_UPDATE_SUCCESS,
+    type: STPACK_UPDATE,
     stpack,
   };
 }
 
-export function updateStpackFail(error) {
+
+export function patchStpack(id) {
+  return (dispatch, getState) => {
+    dispatch(patchStpackRequest(id));
+
+    const data = {};
+
+    data.stickers = getState().getIn(['stpacks', id, 'stickers']).map(stickerId => {
+      return getState().getIn(['stickers', stickerId]).toJS();
+    });
+
+    api(getState).patch(`/api/stpacks/${id}`, data).then(response => {
+      dispatch(patchStpackRequest(response.data));
+    }).catch(error => {
+      dispatch(patchStpackFail(error));
+    });
+  };
+}
+
+export function patchStpackRequest(data) {
   return {
-    type: STPACK_UPDATE_FAIL,
+    type: STPACK_PATCH_REQUEST,
+    data,
+  };
+}
+
+export function patchStpackSuccess(stpack) {
+  return {
+    type: STPACK_PATCH_SUCCESS,
+    stpack,
+  };
+}
+
+export function patchStpackFail(error) {
+  return {
+    type: STPACK_PATCH_FAIL,
     error,
+  };
+}
+
+
+export function connectStpack(id) {
+  return dispatch => {
+    echo.channel(`stpacks.${id}`)
+      .listen('StickerCompileStarting', e => dispatch(updateStpack(e.stpack)))
+      .listen('StickerCompiling',       e => dispatch(updateStpack(e.stpack)))
+      .listen('StickerCompiled',        e => dispatch(updateStpack(e.stpack)))
+      .listen('StickerUploadStarting',  e => dispatch(updateStpack(e.stpack)))
+      .listen('StickerUploading',       e => dispatch(updateStpack(e.stpack)))
+      .listen('StickerUploaded',        e => dispatch(updateStpack(e.stpack)))
+      .listen('StickerUploadFailed',    e => dispatch(updateStpack(e.stpack)));
+  };
+}
+
+export function disconnectStpack(id) {
+  return () => {
+    echo.leave(`stpacks.${id}`);
   };
 }

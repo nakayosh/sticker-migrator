@@ -29,6 +29,7 @@ settings:
   import/ignore:
   - node_modules
   - \\.(css|scss|json)$
+  import/resolver: webpack
 
 rules:
   brace-style: warn

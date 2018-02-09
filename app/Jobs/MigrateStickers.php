@@ -8,7 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Stpack;
-use App\Lib\Constsnts\StpackStatus;
+use App\Lib\Constants\StpackStatus;
 use App\Events;
 use Exception;
 use App\Lib\ImageResizer\Image;
@@ -45,6 +45,7 @@ class MigrateStickers implements ShouldQueue
         $stpack = Stpack::with('stickers')->where('id', $stpack_id)->first();
         $stpack = $this->_migrate_compile($stpack);
         $stpack = $this->_migrate_upload($stpack);
+        $stpack = $this->_migrate_delete($stpack);
         return $stpack;
     }
 
@@ -54,14 +55,13 @@ class MigrateStickers implements ShouldQueue
         $stickers = $stpack['stickers'];
         $stpack->status = StpackStatus::COMPILING;
         $stpack->save();
-        event(new Events\StickerCompileStarting($stpack));
-        $count = 1;
-        foreach ($stickers as $sticker) {
+        $stpack_arr = $stpack->toArray();
+        event(new Events\StickerCompileStarting($stpack_arr));
+        foreach ($stickers as $count => $sticker) {
             $resizer->resize($sticker['original_url'], 'resized_stickers', $sticker['id_str']);
-            event(new Events\StickerCompiling($stpack, $count));
-            $count++;
+            event(new Events\StickerCompiling($stpack_arr, $count + 1));
         }
-        event(new Events\StickerCompiled($stpack));
+        event(new Events\StickerCompiled($stpack_arr));
         return $stpack;
     }
 
@@ -70,16 +70,18 @@ class MigrateStickers implements ShouldQueue
         $telegram = new Telegram();
         $stpack->status = StpackStatus::UPLOADING;
         $stpack->save();
-        event(new Events\StickerUploadStarting($stpack));
+        $stpack_arr = $stpack->toArray();
+        event(new Events\StickerUploadStarting($stpack_arr));
         foreach ($telegram->upload($stpack) as $uploaded_count) {
-            event(new Events\StickerUploading($stpack, $uploaded_count));
+            event(new Events\StickerUploading($stpack_arr, $uploaded_count));
         }
         $url = 'https://t.me/addstickers/'.$stpack['short_name'];
-        $stpack = Stpack::where('id', $stpack_id)->first();
+        $stpack = Stpack::with('stickers')->where('id', $this->stpack_id)->first();
         $stpack->url = $url;
         $stpack->status = StpackStatus::UPLOADED;
         $stpack->save();
-        event(new Events\StickerUploaded($stpack));
+        $stpack_arr = $stpack->toArray();
+        event(new Events\StickerUploaded($stpack_arr));
         return $stpack;
     }
 
@@ -87,14 +89,24 @@ class MigrateStickers implements ShouldQueue
     {
         $stpack->status = StpackStatus::FAILED;
         $stpack->save();
-        event(new Events\StickerUploadFailed($stpack));
+        $stpack_arr = $stpack->toArray();
+        event(new Events\StickerUploadFailed($stpack_arr));
         $telegram = new Telegram();
         $telegram->upload_rollback($stpack);
     }
 
+    private function _migrate_delete(Stpack $stpack)
+    {
+        $stickers = $stpack['stickers'];
+        foreach ($stickers as $sticker) {
+            unlink(storage_path('app').'/'.'resized_stickers'.'/'.$sticker['id_str']);
+        }
+        return $stpack;
+    }
+
     public function failed(Exception $exception)
     {
-        $stpack = Stpack::with('stickers')->where('id', $stpack_id)->first();
+        $stpack = Stpack::with('stickers')->where('id', $this->stpack_id)->first();
         $this->_migrate_failed($stpack);
         return $stpack;
     }

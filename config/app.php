@@ -173,7 +173,7 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
@@ -181,6 +181,7 @@ return [
          * service provider by pinfort
          */
         Intervention\Image\ImageServiceProvider::class,
+        App\Providers\ComposerServiceProvider::class,
     ],
 
     /*

@@ -19,8 +19,13 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
     <link rel="manifest" href="/manifest.json">
 
-    {{--  Prefetch  --}}
-    <link as="script" crossorigin="anonymous" href="{{ mix('/features/home.js', '/packs') }}" rel="preload">
+    {{--  Socket.io  --}}
+    <script src="//{{ $websocket_host }}/socket.io/socket.io.js"></script>
+
+    {{-- Preloading --}}
+    <script src="{{ mix('style.css', '/features/home.js') }}"></script>
+    <script src="{{ mix('style.css', '/features/mobile_home.js') }}"></script>
+    <script src="{{ mix('style.css', '/features/stpacks.js') }}"></script>
   </head>
 
   <body class="" role="application">

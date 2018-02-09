@@ -1,0 +1,30 @@
+{
+  "wizard.title": "新しいステッカーセットを作成",
+  "wizard.submit": "作成",
+  "wizard.description": "LINE STOREのURLを入力して新しいステッカーセットを作成します．既に存在する場合はそのステッカーセットのダウンロードページが表示されます",
+
+  "stpack.add": "Telegramで追加",
+  "stpack.visit_original": "元ページを表示",
+  "stpack.share_line": "LINEでシェア",
+  "stpack.share_telegram": "Telegramでシェア",
+
+  "stpack.progress.compile_starting": "画像のコンパイルを開始しています",
+  "stpack.progress.compiling": "画像のコンパイル中... {indicator}",
+  "stpack.progress.upload_starting": "アップロードを開始しています... {indicator}",
+  "stpack.progress.uploading": "アップロード中... {indicator}",
+  "stpack.progress.uploaded": "完了しました！",
+  "stpack.progress.failed": "マイグレーションに失敗",
+
+  "sticker.tooltip": "全画面で表示",
+
+  "recent_stpacks.title": "最近追加されたステッカーセット",
+  "recent_stpacks.empty": "まだ何もありません",
+
+  "search_stpacks.title": "「{query}」の検索結果",
+  "search_stpacks.submit": "検索",
+  "search_stpacks.clear": "クリア",
+  "search_stpacks.placeholder": "キーワードを入力",
+  "search_stpacks.empty": "申し訳ございませんが，そのようなステッカーセットはまだありません． 必要であればLINE STOREから{line_store}について検索することができます．",
+
+  "loading_indicator.loading": "読み込み中..."
+}

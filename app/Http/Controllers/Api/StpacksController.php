@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Lib\Imagedownloader\Line;
+use App\Lib\ImageDownloader\Line;
 use App\Stpack;
 use DB;
 use App\Jobs\MigrateStickers;
+use Exception;
+use App\Lib\Constants\StpackStatus;
+use Emoji;
 
 class StpacksController extends Controller
 {
@@ -28,7 +31,7 @@ class StpacksController extends Controller
         $q = $request->input('q');
         $limit = (integer)($request->input('limit') ?? 15);
         $offset = (integer)($request->input('offset') ?? 0);
-        $query = Stpack::with('stickers')->where('name', 'LIKE', '%'.$q.'%');
+        $query = Stpack::with('stickers')->where('status', StpackStatus::UPLOADED)->where('name', 'LIKE', '%'.$q.'%');
         $stpacks = $query->skip($offset)->take($limit)->get();
         $retval = [
             'results' => $stpacks,
@@ -46,7 +49,7 @@ class StpacksController extends Controller
         ]);
         $limit = (integer)($request->input('limit') ?? 15);
         $offset = (integer)($request->input('offset') ?? 0);
-        $query = Stpack::with('stickers')->orderBy('created_at', 'desc');
+        $query = Stpack::with('stickers')->where('status', StpackStatus::UPLOADED)->orderBy('created_at', 'desc');
         $stpacks = $query->skip($offset)->take($limit)->get();
         $retval = [
             'results' => $stpacks,
@@ -59,22 +62,50 @@ class StpacksController extends Controller
     public function patchStpack(Request $request, $stpack_id)
     {
         $validatedData = $request->validate([
-            'stickers' => 'required|json',
+            'stickers' => 'required|array',
         ]);
         $stpack_id = (integer)$stpack_id;
-        $stickers = json_decode($request->input('stickers'), true);
+        $stickers = $request->input('stickers');
         [$stpack, $return_code] = $this->_getStpackData($stpack_id);
         if ($stpack['error']) {
             return response()->json($stpack, $return_code);
         }
-        DB:transaction(function () use ($stpack, $stickers){
-            $count = 0;
-            foreach ($stpack->stickers as $sticker) {
-                $sticker->emojis = $stickers[$count]['emojis'];
-                $sticker->save();
-                $count++;
-            }
-        });
+        if (count($stickers) != count($stpack->stickers)) {
+            return response()->json(
+                [
+                    'error' => 'Bad Request',
+                    'error_description' => 'stickers length invailed',
+                ],
+                400
+            );
+        }
+        if ($stpack->status == StpackStatus::UPLOADED) {
+            return response()->json(
+                [
+                    'error' => 'Bad Request',
+                    'error_description' => 'stpack already uploaded',
+                ],
+                400
+            );
+        }
+        try{
+            DB::transaction(function () use ($stpack, $stickers){
+                foreach ($stpack->stickers as $count => $sticker) {
+                    foreach ($stickers[$count]['emojis'] as $emoji) {
+                        if (!Emoji\is_single_emoji($emoji)) {
+                            throw new Exception('invailed emoji');
+                        }
+                    }
+                    $sticker->emojis = $stickers[$count]['emojis'];
+                    $sticker->save();
+                }
+            });
+        } catch(Exception $e) {
+            return response()->json([
+                'error' => 'Bad Request',
+                'error_description' => 'invailed emoji',
+            ], 400);
+        }
         $stpack = Stpack::with('stickers')->where('id', $stpack_id)->first();
         dispatch(new MigrateStickers($stpack_id));
         return response()->json($stpack);

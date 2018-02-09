@@ -1,16 +1,16 @@
 const webpack = require('webpack');
-const path    = require('path');
-const { env } = require('process');
+const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const OfflinePlugin = require('offline-plugin');
 
-const isProd = env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'production';
 
-module.exports = {
+const config = {
 
-  stats: isProd ? 'normal' : { errorDetails: true },
+  stats: isProduction ? 'normal' : { errorDetails: true },
 
-  devtool: !isProd && 'source-map' || '',
+  devtool: !isProduction && 'source-map' || '',
 
   entry: {
     main: './resources/smigrator/main.js',
@@ -18,8 +18,8 @@ module.exports = {
   },
 
   output: {
-    filename: isProd ? '[name]-[chunkhash].js' : '[name].js',
-    chunkFilename: isProd ? '[name]-[chunkhash].js' : '[name].js',
+    filename: isProduction ? '[name]-[chunkhash].js' : '[name].js',
+    chunkFilename: isProduction ? '[name]-[chunkhash].js' : '[name].js',
     path: path.resolve(__dirname, 'public', 'packs'),
     publicPath: '/packs/',
   },
@@ -36,6 +36,10 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
+        test: /\.json$/,
+        use: 'json-loader',
+      },
+      {
         test: /\.(scss|sass)$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
@@ -43,14 +47,14 @@ module.exports = {
             {
               loader: 'css-loader',
               options: {
-                minimize: isProd,
-                sourceMap: !isProd,
+                minimize: isProduction,
+                sourceMap: !isProduction,
               },
             },
             {
               loader: 'sass-loader',
               options: {
-                sourceMap: !isProd,
+                sourceMap: !isProduction,
               },
             },
           ],
@@ -61,7 +65,7 @@ module.exports = {
         use: [{
           loader: 'file-loader',
           options: {
-            name: isProd ? '[name]-[hash].[ext]' : '[name].[ext]',
+            name: isProduction ? '[name]-[hash].[ext]' : '[name].[ext]',
             publicPath: '/packs/',
           },
         }],
@@ -71,6 +75,9 @@ module.exports = {
 
   resolve: {
     extensions: ['.js'],
+    alias: {
+      '@': __dirname + '/resources/smigrator',
+    },
   },
 
   plugins: [
@@ -81,7 +88,7 @@ module.exports = {
     }),
 
     new ExtractTextPlugin({
-      filename: isProd ? '[name]-[contenthash].css' : '[name].css',
+      filename: isProduction ? '[name]-[contenthash].css' : '[name].css',
       allChunks: true,
       publicPath: '/packs/',
     }),
@@ -95,8 +102,8 @@ module.exports = {
 
 };
 
-if ( isProd ) {
-  module.exports.plugins.push([
+if ( isProduction ) {
+  config.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
       mangle: true,
@@ -107,5 +114,30 @@ if ( isProd ) {
         comments: false,
       },
     }),
-  ]);
+
+    new OfflinePlugin({
+      publicPath: '/packs/',
+      caches: {
+        main: [':rest:'],
+        additional: [':externals:'],
+        optional: [
+          '**/*.png',
+          '**/*.jpg',
+          '**/*.jpeg',
+          '**/*.svg',
+        ],
+      },
+      externals: [
+        '/',
+      ],
+      ServiceWorker: {
+        output: '../sw.js',
+        publicPath: '/sw.js',
+        cacheName: 'smigrator',
+        minify: true,
+      },
+    }),
+  );
 }
+
+module.exports = config;

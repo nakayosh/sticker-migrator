@@ -9,9 +9,9 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use App\Stpack;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 
-class StickerCompileStarting
+class StickerCompileStarting implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -22,7 +22,7 @@ class StickerCompileStarting
      *
      * @return void
      */
-    public function __construct(Stpack $stpack)
+    public function __construct(Array $stpack)
     {
         $this->stpack = $stpack;
         $this->stpack['compiled_stickers_count'] = 0;
@@ -35,6 +35,6 @@ class StickerCompileStarting
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('stpacks-'.$this->stpack->id);
+        return new Channel('stpacks.'.$this->stpack['id']);
     }
 }

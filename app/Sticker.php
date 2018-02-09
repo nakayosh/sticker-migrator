@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Emoji;
 
 class Sticker extends Model
 {
@@ -30,5 +31,18 @@ class Sticker extends Model
 
     public function getStpackIdStrAttribute(){
         return (string)$this->stpack_id;
+    }
+
+    public function getEmojisAttribute($value){
+        $emojis = Emoji\detect_emoji($value);
+        $retval = [];
+        foreach ($emojis as $emoji) {
+            $retval[] = $emoji['emoji'];
+        }
+        return $retval;
+    }
+
+    public function setEmojisAttribute($value){
+        $this->attributes['emojis'] = implode($value);
     }
 }

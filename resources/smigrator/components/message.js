@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import IconButton from '../components/icon_button';
+import IconButton from '@/components/icon_button';
 
 export default class Message extends React.PureComponent {
 
@@ -10,7 +10,6 @@ export default class Message extends React.PureComponent {
     text: PropTypes.string,
     time: PropTypes.number,
     onClose: PropTypes.func.isRequired,
-    isModalOpen: PropTypes.bool.isRequired,
   }
 
   componentWillReceiveProps (nextProps) {
