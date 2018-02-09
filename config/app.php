@@ -181,7 +181,6 @@ return [
          * service provider by pinfort
          */
         Intervention\Image\ImageServiceProvider::class,
-        App\Providers\ComposerServiceProvider::class,
     ],
 
     /*
