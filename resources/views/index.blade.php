@@ -23,9 +23,9 @@
     <script src="//{{ $websocket_host }}/socket.io/socket.io.js"></script>
 
     {{-- Preloading --}}
-    <script src="{{ mix('style.css', '/features/home.js') }}"></script>
-    <script src="{{ mix('style.css', '/features/mobile_home.js') }}"></script>
-    <script src="{{ mix('style.css', '/features/stpacks.js') }}"></script>
+    <script src="{{ mix('/features/home.js', '/packs') }}"></script>
+    <script src="{{ mix('/features/mobile_home.js', '/packs') }}"></script>
+    <script src="{{ mix('/features/stpacks.js', '/packs') }}"></script>
   </head>
 
   <body class="" role="application">
