@@ -8,7 +8,6 @@ import {
 import StpackCompose from '@/features/stpacks/components/stpack_compose';
 
 const mapStateToProps = (state, { id }) => ({
-  stpack: state.getIn(['stpacks', id], null),
   targetNode: state.getIn(['stpack_compose', 'targetNode']),
 });
 

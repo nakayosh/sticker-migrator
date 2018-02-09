@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { openModal } from '@/actions/modal';
+import { injectIntl } from 'react-intl';
 import Sticker from '@/components/sticker';
 
 const mapStateToProps = (state, { stickerId }) => ({
@@ -14,7 +15,7 @@ const mapDispatchToProps = (dispatch, { stickerId }) => ({
 
 });
 
-export default connect(
+export default injectIntl(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Sticker);
+)(Sticker));

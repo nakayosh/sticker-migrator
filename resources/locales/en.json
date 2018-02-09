@@ -15,7 +15,7 @@
   "stpack.progress.failed_description": "It is possible that Telegram has been restricting the application or the host is busy now. Please try again after a while.",
   "stpack.progress.retry": "Retry",
 
-  "sticker.tooltip": "Show with fullscreen",
+  "sticker.tooltip": "Show in fullscreen",
 
   "recent_stpacks.title": "Recently added sticker sets",
   "recent_stpacks.empty": "Noting here yet",

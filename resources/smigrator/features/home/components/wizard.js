@@ -5,6 +5,7 @@ import IconButton from '@/components/icon_button';
 
 const messages = defineMessages({
   submit: { id: 'wizard.submit', defaultMessage: 'Create' },
+  input: { id: 'wizard.description', defaultMessage: 'Input LINE STORE\'s URL to migrate sticker to Telegram. If it already exists, redirect to the download page.' },
 });
 
 export default class Wizard extends React.PureComponent {
@@ -53,6 +54,8 @@ export default class Wizard extends React.PureComponent {
             type='text'
             pattern='https:\/\/store\.line\.me\/stickershop\/product\/[0-9]+?(\/.*)*'
             placeholder='https://store.line.me/stickershop/product/3897'
+            title={intl.formatMessage(messages.input)}
+            aria-label={intl.formatMessage(messages.input)}
             onChange={this.handleChange}
             onKeyDown={this.handleKeyDown}
             autoFocus

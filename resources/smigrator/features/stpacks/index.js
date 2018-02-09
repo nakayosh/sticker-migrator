@@ -33,7 +33,7 @@ export default class Stpacks extends ImmutablePureComponent {
   }
 
   componentWillMount () {
-    // this.props.dispatch(connectStpack(this.props.match.params.id));
+    this.props.dispatch(connectStpack(this.props.match.params.id));
 
     if ( !this.props.stpack ) {
       this.props.dispatch(fetchStpack(this.props.match.params.id));
@@ -41,17 +41,17 @@ export default class Stpacks extends ImmutablePureComponent {
   }
 
   componentWillUnmount () {
-    // this.props.dispatch(disconnectStpack(this.props.match.params.id));
+    this.props.dispatch(disconnectStpack(this.props.match.params.id));
   }
 
-  renderContent (id, status) {
-    switch(status) {
+  renderContent (id, stpack) {
+    switch(stpack.get('status')) {
     case DOWNLOADED:
-      return <StpackComposeContainer id={id} />;
+      return <StpackComposeContainer id={id} stpack={stpack} />;
     case COMPILING:
     case UPLOADING:
     case UPLOADED:
-      return <StpackContainer id={id} />;
+      return <StpackContainer id={id} stpack={stpack} />;
     case FAILED:
     default:
       return <Failed />;
@@ -62,16 +62,14 @@ export default class Stpacks extends ImmutablePureComponent {
     const { id } = this.props.match.params;
     const { stpack } = this.props;
 
-    if ( !stpack ) {
-      return <LoadingIndicator />;
-    }
-
     return (
       <Page>
         <GeneralHeader />
 
         <Content>
-          { this.renderContent(id, stpack.get('status')) }
+          <article className='module'>
+            { stpack ? this.renderContent(id, stpack) : <LoadingIndicator /> }
+          </article>
         </Content>
       </Page>
     );

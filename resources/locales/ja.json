@@ -15,7 +15,6 @@
   "stpack.progress.failed_description": "ホストがビジー状態か、Telegramがアプリケーションに対して一時的な制限を行っている可能性があります。 申し訳ございませんが、しばらく時間を置いてからもう一度お試しください。",
   "stpack.progress.retry": "再試行",
 
-
   "sticker.tooltip": "全画面で表示",
 
   "recent_stpacks.title": "最近追加されたステッカーセット",

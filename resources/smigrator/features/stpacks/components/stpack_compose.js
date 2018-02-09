@@ -6,7 +6,6 @@ import { Picker as EmojiPicker } from 'emoji-mart';
 import Overlay from 'react-overlays/lib/Overlay';
 
 import LetterHead from '@/features/stpacks/components/letter_head';
-import LoadingIndicator from '@/components/loading_indicator';
 import StickerEmojiSelector from '@/containers/sticker_emoji_selector_container';
 
 export default class StapckCompose extends ImmutablePureComponent {
@@ -45,15 +44,11 @@ export default class StapckCompose extends ImmutablePureComponent {
     const { stpack, targetNode } = this.props;
 
     if (!stpack) {
-      return (
-        <article className='stpack module'>
-          <LoadingIndicator />
-        </article>
-      );
+      return null;
     }
 
     return (
-      <article className='stpack module'>
+      <div className='stpack'>
         <LetterHead stpack={stpack} />
 
         <Overlay show={!!targetNode} placement='bottom' target={targetNode}>
@@ -83,7 +78,7 @@ export default class StapckCompose extends ImmutablePureComponent {
         <button className='rich-button button' onClick={this.handlePatch}>
           Publish
         </button>
-      </article>
+      </div>
     );
   }
 

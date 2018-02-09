@@ -14,7 +14,7 @@ export default class ProgressBar extends ImmutablePureComponent {
   }
 
   state = {
-    numer: 0,
+    numer: 15,
     denom: 0,
   }
 
@@ -58,13 +58,19 @@ export default class ProgressBar extends ImmutablePureComponent {
 
     return (
       <div className='stpack-progress-bar'>
-        { message }
+        <div className='stpack-progress-bar__title'>
+          <i className='fa fa-spin fa-spinner' aria-hidden='true' />
 
-        <Motion defaultStyle={{ width: 0 }} style={{ width: spring(percentage) }}>
-          {({ width }) =>
-            <div className='stpack-progress-bar__tracker' style={{ width: `${width}%` }} />
-          }
-        </Motion>
+          { message }
+        </div>
+
+        <div className='stpack-progress-bar__backdrop'>
+          <Motion defaultStyle={{ width: 0 }} style={{ width: spring(percentage) }}>
+            {({ width }) =>
+              <div className='stpack-progress-bar__tracker' style={{ width: `${width}%` }} />
+            }
+          </Motion>
+        </div>
       </div>
     );
   }

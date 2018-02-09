@@ -30,7 +30,7 @@ export default class CompactStpack extends ImmutablePureComponent {
               {stpack.get('name')}
             </h3>
 
-            <time className='stpack__time' timestamp={stpack.get('created_at')}>
+            <time className='compact-stpack__time' timestamp={stpack.get('created_at')}>
               <i className='fa fa-clock-o' aria-hidden />
 
               <FormattedDate

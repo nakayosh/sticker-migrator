@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { FormattedMessage, FormattedDate, defineMessages, injectIntl } from 'react-intl';
 import Dropdown from '@/containers/dropdown_container';
 
+import { UPLOADED } from '@/features/stpacks/util/constants';
+
 const messages = defineMessages({
   visit_original: { id: 'stpack.visit_original', defualtMessage: 'Visit original' },
   share_line: { id: 'stpack.share_line', defualtMessage: 'Share with LINE' },
@@ -62,7 +64,7 @@ export default class LetterHead extends ImmutablePureComponent {
 
           <div className='stpack-letter-head__buttons-wrapper'>
             <div className='stpack-letter-head__download-button'>
-              <a className='rich-button' href={stpack.get('url')} target='_blank' onClick={this.handleDownload}>
+              <a className='rich-button' href={stpack.get('url')} target='_blank' disabled={stpack.get('status') !== UPLOADED} onClick={this.handleDownload}>
                 <i className='fa fa-plus' />
                 <FormattedMessage id='stpack.add' defaultMessage='Add on Telegram' />
               </a>
@@ -70,9 +72,11 @@ export default class LetterHead extends ImmutablePureComponent {
 
             <div className='stpack-letter-head__dropdown-menu'>
               <Dropdown
-                icon='fa fa-ellipsis-v rich-button'
+                className='rich-button'
+                icon='fa fa-ellipsis-v'
                 items={items}
                 title='Show more'
+                disabled={stpack.get('status') !== UPLOADED}
               />
             </div>
           </div>
