@@ -20,7 +20,7 @@ class WsHostComposer
     public function __construct()
     {
         $path = base_path().'/laravel-echo-server.json';
-        $json = json_encode(file_get_contents($path), True);
+        $json = json_decode(file_get_contents($path), True);
         try {
             $this->ws_host = $json['host'];
         } catch(Exception $e) {
