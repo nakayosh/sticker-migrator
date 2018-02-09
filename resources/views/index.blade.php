@@ -19,13 +19,13 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
     <link rel="manifest" href="/manifest.json">
 
-    {{--  Socket.io  --}}
-    <script src="//{{ $websocket_host }}/socket.io/socket.io.js"></script>
-
     {{-- Preloading --}}
     <script src="{{ mix('/features/home.js', '/packs') }}"></script>
     <script src="{{ mix('/features/mobile_home.js', '/packs') }}"></script>
     <script src="{{ mix('/features/stpacks.js', '/packs') }}"></script>
+
+    {{--  Socket.io  --}}
+    <script src="//{{ $websocket_host }}/socket.io/socket.io.js"></script>
   </head>
 
   <body class="" role="application">

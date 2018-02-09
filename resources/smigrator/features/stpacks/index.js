@@ -65,7 +65,6 @@ export default class Stpacks extends ImmutablePureComponent {
       return <StpackComposeContainer id={id} />;
     case 'compiling':
     case 'uploading':
-      return <div>in progress</div>;
     case 'uploaded':
       return <StpackContainer id={id} />;
     case 'failed':
