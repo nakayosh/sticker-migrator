@@ -30,7 +30,7 @@ export default class Message extends React.PureComponent {
 
           <IconButton
             className='message__close-button'
-            icon='fa fa-time'
+            icon='fa fa-times'
             title='Dissmiss this message'
             onClick={this.props.onClose}
           />

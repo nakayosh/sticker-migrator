@@ -5,8 +5,9 @@ import { Switch, Redirect } from 'react-router';
 import { WrappedRoute } from '@/features/app/util/react_router_helpers';
 import { ImmutableLoadingBar as LoadingBar } from 'react-redux-loading-bar';
 import ModalContaienr from '@/features/app/containers/modal_container';
-import { isMobile } from '@/is_mobile';
 import MobileMenu from '@/features/mobile_menu';
+import MessageContainer from '@/containers/message_container';
+import { isMobile } from '@/is_mobile';
 import { addLocaleData, IntlProvider } from 'react-intl';
 import en from 'react-intl/locale-data/en';
 import ja from 'react-intl/locale-data/ja';
@@ -41,7 +42,6 @@ export default class App extends React.Component {
     return (
       <IntlProvider locale={locale} messages={messagesForLocale(locale)}>
         <div className='app' ref={this.setRef}>
-
           <Switch>
             <Redirect exact from='/' to='/home' />
             <WrappedRoute path='/home' component={isMobile(window.innerWidth) ? MobileHome : Home} />
@@ -50,6 +50,7 @@ export default class App extends React.Component {
             <WrappedRoute path='/stpacks/:id' component={Stpacks} />
           </Switch>
 
+          <MessageContainer />
           <ModalContaienr />
 
           { isMobile(window.innerWidth) && <MobileMenu location={{ ...window.location }} /> }
