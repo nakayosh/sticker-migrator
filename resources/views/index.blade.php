@@ -21,6 +21,11 @@
 
     {{--  Socket.io  --}}
     <script src="//{{ $websocket_host }}/socket.io/socket.io.js"></script>
+
+    {{-- Preloading --}}
+    <script src="{{ mix('style.css', '/features/home.js') }}"></script>
+    <script src="{{ mix('style.css', '/features/mobile_home.js') }}"></script>
+    <script src="{{ mix('style.css', '/features/stpacks.js') }}"></script>
   </head>
 
   <body class="" role="application">
