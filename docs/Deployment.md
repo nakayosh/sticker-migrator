@@ -33,7 +33,7 @@ docker-compose run --rm web ash -c "composer install --no-progress \
 つぎに，Laravel echo serverのイニシャライズを行います．次のコマンドを入力し，指示に従い設定を行います．
 
 ```
-docker-compose run --rm echo ash laravel-echo-server init
+docker-compose run --rm echo laravel-echo-server init
 ```
 
 最後に，コンテナを起動し，ホストに公開します．デフォルトでは `:3000` 番に公開されているので，ホスト側でプロキシの設定を行うことでアクセスできるようになります．ローカル環境の場合，`localhost:3000` からもアクセスできます．画像のリサイズのプログレスをストリームするAPIも同様に `:4000` 番で公開されているので，こちらも同様にプロキシの設定を行ってください．
