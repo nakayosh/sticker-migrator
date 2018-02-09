@@ -6,10 +6,10 @@ let echo;
 
 if (process.env.NODE_ENV === 'production') {
   echo = new Echo({
-    authEndpoint: laravelEchoServer.authEndpoint,
+    authEndpoint: laravelEchoServer.authEndpoint || '',
     broadcaster:  'socket.io',
-    host:         laravelEchoServer.host,
-    key:          laravelEchoServer.clients.key,
+    host:         'ws.smigrator.tk',
+    key:          laravelEchoServer.clients.key || '',
     csrfToken,
   });
 } else {
