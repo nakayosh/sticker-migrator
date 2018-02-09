@@ -36,7 +36,7 @@
   margin-right: 8px;
   border-radius: 50%;
   overflow: hidden;
-  border: 3.5px solid $p500;
+  border: 1px solid $p500;
   box-sizing: border-box;
 
   @media screen and (min-width: 700px) {
@@ -53,4 +53,9 @@
 
 .maintainer__username {
   color: $h100;
+  font-size: 0.8em;
+
+  @media screen and (min-width: 700px) {
+    font-size: 1em;
+  }
 }
