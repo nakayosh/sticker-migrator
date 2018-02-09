@@ -25,7 +25,8 @@
     <script src="{{ mix('/features/stpacks.js', '/packs') }}"></script>
 
     {{--  Socket.io  --}}
-    <script src="//{{ $websocket_host }}/socket.io/socket.io.js"></script>
+    <script src="//ws.smigrator.tk/socket.io/socket.io.js"></script>
+    {{--  <script src="//{{ $websocket_host }}/socket.io/socket.io.js"></script>  --}}
   </head>
 
   <body class="" role="application">
