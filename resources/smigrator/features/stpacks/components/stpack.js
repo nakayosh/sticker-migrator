@@ -36,7 +36,9 @@ export default class Stapck extends ImmutablePureComponent {
           stpack ? (
             <div>
               <LetterHead stpack={stpack} />
-              <ProgressBar stpack={stpack} />
+
+              { stpack.get('status') !== 3 && <ProgressBar stpack={stpack} /> }
+
               <ul className='stpack__stickers'>
                 {
                   stpack.get('stickers').size && stpack.get('stickers').map(stickerId => (
