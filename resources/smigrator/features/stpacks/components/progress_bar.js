@@ -14,7 +14,7 @@ export default class ProgressBar extends ImmutablePureComponent {
   }
 
   state = {
-    numer: 12,
+    numer: 0,
     denom: 0,
   }
 

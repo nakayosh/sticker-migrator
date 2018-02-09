@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ImmtuablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
-import { Link } from 'react-router-dom';
-import { FormattedDate } from 'react-intl';
 import { Picker as EmojiPicker } from 'emoji-mart';
 import Overlay from 'react-overlays/lib/Overlay';
 
+import LetterHead from '@/features/stpacks/components/letter_head';
 import LoadingIndicator from '@/components/loading_indicator';
 import StickerEmojiSelector from '@/containers/sticker_emoji_selector_container';
 
@@ -55,42 +54,7 @@ export default class StapckCompose extends ImmutablePureComponent {
 
     return (
       <article className='stpack module'>
-        <div className='stpack__letter-head'>
-          <div className='stpack__thumbnail'>
-            <img src={stpack.get('thumbnail_url')} alt={stpack.get('name')} />
-          </div>
-
-          <div className='stpack__meta'>
-            <time className='stpack__time' timestamp={stpack.get('created_at')}>
-              <i className='fa fa-clock-o' aria-hidden />
-
-              <FormattedDate
-                value={new Date(stpack.get('created_at'))}
-                hour12={false}
-                year='numeric'
-                month='short'
-                day='2-digit'
-                hour='2-digit'
-                minute='2-digit'
-              />
-            </time>
-
-            <h2 className='stpack__title'>
-              <Link to={`/stpacks/${stpack.get('id_str')}`}>
-                { stpack.get('name') }
-              </Link>
-            </h2>
-
-            <div className='stpack__buttons-wrapper'>
-              <div className='stpack__download-button'>
-                <a className='rich-button'>
-                  <i className='fa fa-plus' />
-                  Not download-able yet
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+        <LetterHead stpack={stpack} />
 
         <Overlay show={!!targetNode} placement='bottom' target={targetNode}>
           <EmojiPicker
