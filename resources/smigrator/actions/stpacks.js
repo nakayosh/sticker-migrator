@@ -96,7 +96,7 @@ export function patchStpackFail(error) {
 export function connectStpack(id) {
   return dispatch => {
     echo.channel(`stpacks.${id}`)
-      .listen('StickerComlileStarting', e => dispatch(updateStpack(e.stpack)))
+      .listen('StickerCompileStarting', e => dispatch(updateStpack(e.stpack)))
       .listen('StickerCompiling',       e => dispatch(updateStpack(e.stpack)))
       .listen('StickerCompiled',        e => dispatch(updateStpack(e.stpack)))
       .listen('StickerUploadStarting',  e => dispatch(updateStpack(e.stpack)))
