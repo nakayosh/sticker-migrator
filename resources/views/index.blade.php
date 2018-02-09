@@ -25,7 +25,7 @@
     <link as="script" crossorigin="anonymous" href="{{ mix('/features/mobile_home.js', '/packs') }}" rel="preload">
 
     {{--  Socket.io  --}}
-    <script src="//{{ Request::getHost() }}:4000/socket.io/socket.io.js"></script>
+    <script src="//{{ $websocket_host }}/socket.io/socket.io.js"></script>
   </head>
 
   <body class="" role="application">
