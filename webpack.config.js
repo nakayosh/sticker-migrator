@@ -116,7 +116,7 @@ if ( isProduction ) {
     }),
 
     new OfflinePlugin({
-      publicPath: '/',
+      publicPath: '/packs/',
       caches: {
         main: [':rest:'],
         additional: [':externals:'],
