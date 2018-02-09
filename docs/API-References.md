@@ -106,6 +106,7 @@ GET /api/stpacks/search
 
 ### Channels
 |Channel|Description|
+|:------|:----------|
 |`stpacks.[id]`|Stpackのコンパイル/アップロードの状態変化があるたびに最新の情報がストリーミングされます|
 
 #### `stpacks.[id]`
