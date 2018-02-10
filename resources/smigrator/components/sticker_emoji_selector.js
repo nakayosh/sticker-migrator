@@ -45,14 +45,14 @@ export default class StickerEmojiSelector extends ImmutablePureComponent {
 
     return (
       <div className='sticker sticker-emoji-selector button' ref={this.setRef} data-sticker-id={sticker.get('id')}>
-        <img src={sticker.get('original_url')} alt={sticker.get('emojis', '😀')} />
+        <img src={sticker.get('original_url')} />
 
         <ul className='sticker-emojis'>
           { sticker.get('emojis').map(emoji => this.renderEmojiButton(emoji)) }
         </ul>
 
         <IconButton
-          className='sticker_add-emojis rich-button button'
+          className='sticker_add-emojis button'
           icon='fa fa-smile-o'
           title='Add emojis'
           onClick={this.handleExpandEmojiPicker}

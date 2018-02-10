@@ -4,9 +4,11 @@ import ImmtuablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import { Picker as EmojiPicker } from 'emoji-mart';
 import Overlay from 'react-overlays/lib/Overlay';
-
+import detectPassiveEvents from 'detect-passive-events';
 import LetterHead from '@/features/stpacks/components/letter_head';
 import StickerEmojiSelector from '@/containers/sticker_emoji_selector_container';
+
+const listenerOptions = detectPassiveEvents.hasSupport ? { passive: true } : false;
 
 export default class StapckCompose extends ImmutablePureComponent {
 
@@ -14,8 +16,25 @@ export default class StapckCompose extends ImmutablePureComponent {
     intl: PropTypes.object.isRequired,
     stpack: ImmtuablePropTypes.map,
     targetNode: PropTypes.node,
-    onappendStickerEmoji: PropTypes.func.isRequired,
-    onExpandStickerEmojiPicker: PropTypes.func.isRequired,
+    onAppendStickerEmoji: PropTypes.func.isRequired,
+    onExpand: PropTypes.func.isRequired,
+    onHide: PropTypes.func.isRequired,
+  }
+
+  componentDidMount () {
+    document.addEventListener('click', this.handleDocumentClick, false);
+    document.addEventListener('touchend', this.handleDocumentClick, listenerOptions);
+  }
+
+  componentWillUnmount () {
+    document.removeEventListener('click', this.handleDocumentClick, false);
+    document.removeEventListener('touchend', this.handleDocumentClick, listenerOptions);
+  }
+
+  handleDocumentClick = e => {
+    if (this.node && !this.node.contains(e.target)) {
+      this.props.onHide();
+    }
   }
 
   handleappendStickerEmoji = emoji => {
@@ -23,7 +42,7 @@ export default class StapckCompose extends ImmutablePureComponent {
     const { native } = emoji;
 
     if ( stickerId && native ) {
-      this.props.onappendStickerEmoji(stickerId, native);
+      this.props.onAppendStickerEmoji(stickerId, native);
     }
   }
 
@@ -31,13 +50,17 @@ export default class StapckCompose extends ImmutablePureComponent {
     const stickerNode = e.currentTarget;
 
     if ( stickerNode ) {
-      this.props.onExpandStickerEmojiPicker(stickerNode);
+      this.props.onExpand(stickerNode);
     }
   }
 
   handlePatch = e => {
     e.preventDefault();
     this.props.onPatch();
+  }
+
+  setRef = c => {
+    this.node = c;
   }
 
   render () {
@@ -52,13 +75,15 @@ export default class StapckCompose extends ImmutablePureComponent {
         <LetterHead stpack={stpack} />
 
         <Overlay show={!!targetNode} placement='bottom' target={targetNode}>
-          <EmojiPicker
-            set='apple'
-            color={false}
-            showPreview={false}
-            onClick={this.handleappendStickerEmoji}
-            emojiTooltip
-          />
+          <div ref={this.setRef}>
+            <EmojiPicker
+              set='apple'
+              color={false}
+              showPreview={false}
+              onClick={this.handleappendStickerEmoji}
+              emojiTooltip
+            />
+          </div>
         </Overlay>
 
         <h3>1. Specify emojis to sticker</h3>

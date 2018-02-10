@@ -4,10 +4,11 @@ import { patchStpack } from '@/actions/stpacks';
 import {
   appendStickerEmoji,
   expandStickerEmojiPicker,
+  hideStickerEmojiPicker,
 } from '@/actions/stickers';
 import StpackCompose from '@/features/stpacks/components/stpack_compose';
 
-const mapStateToProps = (state, { id }) => ({
+const mapStateToProps = state => ({
   targetNode: state.getIn(['stpack_compose', 'targetNode']),
 });
 
@@ -17,11 +18,15 @@ const mapDispatchToProps = (dispatch, { id }) => ({
     dispatch(patchStpack(id));
   },
 
-  onExpandStickerEmojiPicker(node) {
+  onExpand(node) {
     dispatch(expandStickerEmojiPicker(node));
   },
 
-  onappendStickerEmoji(stickerId, emoji) {
+  onHide() {
+    dispatch(hideStickerEmojiPicker());
+  },
+
+  onAppendStickerEmoji(stickerId, emoji) {
     dispatch(appendStickerEmoji(stickerId, emoji));
   },
 

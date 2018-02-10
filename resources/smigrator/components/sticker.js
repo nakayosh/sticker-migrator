@@ -32,7 +32,7 @@ export default class Sticker extends ImmutablePureComponent {
 
     return (
       <button className='sticker button' onClick={this.handleOpenModal} title={intl.formatMessage(messages.tooltip)} aria-label={intl.formatMessage(messages.tooltip)}>
-        <img src={sticker.get('original_url')} alt={sticker.get('emojis', '')} />
+        <img src={sticker.get('original_url')} />
 
         {
           withEmojis && (

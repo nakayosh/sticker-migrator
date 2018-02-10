@@ -1,7 +1,9 @@
 import api from '@/api';
 
 export const STICKER_APPEND_EMOJI = 'STICKER_APPEND_EMOJI';
+
 export const STICKER_EXPAND_EMOJI_PICKER = 'STICKER_EXPAND_EMOJI_PICKER';
+export const STICKER_HIDE_EMOJI_PICKER = 'STICKER_HIDE_EMOJI_PICKER';
 
 export const STICKER_FETCH_REQUEST = 'STICKER_FETCH_REQUEST';
 export const STICKER_FETCH_SUCCESS = 'STICKER_FETCH_SUCCESS';
@@ -20,6 +22,12 @@ export function expandStickerEmojiPicker(node) {
   return {
     type: STICKER_EXPAND_EMOJI_PICKER,
     node,
+  };
+}
+
+export function hideStickerEmojiPicker() {
+  return {
+    type: STICKER_HIDE_EMOJI_PICKER,
   };
 }
 
