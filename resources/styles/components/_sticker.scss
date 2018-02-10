@@ -1,17 +1,11 @@
 .sticker {
   position: relative;
-  padding: 2px;
-  box-sizing: border-box;
   border-radius: 6px;
   border: 1px solid transparent;
 
   &:hover {
     background-color: $p100;
     border-color: $p500;
-  }
-
-  @media screen and (min-width: 700px) {
-    padding: 8px;
   }
 }
 

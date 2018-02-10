@@ -92,6 +92,12 @@
   flex-basis: 25%;
   flex-grow: 1;
   flex-shrink: 0;
+  padding: 2px;
+  box-sizing: border-box;
+
+  @media screen and (min-width: 700px) {
+    padding: 8px;
+  }
 }
 
 .stpack__compose-button {

@@ -31,7 +31,7 @@ export class EmojiPicker extends React.PureComponent {
   }
 
   handleDocumentClick = e => {
-    if ( !e.target.classList.contains('sticker_add-emojis') ) {
+    if ( this.node && !this.node.contains(e.target) ) {
       this.props.onClose();
     }
   }
@@ -49,18 +49,29 @@ export class EmojiPicker extends React.PureComponent {
 
     if ( this.props.stickerId && native ) {
       this.props.onAppend(this.props.stickerId, native);
+      this.props.onClose();
     }
   }
 
+  setRef = c => {
+    this.node = c;
+  }
+
   render () {
-    const { style } = this.props;
     const PICKER_WIDTH = 338;
     const PICKER_HEIGHT = 354;
 
+    const style = {
+      position: 'absolute',
+      margin: 'auto',
+      width: `${PICKER_WIDTH}px`,
+      height: `${PICKER_HEIGHT}px`,
+      ...this.props.style,
+    };
+
     return (
-      <div style={{ position: 'absolute', margin: 'auto', width: `${PICKER_WIDTH}px`, height: `${PICKER_HEIGHT}px`, ...style }} onKeyDown={this.handleKeyDown}>
+      <div style={style} ref={this.setRef} onKeyDown={this.handleKeyDown}>
         <Picker
-          ref={this.setEmojiPickerRef}
           set='apple'
           color={false}
           showPreview={false}
