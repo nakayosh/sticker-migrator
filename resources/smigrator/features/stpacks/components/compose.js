@@ -125,7 +125,9 @@ export default class Compose extends ImmutablePureComponent {
           />
         </Overlay>
 
-        {/* <h3>1. Specify emojis to sticker</h3> */}
+        <div className='stpack__compose-description'>
+          <FormattedMessage id='compose.description' defaultMessage='This sticker set has not migrated to Telegram. Click following stickers to specify emoij and then publish to Telegram!' />
+        </div>
 
         <ul className='stpack__stickers'>
           { stpack.get('stickers').map(stickerId => this.renderItem(stickerId)) }
