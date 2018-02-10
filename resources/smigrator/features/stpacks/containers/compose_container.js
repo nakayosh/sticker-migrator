@@ -11,6 +11,7 @@ const mapStateToProps = (state, { stpack }) => ({
   stickerId: state.getIn(['compose', 'stickerId']),
   targetNode: state.getIn(['compose', 'targetNode']),
   includedStickers: stpack.get('stickers').map(stickerId => state.getIn(['stickers', stickerId])),
+  submitting: state.getIn(['compose', 'submitting']), // Only detectable patchStpack method
 });
 
 const mapDispatchToProps = (dispatch, { stpack }) => ({

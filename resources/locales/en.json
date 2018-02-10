@@ -12,6 +12,7 @@
   "compose.description": "This sticker set has not migrated to Telegram. Click following stickers to specify emoij and then publish to Telegram!",
   "compose.specify_emojis": "Specify emojis",
   "compose.publish": "Publish",
+  "compose.requesting": "Requesting...",
 
   "stpack.progress.compiling": "Compiling stickers... {percentage}%",
   "stpack.progress.uploading": "Uploading stickers... {percentage}%",

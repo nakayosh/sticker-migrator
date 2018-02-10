@@ -84,13 +84,49 @@ export class EmojiPicker extends React.PureComponent {
 
 }
 
+export class PublishButton extends React.PureComponent {
+
+  static propTypes = {
+    submittable: PropTypes.bool.isRequired,
+    submitting: PropTypes.bool.isRequired,
+    onClick: PropTypes.func.isRequired,
+  }
+
+  render () {
+    const { submittable, submitting } = this.props;
+    let icon, message;
+
+    if (submittable && !submitting) {
+      icon    = <i className='fa fa-paint-brush' aria-hidden />;
+      message = <FormattedMessage id='compose.publish' defaultMessage='Publish' />;
+    } else if (submitting) {
+      icon    = <i className='fa fa-spin fa-spinner' aria-hidden='true' />;
+      message = <FormattedMessage id='compose.requesting' defaultMessage='Requesting...' />;
+    } else {
+      icon    = null;
+      message = <FormattedMessage id='compose.specify_emojis' defaultMessage='Specify emoijs' />;
+    }
+
+    return (
+      <div className='stpack__compose-button'>
+        <button className='rich-button button' disabled={!submittable || submitting} title={message} aria-label={message} onClick={this.props.onClick}>
+          { icon }
+          { message }
+        </button>
+      </div>
+    );
+  }
+
+}
+
 export default class Compose extends ImmutablePureComponent {
 
   static propTypes = {
     intl: PropTypes.object.isRequired,
-    stpack: ImmtuablePropTypes.map,
     stickerId: PropTypes.string,
+    stpack: ImmtuablePropTypes.map,
     includedStickers: ImmtuablePropTypes.list,
+    submitting: PropTypes.bool.isRequired,
     onAppend: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
   }
@@ -108,9 +144,9 @@ export default class Compose extends ImmutablePureComponent {
   }
 
   componentWillReceiveProps (nextProps) {
-    if ( this.props.stpack.get('stickers').size === nextProps.includedStickers.filter(sticker => sticker.get('emojis').size > 0 ).size ) {
+    if ( !this.props.submitting && this.props.stpack.get('stickers').size === nextProps.includedStickers.filter(sticker => sticker.get('emojis').size > 0 ).size ) {
       this.setState({ submittable: true });
-    } else if (this.state.submittable) {
+    } else if ( this.props.submitting || this.state.submittable) {
       this.setState({ submittable: false });
     }
   }
@@ -139,7 +175,7 @@ export default class Compose extends ImmutablePureComponent {
 
   render () {
     const { submittable } = this.state;
-    const { stpack, stickerId } = this.props;
+    const { stpack, stickerId, submitting } = this.props;
 
     const targetNode = stickerId && document.querySelector(`.sticker[data-sticker-id="${stickerId}"]`);
     const placement  = targetNode && document.body.clientHeight - targetNode.offsetTop - targetNode.offsetHeight < 400 ? 'top' : 'bottom';
@@ -168,12 +204,11 @@ export default class Compose extends ImmutablePureComponent {
           { stpack.get('stickers').map((stickerId, i) => this.renderItem(stickerId, i)) }
         </ul>
 
-        <div className='stpack__compose-button'>
-          <button className='rich-button button' disabled={!submittable} onClick={this.handlePatch}>
-            { submittable && <i className='fa fa-paint-brush' aria-hidden /> }
-            { submittable ? <FormattedMessage id='compose.publish' defaultMessage='Publish' /> : <FormattedMessage id='compose.specify_emojis' defaultMessage='Specify emoijs' /> }
-          </button>
-        </div>
+        <PublishButton
+          submitting={submitting}
+          submittable={submittable}
+          onClick={this.handlePatch}
+        />
       </div>
     );
   }

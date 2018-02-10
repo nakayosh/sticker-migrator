@@ -11,7 +11,7 @@ import {
 
 const initialState = ImmutableMap({
   stickerId: null,
-  submitting: false,
+  submitting: false, // Only detectable patchStpack method
 });
 
 export default function compose(state = initialState, action) {

@@ -11,14 +11,14 @@ export default class CompactStpack extends ImmutablePureComponent {
   }
 
   render () {
-    const { stpack, id, ...others } = this.props;
+    const { stpack } = this.props;
 
     if ( !stpack ) {
       return null;
     }
 
     return (
-      <div className='compact-stpack' {...others}>
+      <div className='compact-stpack'>
         <Link to={`/stpacks/${stpack.get('id_str')}`}>
           <div className='compact-stpack__thumbnail'>
             <img src={stpack.get('thumbnail_url')} alt={stpack.get('name')} />
