@@ -79,17 +79,35 @@ export default class Compose extends ImmutablePureComponent {
     intl: PropTypes.object.isRequired,
     stpack: ImmtuablePropTypes.map,
     stickerId: PropTypes.string,
-    submittable: PropTypes.bool.isRequired,
+    includedStickers: ImmtuablePropTypes.list,
     onAppend: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
+  }
+
+  state = {
+    submittable: false,
+  }
+
+  shouldComponentUpdate (nextProps) {
+    if ( this.props.includedStickers.map(sticker => sticker.get('emojis').size) !== nextProps.includedStickers.map(sticker => sticker.get('emojis').size) ) {
+      return true;
+    }
+
+    return false;
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if ( this.props.stpack.get('stickers').size === nextProps.includedStickers.filter(sticker => sticker.get('emojis').size > 0 ).size ) {
+      this.setState({ submittable: true });
+    }
   }
 
   handlePatch = e => {
     e.preventDefault();
 
-    // if (this.props.submittable) {
-    this.props.onPatch();
-    // }
+    if (this.state.submittable) {
+      this.props.onPatch();
+    }
   }
 
   setEmojiPickerRef = c => {
@@ -107,7 +125,9 @@ export default class Compose extends ImmutablePureComponent {
   }
 
   render () {
-    const { stpack, submittable, stickerId } = this.props;
+    const { submittable } = this.state;
+    const { stpack, stickerId } = this.props;
+
     const targetNode = stickerId && document.querySelector(`.sticker[data-sticker-id="${stickerId}"]`);
     const placement  = targetNode && document.body.clientHeight - targetNode.offsetTop - targetNode.offsetHeight < 400 ? 'top' : 'bottom';
 

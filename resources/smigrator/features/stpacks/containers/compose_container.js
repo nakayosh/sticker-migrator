@@ -7,10 +7,10 @@ import {
 } from '@/actions/stickers';
 import Compose from '@/features/stpacks/components/compose';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, { stpack }) => ({
   stickerId: state.getIn(['compose', 'stickerId']),
   targetNode: state.getIn(['compose', 'targetNode']),
-  // submittable: stpack.get('stickers').size === stpack.get('stickers').filter(stickerId => state.getIn(['stickers', stickerId, 'emojis']).size > 0),
+  includedStickers: stpack.get('stickers').map(stickerId => state.getIn(['stickers', stickerId])),
 });
 
 const mapDispatchToProps = (dispatch, { stpack }) => ({
