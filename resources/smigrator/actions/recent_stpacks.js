@@ -50,7 +50,7 @@ export function expandRecentStpacks() {
   return (dispatch, getState) => {
     dispatch(expandRecentStpacksRequest());
 
-    if ( !getState().getIn(['recent_stpacks', 'has_more']) ) {
+    if ( !getState().getIn(['recent_stpacks', 'next']) ) {
       return;
     }
 

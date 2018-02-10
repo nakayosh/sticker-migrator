@@ -70,6 +70,10 @@ export function expandSearchStpacks() {
   return (dispatch, getState) => {
     dispatch(expandSearchStpacksRequest());
 
+    if ( !getState().getIn(['search_stpacks', 'next']) ) {
+      return;
+    }
+
     const q = getState().getIn(['search_stpacks', 'value']).trim();
 
     if (!q) {
