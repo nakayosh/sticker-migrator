@@ -9,11 +9,9 @@ import spring from 'react-motion/lib/spring';
 
 const listenerOptions = detectPassiveEvents.hasSupport ? { passive: true } : false;
 
-export const DropdownMenuCaret = props => {
-  const { style } = props;
-
+export const DropdownMenuCaret = () => {
   return (
-    <div className='dropdown-menu__caret' style={style} >
+    <div className='dropdown-menu__caret' >
       <div className='dropdown-menu__caret-outer' />
       <div className='dropdown-menu__caret-inner' />
     </div>
@@ -90,13 +88,13 @@ export class DropdownMenu extends React.PureComponent {
   }
 
   render () {
-    const { items, style, placement } = this.props;
+    const { items, style } = this.props;
 
     return (
       <Motion defaultStyle={{ opacity: 0, scaleX: 0.85, scaleY: 0.75 }} style={{ opacity: spring(1, { damping: 35, stiffness: 400 }), scaleX: spring(1, { damping: 35, stiffness: 400 }), scaleY: spring(1, { damping: 35, stiffness: 400 }) }}>
         {({ opacity, scaleX, scaleY }) => (
           <div className='dropdown-menu'  style={{ ...style, opacity: opacity, transform: `scale(${scaleX}, ${scaleY})` }} ref={this.setRef}>
-            <DropdownMenuCaret placement={placement} />
+            <DropdownMenuCaret />
 
             <ul className='dropdown-menu__list'>
               {items.map((option, i) => this.renderItem(option, i))}

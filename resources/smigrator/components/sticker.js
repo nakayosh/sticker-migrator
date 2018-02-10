@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import { defineMessages } from 'react-intl';
-import { Emoji } from 'emoji-mart';
 
 const messages = defineMessages({
-  tooltip: { id: 'sticker.tooltip', defaultMessage: 'Show in fullscreen' },
+  fullscreen: { id: 'sticker.fullscreen', defaultMessage: 'Show in fullscreen' },
 });
 
 export default class Sticker extends ImmutablePureComponent {
@@ -23,23 +22,31 @@ export default class Sticker extends ImmutablePureComponent {
     this.props.onOpenModal();
   }
 
+  renderEmoji = (emoji, i) => {
+    return (
+      <li className='sticker_emoji-list-item' key={`${i}-${emoji}`}>
+        { emoji }
+      </li>
+    );
+  }
+
   render () {
     const { intl, sticker, withEmojis } = this.props;
 
     if ( !sticker ) {
-      return <p>no sticker specified</p>;
+      return null;
     }
 
     return (
-      <button className='sticker button' onClick={this.handleOpenModal} title={intl.formatMessage(messages.tooltip)} aria-label={intl.formatMessage(messages.tooltip)}>
+      <button className='sticker button' onClick={this.handleOpenModal} title={intl.formatMessage(messages.fullscreen)} aria-label={intl.formatMessage(messages.fullscreen)}>
         <img src={sticker.get('original_url')} />
 
         {
           withEmojis && (
             <div className='sticker_emoji'>
-              <div className='sticker_emoji-list'>
-                <Emoji set='apple' emoji='santa' size={20} />
-              </div>
+              <ul className='sticker_emoji-list'>
+                { sticker.get('emojis').map((emoji, i) => this.renderEmoji(emoji, i)) }
+              </ul>
             </div>
           )
         }

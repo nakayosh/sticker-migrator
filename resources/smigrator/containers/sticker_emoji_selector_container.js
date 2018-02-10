@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import {
-  appendStickerEmoji,
   expandStickerEmojiPicker,
 } from '@/actions/stickers';
 import StickerEmojiSelector from '@/components/sticker_emoji_selector';
@@ -11,12 +10,8 @@ const mapStateToProps = (state, { stickerId }) => ({
 
 const mapDispatchToProps = (dispatch, { stickerId }) => ({
 
-  onChangeEmoji(emoji) {
-    dispatch(appendStickerEmoji(stickerId, emoji));
-  },
-
-  onExpandEmojiPicker(targetNode) {
-    dispatch(expandStickerEmojiPicker(targetNode));
+  onExpand() {
+    dispatch(expandStickerEmojiPicker(stickerId));
   },
 
 });

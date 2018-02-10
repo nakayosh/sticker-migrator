@@ -1,6 +1,6 @@
 import {
   MESSAGE_SHOW,
-  MESSAGE_HIDE,
+  MESSAGE_CLOSE,
 } from '@/actions/message';
 
 import { Map as ImmutableMap } from 'immutable';
@@ -18,7 +18,7 @@ export default function message(state = initialState, action) {
       .set('show', true)
       .set('text', action.messageProps.text)
       .set('time', action.messageProps.time || 5000);
-  case MESSAGE_HIDE:
+  case MESSAGE_CLOSE:
     return state.set('show', false);
   default:
     return state;

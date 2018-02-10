@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { hideMessage } from '@/actions/message';
+import { closeMessage } from '@/actions/message';
 import Message from '@/components/message';
 
 const mapStateToProps = state => ({
@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onClose() {
-    dispatch(hideMessage());
+    dispatch(closeMessage());
   },
 });
 

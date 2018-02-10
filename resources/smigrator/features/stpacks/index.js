@@ -13,8 +13,8 @@ import Page from '@/features/app/components/page';
 import Content from '@/features/app/components/content';
 import GeneralHeader from '@/features/general_header';
 import LoadingIndicator from '@/components/loading_indicator';
-import StpackContainer from '@/features/stpacks/containers/stpack_container';
-import StpackComposeContainer from '@/features/stpacks/containers/stpack_compose_container';
+import StickersContainer from '@/features/stpacks/containers/stickers_container';
+import ComposeContainer from '@/features/stpacks/containers/compose_container';
 import Failed from '@/features/stpacks/components/failed';
 
 import { DOWNLOADED, COMPILING, UPLOADING, UPLOADED, FAILED } from '@/features/stpacks/util/constants';
@@ -47,11 +47,11 @@ export default class Stpacks extends ImmutablePureComponent {
   renderContent (id, stpack) {
     switch(stpack.get('status')) {
     case DOWNLOADED:
-      return <StpackComposeContainer id={id} stpack={stpack} />;
+      return <ComposeContainer id={id} stpack={stpack} />;
     case COMPILING:
     case UPLOADING:
     case UPLOADED:
-      return <StpackContainer id={id} stpack={stpack} />;
+      return <StickersContainer id={id} stpack={stpack} />;
     case FAILED:
     default:
       return <Failed />;

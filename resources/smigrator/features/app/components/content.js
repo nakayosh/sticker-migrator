@@ -11,9 +11,9 @@ export default class Content extends React.Component {
     const { children } = this.props;
 
     return (
-      <main className='content'>
+      <div className='content'>
         {children}
-      </main>
+      </div>
     );
   }
 

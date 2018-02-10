@@ -15,39 +15,67 @@
   }
 }
 
-.sticker-emoji-selector:hover {
-  background-color: transparent;
-  border-color: transparent;
+.sticker-emoji-selector {
+  img {
+    opacity: 0.5;
+  }
+
+  &--specified {
+    &:hover {
+      background-color: transparent;
+      border-color: transparent;
+    }
+
+    img {
+      opacity: 1;
+    }
+  }
+}
+
+.sticker-emoji-selector__actions {
+  display: flex;
 }
 
 .sticker_emojis-list {
+  flex-grow: 1;
   display: flex;
-  justify-content: flex-end;
-  position: absolute;
+  justify-content: flex-start;
   bottom: 8px;
   left: 0;
   width: 100%;
-  padding: 4px 8px;
-  padding-right: 46px;
   box-sizing: border-box;
 }
 
-.sticker_emoji-list-item {
+.sticker_emojis-list-item {
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin-left: 4px;
+}
 
+.sticker-emoji-button {
+  font-size: 36px;
+  padding: 4px;
+  font-size: 18px;
+  height: 31px;
+  border-radius: 6px;
+  border: 1px solid $p500;
+  background-color: $p100;
+
+  &:hover {
+    border-color: $red;
+    background-color: lighten($red, 40%);
+  }
 }
 
 .sticker_add-emojis {
-  position: absolute;
-  top: 0;
-  left: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
   padding: 4px;
-  font-size: 14px;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 18px;
+  width: 31px;
+  height: 31px;
 
   & > i {
     color: $white;
-    font-size: 36px;
   }
 }

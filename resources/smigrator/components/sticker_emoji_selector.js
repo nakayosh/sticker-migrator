@@ -2,34 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
+import { defineMessages, injectIntl } from 'react-intl';
 
-import IconButton from '@/components/icon_button';
+const messages = defineMessages({
+  emoji_specification: { id: 'sticker.emoji_specification', defaultMessage: 'Click to specify emoji' },
+});
 
+@injectIntl
 export default class StickerEmojiSelector extends ImmutablePureComponent {
 
   static propTypes = {
     sticker: ImmutablePropTypes.map,
-    onChangeEmoji: PropTypes.func.isRequired,
-    onExpandEmojiPicker: PropTypes.func.isRequired,
+    onExpand: PropTypes.func.isRequired,
   }
 
-  setRef = c => {
-    this.node = c;
-  }
-
-  handleChangeEmoji = e => {
-    const value = e.currentTarget.value;
-    this.props.onChangeEmoji(value);
-  }
-
-  handleExpandEmojiPicker = () => {
-    this.props.onExpandEmojiPicker(this.node);
-  }
-
-  renderEmojiButton = emoji => {
+  renderEmojiButton = (emoji, i) => {
     return (
-      <li className='sticker-emoji'>
-        <button className='sticker-emoji-button'>
+      <li className='sticker_emojis-list-item' key={`${i}-${emoji}`}>
+        <button className='sticker-emoji-button button'>
           { emoji }
         </button>
       </li>
@@ -37,26 +27,25 @@ export default class StickerEmojiSelector extends ImmutablePureComponent {
   }
 
   render () {
-    const { sticker } = this.props;
+    const { intl, sticker } = this.props;
 
     if ( !sticker ) {
-      return <p>no sticker specified</p>;
+      return null;
     }
 
+    const specified = !!sticker.get('emojis').size;
+
     return (
-      <div className='sticker sticker-emoji-selector button' ref={this.setRef} data-sticker-id={sticker.get('id')}>
-        <img src={sticker.get('original_url')} />
+      <div className={`sticker sticker-emoji-selector button ${ specified ? 'sticker-emoji-selector--specified' : '' }`} data-sticker-id={sticker.get('id')}>
+        <button className='button' title={intl.formatMessage(messages.emoji_specification)} aria-label={intl.formatMessage(messages.emoji_specification)} onClick={this.props.onExpand} >
+          <img src={sticker.get('original_url')} />
+        </button>
 
-        <ul className='sticker-emojis'>
-          { sticker.get('emojis').map(emoji => this.renderEmojiButton(emoji)) }
-        </ul>
-
-        <IconButton
-          className='sticker_add-emojis button'
-          icon='fa fa-smile-o'
-          title='Add emojis'
-          onClick={this.handleExpandEmojiPicker}
-        />
+        <div className='sticker-emoji-selector__actions'>
+          <ul className='sticker_emojis-list'>
+            { !!sticker.get('emojis').size && sticker.get('emojis').map((emoji, i) => this.renderEmojiButton(emoji, i)) }
+          </ul>
+        </div>
       </div>
     );
   }

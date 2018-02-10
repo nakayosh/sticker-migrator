@@ -1,5 +1,5 @@
 export const MESSAGE_SHOW  = 'MESSAGE_SHOW';
-export const MESSAGE_HIDE  = 'MESSAGE_HIDE';
+export const MESSAGE_CLOSE  = 'MESSAGE_CLOSE';
 
 export function showMessage(props) {
   return {
@@ -8,8 +8,8 @@ export function showMessage(props) {
   };
 }
 
-export function hideMessage() {
+export function closeMessage() {
   return {
-    type: MESSAGE_HIDE,
+    type: MESSAGE_CLOSE,
   };
 }

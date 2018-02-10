@@ -6,20 +6,20 @@ import {
 } from '@/actions/stpacks';
 import {
   STICKER_EXPAND_EMOJI_PICKER,
-  STICKER_HIDE_EMOJI_PICKER,
+  STICKER_CLOSE_EMOJI_PICKER,
 } from '@/actions/stickers';
 
 const initialState = ImmutableMap({
-  targetNode: null,
+  stickerId: null,
   submitting: false,
 });
 
-export default function stpack_compose(state = initialState, action) {
+export default function compose(state = initialState, action) {
   switch(action.type) {
   case STICKER_EXPAND_EMOJI_PICKER:
-    return state.set('targetNode', action.node);
-  case STICKER_HIDE_EMOJI_PICKER:
-    return state.set('targetNode', null);
+    return state.set('stickerId', action.id);
+  case STICKER_CLOSE_EMOJI_PICKER:
+    return state.set('stickerId', null);
   case STPACK_PATCH_REQUEST:
     return state.set('submitting', true);
   case STPACK_PATCH_SUCCESS:

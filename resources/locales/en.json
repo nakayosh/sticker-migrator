@@ -4,9 +4,13 @@
   "wizard.description": "Input LINE STORE's URL to migrate sticker to Telegram. If it already exists, redirect to the download page.",
 
   "stpack.add": "Add on Telegram",
+  "stpack.show_more": "Show more",
   "stpack.visit_original": "Visit original",
   "stpack.share_line": "Share with LINE",
   "stpack.share_telegram": "Share with Telegram",
+
+  "compose.specify_emojis": "Specify emojis",
+  "compose.publish": "Publish",
 
   "stpack.progress.compiling": "Compiling stickers... {percentage}%",
   "stpack.progress.uploading": "Uploading stickers... {percentage}%",
@@ -15,7 +19,8 @@
   "stpack.progress.failed_description": "It is possible that Telegram has been restricting the application or the host is busy now. Please try again after a while.",
   "stpack.progress.retry": "Retry",
 
-  "sticker.tooltip": "Show in fullscreen",
+  "sticker.fullscreen": "Show in fullscreen",
+  "sticker.emoji_specification": "Click to specify emoji",
 
   "recent_stpacks.title": "Recently added sticker sets",
   "recent_stpacks.empty": "Noting here yet",

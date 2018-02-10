@@ -9,6 +9,7 @@ import Dropdown from '@/containers/dropdown_container';
 import { UPLOADED } from '@/features/stpacks/util/constants';
 
 const messages = defineMessages({
+  show_more: { id: 'stpack.show_more', defualtMessage: 'Show more' },
   visit_original: { id: 'stpack.visit_original', defualtMessage: 'Visit original' },
   share_line: { id: 'stpack.share_line', defualtMessage: 'Share with LINE' },
   share_telegram: { id: 'stpack.share_telegram', defualtMessage: 'Share with Telegram' },
@@ -28,11 +29,13 @@ export default class LetterHead extends ImmutablePureComponent {
     const url        = this.props.stpack.get('url');
     const short_name = this.props.stpack.get('short_name');
 
-    setTimeout(() => {
-      window.location = url;
-    }, 200);
+    if ( url && short_name ) {
+      setTimeout(() => {
+        window.location = url;
+      }, 200);
 
-    window.location = `tg://addstickers?${querystring.encode({ set: short_name })}`;
+      window.location = `tg://addstickers?${querystring.encode({ set: short_name })}`;
+    }
   }
 
   render () {
@@ -40,8 +43,8 @@ export default class LetterHead extends ImmutablePureComponent {
 
     const items = [
       { text: intl.formatMessage(messages.visit_original), href: stpack.get('original_url') },
-      { text: intl.formatMessage(messages.share_line),     href: `https://lineit.line.me/share/ui?url=${ window.location.href }` },
-      { text: intl.formatMessage(messages.share_telegram), href: `https://t.me/share/url?url=${ window.location.href }` },
+      { text: intl.formatMessage(messages.share_line),     href: `https://lineit.line.me/share/ui?${ querystring.encode({ url: window.location.href }) }` },
+      { text: intl.formatMessage(messages.share_telegram), href: `https://t.me/share/url?${ querystring.encode({ url: window.location.href }) }` },
     ];
 
     if ( !stpack ) {
@@ -88,7 +91,7 @@ export default class LetterHead extends ImmutablePureComponent {
                 className='rich-button'
                 icon='fa fa-ellipsis-v'
                 items={items}
-                title='Show more'
+                title={intl.formatMessage(messages.show_more)}
                 disabled={stpack.get('status') !== UPLOADED}
               />
             </div>

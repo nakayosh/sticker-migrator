@@ -3,7 +3,7 @@ import api from '@/api';
 export const STICKER_APPEND_EMOJI = 'STICKER_APPEND_EMOJI';
 
 export const STICKER_EXPAND_EMOJI_PICKER = 'STICKER_EXPAND_EMOJI_PICKER';
-export const STICKER_HIDE_EMOJI_PICKER = 'STICKER_HIDE_EMOJI_PICKER';
+export const STICKER_CLOSE_EMOJI_PICKER = 'STICKER_CLOSE_EMOJI_PICKER';
 
 export const STICKER_FETCH_REQUEST = 'STICKER_FETCH_REQUEST';
 export const STICKER_FETCH_SUCCESS = 'STICKER_FETCH_SUCCESS';
@@ -18,16 +18,16 @@ export function appendStickerEmoji(id, emoji) {
   };
 }
 
-export function expandStickerEmojiPicker(node) {
+export function expandStickerEmojiPicker(id) {
   return {
     type: STICKER_EXPAND_EMOJI_PICKER,
-    node,
+    id,
   };
 }
 
-export function hideStickerEmojiPicker() {
+export function closeStickerEmojiPicker() {
   return {
-    type: STICKER_HIDE_EMOJI_PICKER,
+    type: STICKER_CLOSE_EMOJI_PICKER,
   };
 }
 
