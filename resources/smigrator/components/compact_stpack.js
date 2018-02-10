@@ -11,7 +11,7 @@ export default class CompactStpack extends ImmutablePureComponent {
   }
 
   render () {
-    const { stpack, ...others } = this.props;
+    const { stpack, id, ...others } = this.props;
 
     if ( !stpack ) {
       return null;

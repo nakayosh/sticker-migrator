@@ -1,6 +1,7 @@
 import api from '@/api';
 
 export const STICKER_APPEND_EMOJI = 'STICKER_APPEND_EMOJI';
+export const STICKER_REMOVE_EMOJI = 'STICKER_REMOVE_EMOJI';
 
 export const STICKER_EXPAND_EMOJI_PICKER = 'STICKER_EXPAND_EMOJI_PICKER';
 export const STICKER_CLOSE_EMOJI_PICKER = 'STICKER_CLOSE_EMOJI_PICKER';
@@ -15,6 +16,14 @@ export function appendStickerEmoji(id, emoji) {
     type: STICKER_APPEND_EMOJI,
     id,
     emoji,
+  };
+}
+
+export function removeStickerEmoji(id, index) {
+  return {
+    type: STICKER_REMOVE_EMOJI,
+    id,
+    index,
   };
 }
 

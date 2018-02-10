@@ -13,13 +13,24 @@ export default class StickerEmojiSelector extends ImmutablePureComponent {
 
   static propTypes = {
     sticker: ImmutablePropTypes.map,
+    onRemove: PropTypes.func.isRequired,
     onExpand: PropTypes.func.isRequired,
+  }
+
+  handleRemove = e => {
+    e.preventDefault();
+
+    const index = e.currentTarget.getAttribute('data-index');
+
+    if ( index !== null ) {
+      this.props.onRemove(this.props.sticker.get('id_str'), index);
+    }
   }
 
   renderEmojiButton = (emoji, i) => {
     return (
       <li className='sticker_emojis-list-item' key={`${i}-${emoji}`}>
-        <button className='sticker-emoji-button button'>
+        <button className='sticker-emoji-button button' data-index={i} onClick={this.handleRemove}>
           { emoji }
         </button>
       </li>
@@ -37,7 +48,7 @@ export default class StickerEmojiSelector extends ImmutablePureComponent {
 
     return (
       <div className={`sticker sticker-emoji-selector button ${ specified ? 'sticker-emoji-selector--specified' : '' }`} data-sticker-id={sticker.get('id')}>
-        <button className='button' title={intl.formatMessage(messages.emoji_specification)} aria-label={intl.formatMessage(messages.emoji_specification)} onClick={this.props.onExpand} >
+        <button className='button' title={intl.formatMessage(messages.emoji_specification)} aria-label={intl.formatMessage(messages.emoji_specification)} onClick={this.props.onExpand}>
           <img src={sticker.get('original_url')} />
         </button>
 

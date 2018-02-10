@@ -2,6 +2,7 @@ import { Map as ImmutableMap, fromJS } from 'immutable';
 import {
   STICKER_FETCH_SUCCESS,
   STICKER_APPEND_EMOJI,
+  STICKER_REMOVE_EMOJI,
 } from '@/actions/stickers';
 import {
   STPACK_FETCH_SUCCESS,
@@ -50,6 +51,8 @@ export default function sitckers(state = initialState, action) {
   switch(action.type) {
   case STICKER_APPEND_EMOJI:
     return state.updateIn([action.id, 'emojis'], emojis => emojis.concat(action.emoji));
+  case STICKER_REMOVE_EMOJI:
+    return state.removeIn([action.id, 'emojis', action.index]);
   case STICKER_FETCH_SUCCESS:
     return normalizeSticker(state, action.sticker);
   case STPACK_FETCH_SUCCESS:
