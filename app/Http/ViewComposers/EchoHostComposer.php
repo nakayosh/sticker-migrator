@@ -20,7 +20,7 @@ class EchoHostComposer
      */
     public function __construct()
     {
-        $this->echo_host = Config::get('ECHO_HOST', 'localhost:4000');
+        $this->echo_host = Config::get('echo.host');
     }
 
     /**
