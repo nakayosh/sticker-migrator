@@ -46,7 +46,7 @@ export default class RecentStpacks extends ImmutablePureComponent {
             !!results.size ? (
               <ScrollContainer scrollKey='recent'>
                 <div className='module-scrollable-content__inner' onScroll={this.handleScroll}>
-                  { results.map(stpackId => <CompactStpack id={stpackId} key={stpackId} />) }
+                  { results.map((result, i) => <CompactStpack id={result} key={result} aria-posinset={i+1} aria-setsize={results.size} />) }
                   { hasMore && <LoadingIndicator /> }
                 </div>
               </ScrollContainer>

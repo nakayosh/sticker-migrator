@@ -42,7 +42,7 @@ export default class SearchStpacks extends ImmutablePureComponent {
             !submitting && !!results.size && (
               <ScrollContainer scrollKey='search'>
                 <div className='module-scrollable-content__inner' onScroll={this.handleScroll}>
-                  { results.map(result => <CompactStpack id={result} key={result} />) }
+                  { results.map((result, i) => <CompactStpack id={result} key={result} aria-posinset={i+1} aria-setsize={results.size} />) }
                   { hasMore && <LoadingIndicator /> }
                 </div>
               </ScrollContainer>

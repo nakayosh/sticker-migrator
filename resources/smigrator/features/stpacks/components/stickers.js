@@ -12,9 +12,11 @@ export default class Stickers extends ImmutablePureComponent {
     stpack: ImmtuablePropTypes.map,
   }
 
-  renderItem (stickerId) {
+  renderItem (stickerId, i) {
+    const { stpack } = this.props;
+
     return (
-      <li className='stpack__sticker' key={stickerId}>
+      <li className='stpack__sticker' key={stickerId} aria-posinset={i+1} aria-setsize={stpack.get('stickers').size}>
         <StickerContainer stickerId={stickerId} />
       </li>
     );
@@ -38,7 +40,7 @@ export default class Stickers extends ImmutablePureComponent {
           stpack.get('status') !== UPLOADING &&
           (
             <ul className='stpack__stickers'>
-              { stpack.get('stickers').map(stickerId => this.renderItem(stickerId)) }
+              { stpack.get('stickers').map((stickerId, i) => this.renderItem(stickerId, i)) }
             </ul>
           )
         }

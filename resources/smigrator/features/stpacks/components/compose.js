@@ -96,9 +96,11 @@ export default class Compose extends ImmutablePureComponent {
     this.emojiPicker = c;
   }
 
-  renderItem (stickerId) {
+  renderItem (stickerId, i) {
+    const { stpack } = this.props;
+
     return (
-      <li className='stpack__sticker' key={stickerId}>
+      <li className='stpack__sticker' key={stickerId} aria-posinset={i+1} aria-setsize={stpack.get('stickers').size}>
         <StickerEmojiSelector stickerId={stickerId} />
       </li>
     );
@@ -130,10 +132,8 @@ export default class Compose extends ImmutablePureComponent {
         </div>
 
         <ul className='stpack__stickers'>
-          { stpack.get('stickers').map(stickerId => this.renderItem(stickerId)) }
+          { stpack.get('stickers').map((stickerId, i) => this.renderItem(stickerId, i)) }
         </ul>
-
-        {/* <h3>2. Click the button to publish</h3> */}
 
         <button className='rich-button button' onClick={this.handlePatch}>
           { submittable ? <FormattedMessage id='compose.publish' defaultMessage='Publish' /> : <FormattedMessage id='compose.specify_emojis' defaultMessage='Specify emoijs' /> }
