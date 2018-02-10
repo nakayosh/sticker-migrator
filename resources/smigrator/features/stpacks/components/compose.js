@@ -99,6 +99,8 @@ export default class Compose extends ImmutablePureComponent {
   componentWillReceiveProps (nextProps) {
     if ( this.props.stpack.get('stickers').size === nextProps.includedStickers.filter(sticker => sticker.get('emojis').size > 0 ).size ) {
       this.setState({ submittable: true });
+    } else if (this.state.submittable) {
+      this.setState({ submittable: false });
     }
   }
 
@@ -155,9 +157,12 @@ export default class Compose extends ImmutablePureComponent {
           { stpack.get('stickers').map((stickerId, i) => this.renderItem(stickerId, i)) }
         </ul>
 
-        <button className='rich-button button' onClick={this.handlePatch}>
-          { submittable ? <FormattedMessage id='compose.publish' defaultMessage='Publish' /> : <FormattedMessage id='compose.specify_emojis' defaultMessage='Specify emoijs' /> }
-        </button>
+        <div className='stpack__compose-button'>
+          <button className='rich-button button' disabled={!submittable} onClick={this.handlePatch}>
+            { submittable && <i className='fa fa-paint-brush' aria-hidden /> }
+            { submittable ? <FormattedMessage id='compose.publish' defaultMessage='Publish' /> : <FormattedMessage id='compose.specify_emojis' defaultMessage='Specify emoijs' /> }
+          </button>
+        </div>
       </div>
     );
   }
