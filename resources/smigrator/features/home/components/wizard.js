@@ -58,7 +58,6 @@ export default class Wizard extends React.PureComponent {
             aria-label={intl.formatMessage(messages.input)}
             onChange={this.handleChange}
             onKeyDown={this.handleKeyDown}
-            autoFocus
           />
 
           <IconButton
