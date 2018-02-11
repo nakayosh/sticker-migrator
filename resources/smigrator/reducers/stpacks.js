@@ -16,7 +16,9 @@ import {
 const normalizeStpack = (state, stpack) => {
   stpack = { ...stpack };
 
-  stpack.stickers = stpack.stickers.map(sticker => sticker.id_str);
+  stpack.stickers   = stpack.stickers.map(sticker => sticker.id_str);
+  stpack.created_at = stpack.created_at.replace(/-/g, '/');
+  stpack.updated_at = stpack.updated_at.replace(/-/g, '/');
 
   return state.set(stpack.id_str, fromJS(stpack));
 };

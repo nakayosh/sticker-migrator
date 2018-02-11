@@ -20,6 +20,9 @@ import {
 const normalizeSticker = (state, sticker) => {
   sticker = { ...sticker };
 
+  sticker.created_at = sticker.created_at.replace(/-/g, '/');
+  sticker.updated_at = sticker.updated_at.replace(/-/g, '/');
+
   return state.set(sticker.id_str, fromJS(sticker));
 };
 
