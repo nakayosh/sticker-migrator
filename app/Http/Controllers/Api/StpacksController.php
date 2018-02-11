@@ -91,7 +91,7 @@ class StpacksController extends Controller
         try{
             DB::transaction(function () use ($stpack, $stickers){
                 foreach ($stpack->stickers as $count => $sticker) {
-                    if (empty(count($stickers[$count]['emojis']))) {
+                    if (empty($stickers[$count]['emojis'])) {
                         throw new Exception('emoji must not be empty');
                     }
                     foreach ($stickers[$count]['emojis'] as $emoji) {
