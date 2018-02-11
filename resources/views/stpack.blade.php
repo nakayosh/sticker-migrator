@@ -15,7 +15,7 @@
 @endsection
 
 @section('initial_state')
-<script id="initial-state" type="application/json">
-{!! json_encode($stpack->toArray()) !!}
-</script>
+  <script id="initial-state" type="application/json">
+    {!! json_encode($initial_state) !!}
+  </script>
 @endsection
