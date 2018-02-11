@@ -23,11 +23,25 @@ class StpacksController extends Controller
 
     public function searchStpack(Request $request)
     {
-        $validatedData = $request->validate([
-            'q' => 'required|string',
-            'limit' => 'integer',
-            'offset' => 'integer',
-        ]);
+        try {
+            if (is_null($request->input('q'))) {
+                throw new Exception('search query required');
+            }
+            if ((!is_null($request->input('limit'))) and (!is_numeric($request->input('limit')))) {
+                throw new Exception('limit must be integer');
+            }
+            if ((!is_null($request->input('offset'))) and (!is_numeric($request->input('offset')))) {
+                throw new Exception('offset must be integer');
+            }
+        } catch (Exception $e) {
+            return response()->json(
+                [
+                'error' => 'Bad Request',
+                'error_description' => $e->getMessage(),
+                ],
+                422
+            );
+        }
         $q = $request->input('q');
         $limit = (integer)($request->input('limit') ?? 15);
         $offset = (integer)($request->input('offset') ?? 0);
