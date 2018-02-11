@@ -91,6 +91,9 @@ class StpacksController extends Controller
         try{
             DB::transaction(function () use ($stpack, $stickers){
                 foreach ($stpack->stickers as $count => $sticker) {
+                    if (empty(count($stickers[$count]['emojis']))) {
+                        throw new Exception('emoji must not be empty');
+                    }
                     foreach ($stickers[$count]['emojis'] as $emoji) {
                         if (!Emoji\is_single_emoji($emoji)) {
                             throw new Exception('invailed emoji');
@@ -103,7 +106,7 @@ class StpacksController extends Controller
         } catch(Exception $e) {
             return response()->json([
                 'error' => 'Bad Request',
-                'error_description' => 'invailed emoji',
+                'error_description' => $e->getMessage(),
             ], 400);
         }
         $stpack = Stpack::with('stickers')->where('id', $stpack_id)->first();
