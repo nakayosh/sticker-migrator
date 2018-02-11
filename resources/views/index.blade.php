@@ -33,6 +33,8 @@
       <meta name="twitter:image" content="{{ url('/apple-touch-icon.png') }}">
     @show
 
+    @yield('initial_state')
+
     {{--  Socket.io  --}}
     <script src="//{{ $echo_host }}/socket.io/socket.io.js"></script>
   </head>

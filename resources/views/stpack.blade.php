@@ -13,3 +13,9 @@
   <meta name="twitter:text:description" content="{{ $stpack->name }}">
   <meta name="twitter:image" content="{{ $stpack->thumbnail_url }}">
 @endsection
+
+@section('initial_state')
+<script id="initial-state" type="application/json">
+{!! json_encode($stpack->toArray()) !!}
+</script>
+@endsection
