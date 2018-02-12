@@ -56,7 +56,6 @@ export default class EmojiPicker extends React.PureComponent {
 
   handleClose = () => {
     this.props.onClose();
-    document.body.style.marginBottom = '';
   }
 
   handleAppend = emoji => {
@@ -97,11 +96,6 @@ export default class EmojiPicker extends React.PureComponent {
 
   render () {
     const { expanded } = this.props;
-    const PICKER_HEIGHT = 354;
-
-    if ( expanded ) {
-      document.body.style.marginBottom = `${PICKER_HEIGHT}px`;
-    }
 
     return (
       <div className='mobile-emoji-picker' style={{ display: expanded ? 'block' : 'none' }} ref={this.setRef}>
