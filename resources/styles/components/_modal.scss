@@ -54,7 +54,7 @@
 }
 
 .actions-modal__list {
-  padding: 10px 0;
+  padding: 14px 0;
   font-size: 14px;
 }
 
@@ -73,6 +73,7 @@
   padding: 16px;
   box-sizing: border-box;
   color: $t500;
+  font-size: 1.2em;
 
   &:hover, &:active {
     text-decoration: none;
