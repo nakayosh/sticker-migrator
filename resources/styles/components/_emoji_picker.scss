@@ -4,6 +4,21 @@
   line-height: 1.15;
 }
 
+.mobile-emoji-picker {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 352px;
+  width: 100%;
+  z-index: 999;
+
+  .emoji-mart {
+    @media screen and (max-width: 699px) {
+      width: 100% !important;
+    }
+  }
+}
+
 .emoji-mart {
   position: absolute;
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;

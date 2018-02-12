@@ -1,0 +1,101 @@
+.compose__description {
+  margin-bottom: 16px;
+  padding: 16px;
+  border-radius: 6px;
+  line-height: 1.4;
+  border: 1px solid $p500;
+  background-color: $p100;
+}
+
+.compose__stickers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.compose__sticker {
+  flex-basis: 25%;
+  flex-grow: 1;
+  flex-shrink: 0;
+  padding: 2px;
+  box-sizing: border-box;
+
+  @media screen and (min-width: 700px) {
+    padding: 8px;
+  }
+}
+
+.compose-selector {
+  border-radius: 6px;
+  border: 1px solid transparent;
+
+  &:hover {
+    background-color: $p100;
+    border-color: $p500;
+  }
+
+  img {
+    opacity: 0.5;
+  }
+
+  &--specified {
+    &:hover {
+      background-color: transparent;
+      border-color: transparent;
+    }
+
+    img {
+      opacity: 1;
+    }
+  }
+}
+
+.compose-selector-actions {
+  display: flex;
+}
+
+.compose-selector-actions__list {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-start;
+  bottom: 8px;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.compose-selector-actions__list-item {
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin-left: 4px;
+}
+
+.compose-selector__emoji-button {
+  font-size: 36px;
+  padding: 4px;
+  font-size: 18px;
+  height: 31px;
+  border-radius: 6px;
+  border: 1px solid $p500;
+  background-color: $p100;
+
+  &:hover {
+    border-color: $red;
+    background-color: lighten($red, 40%);
+  }
+}
+
+.compose__button {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+
+  & > button {
+    transition: 0.3s ease-out;
+
+    & > i {
+      margin-right: 0.25em;
+    }
+  }
+}

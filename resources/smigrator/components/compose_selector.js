@@ -9,7 +9,7 @@ const messages = defineMessages({
 });
 
 @injectIntl
-export default class StickerEmojiSelector extends ImmutablePureComponent {
+export default class ComposeSelector extends ImmutablePureComponent {
 
   static propTypes = {
     sticker: ImmutablePropTypes.map,
@@ -27,10 +27,15 @@ export default class StickerEmojiSelector extends ImmutablePureComponent {
     }
   }
 
+  handleExpand = e => {
+    e.preventDefault();
+    this.props.onExpand();
+  }
+
   renderEmojiButton = (emoji, i) => {
     return (
-      <li className='sticker_emojis-list-item' key={`${i}-${emoji}`}>
-        <button className='sticker-emoji-button button' data-index={i} onClick={this.handleRemove}>
+      <li className='compose-selector-actions__list-item' key={`${i}-${emoji}`}>
+        <button className='compose-selector__emoji-button button' data-index={i} onClick={this.handleRemove}>
           { emoji }
         </button>
       </li>
@@ -47,13 +52,18 @@ export default class StickerEmojiSelector extends ImmutablePureComponent {
     const specified = !!sticker.get('emojis').size;
 
     return (
-      <div className={`sticker sticker-emoji-selector button ${ specified ? 'sticker-emoji-selector--specified' : '' }`} data-sticker-id={sticker.get('id')}>
-        <button className='button' title={intl.formatMessage(messages.emoji_specification)} aria-label={intl.formatMessage(messages.emoji_specification)} onClick={this.props.onExpand}>
-          <img src={sticker.get('original_url')} />
+      <div className={`compose-selector button ${ specified ? 'compose-selector--specified' : '' }`} data-sticker-id={sticker.get('id')}>
+        <button
+          className='compose-selector__expand button'
+          title={intl.formatMessage(messages.emoji_specification)}
+          aria-label={intl.formatMessage(messages.emoji_specification)}
+          onClick={this.handleExpand}
+        >
+          <img src={sticker.get('original_url')} alt={sticker.get('emojis').join('')} />
         </button>
 
-        <div className='sticker-emoji-selector__actions'>
-          <ul className='sticker_emojis-list'>
+        <div className='compose-selector-actions'>
+          <ul className='compose-selector-actions__list'>
             { !!sticker.get('emojis').size && sticker.get('emojis').map((emoji, i) => this.renderEmojiButton(emoji, i)) }
           </ul>
         </div>

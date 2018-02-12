@@ -33,5 +33,20 @@
   "search_stpacks.placeholder": "Type your keyword",
   "search_stpacks.empty": "Sorry, there is no such sticker set yet．If you need you can search about {line_store} in LINE STORE.",
 
-  "loading_indicator.loading": "Loading..."
+  "loading_indicator.loading": "Loading...",
+
+  "emoji_button.activity": "Activity",
+  "emoji_button.custom": "Custom",
+  "emoji_button.flags": "Flags",
+  "emoji_button.food": "Food & Drink",
+  "emoji_button.label": "Insert emoji",
+  "emoji_button.nature": "Nature",
+  "emoji_button.not_found": "No emoji found",
+  "emoji_button.objects": "Objects",
+  "emoji_button.people": "People",
+  "emoji_button.recent": "Frequently used",
+  "emoji_button.search": "Search...",
+  "emoji_button.search_results": "Search results",
+  "emoji_button.symbols": "Symbols",
+  "emoji_button.travel": "Travel & Places"
 }

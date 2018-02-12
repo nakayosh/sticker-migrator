@@ -1,17 +1,13 @@
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 import { patchStpack } from '@/actions/stpacks';
-import {
-  appendStickerEmoji,
-  closeStickerEmojiPicker,
-} from '@/actions/stickers';
+import { appendEmojiToSticker } from '@/actions/stickers';
 import Compose from '@/features/stpacks/components/compose';
 
 const mapStateToProps = (state, { stpack }) => ({
-  stickerId: state.getIn(['compose', 'stickerId']),
-  targetNode: state.getIn(['compose', 'targetNode']),
-  includedStickers: stpack.get('stickers').map(stickerId => state.getIn(['stickers', stickerId])),
-  submitting: state.getIn(['compose', 'submitting']), // Only detectable patchStpack method
+  currentId: state.getIn(['emoji_picker', 'currentId']),
+  stickers: stpack.get('stickers').map(sticker => state.getIn(['stickers', sticker])),
+  submitting: state.getIn(['compose', 'submitting']),
 });
 
 const mapDispatchToProps = (dispatch, { stpack }) => ({
@@ -20,12 +16,8 @@ const mapDispatchToProps = (dispatch, { stpack }) => ({
     dispatch(patchStpack(stpack.get('id_str')));
   },
 
-  onClose() {
-    dispatch(closeStickerEmojiPicker());
-  },
-
-  onAppend(stickerId, emoji) {
-    dispatch(appendStickerEmoji(stickerId, emoji));
+  onAppend(currentId, emoji) {
+    dispatch(appendEmojiToSticker(currentId, emoji));
   },
 
 });

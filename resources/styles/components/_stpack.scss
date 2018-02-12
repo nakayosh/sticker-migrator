@@ -100,21 +100,6 @@
   }
 }
 
-.stpack__compose-button {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 16px;
-
-  & > button {
-    transition: 0.3s ease-out;
-
-    & > i {
-      margin-right: 0.25em;
-    }
-  }
-}
-
-.stpack__compose-description,
 .stpack-progress-bar {
   margin-bottom: 16px;
   padding: 16px;

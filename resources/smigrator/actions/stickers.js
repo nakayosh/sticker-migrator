@@ -11,7 +11,7 @@ export const STICKER_FETCH_SUCCESS = 'STICKER_FETCH_SUCCESS';
 export const STICKER_FETCH_FAIL = 'STICKER_FETCH_FAIL';
 
 
-export function appendStickerEmoji(id, emoji) {
+export function appendEmojiToSticker(id, emoji) {
   return {
     type: STICKER_APPEND_EMOJI,
     id,
@@ -19,24 +19,11 @@ export function appendStickerEmoji(id, emoji) {
   };
 }
 
-export function removeStickerEmoji(id, index) {
+export function removeEmojiFromSticker(id, index) {
   return {
     type: STICKER_REMOVE_EMOJI,
     id,
     index,
-  };
-}
-
-export function expandStickerEmojiPicker(id) {
-  return {
-    type: STICKER_EXPAND_EMOJI_PICKER,
-    id,
-  };
-}
-
-export function closeStickerEmojiPicker() {
-  return {
-    type: STICKER_CLOSE_EMOJI_PICKER,
   };
 }
 
