@@ -49,6 +49,14 @@ const normalizeStickerFromStpackList = (state, stpackList) => {
   return state;
 };
 
+const appendEmoji = (state, id, emoji) => {
+  return state.withMutations(map => {
+    if (!map.getIn([id, 'emojis']).includes(emoji)) {
+      map.updateIn([id, 'emojis'], emojis => emojis.concat(emoji));
+    }
+  });
+};
+
 const initialState = ImmutableMap();
 
 export default function stickers(state = initialState, action) {
@@ -56,7 +64,7 @@ export default function stickers(state = initialState, action) {
   case STORE_HYDRATE:
     return state.merge(action.state.get('stickers'));
   case STICKER_APPEND_EMOJI:
-    return state.updateIn([action.id, 'emojis'], emojis => emojis.concat(action.emoji));
+    return appendEmoji(state, action.id, action.emoji);
   case STICKER_REMOVE_EMOJI:
     return state.removeIn([action.id, 'emojis', action.index]);
   case STICKER_FETCH_SUCCESS:
