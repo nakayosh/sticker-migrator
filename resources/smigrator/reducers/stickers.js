@@ -16,6 +16,7 @@ import {
   SEARCH_STPACKS_REFRESH_SUCCESS,
   SEARCH_STPACKS_EXPAND_SUCCESS,
 } from '@/actions/search_stpacks';
+import { STORE_HYDRATE } from '@/actions/store';
 
 const normalizeSticker = (state, sticker) => {
   sticker = { ...sticker };
@@ -50,8 +51,10 @@ const normalizeStickerFromStpackList = (state, stpackList) => {
 
 const initialState = ImmutableMap();
 
-export default function sitckers(state = initialState, action) {
+export default function stickers(state = initialState, action) {
   switch(action.type) {
+  case STORE_HYDRATE:
+    return state.merge(action.state.get('stickers'));
   case STICKER_APPEND_EMOJI:
     return state.updateIn([action.id, 'emojis'], emojis => emojis.concat(action.emoji));
   case STICKER_REMOVE_EMOJI:

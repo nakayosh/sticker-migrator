@@ -12,6 +12,7 @@ import {
   SEARCH_STPACKS_REFRESH_SUCCESS,
   SEARCH_STPACKS_EXPAND_SUCCESS,
 } from '@/actions/search_stpacks';
+import { STORE_HYDRATE } from '@/actions/store';
 
 const normalizeStpack = (state, stpack) => {
   stpack = { ...stpack };
@@ -35,6 +36,8 @@ const initialState = ImmutableMap();
 
 export default function stpacks(state = initialState, action) {
   switch(action.type) {
+  case STORE_HYDRATE:
+    return state.merge(action.state.get('stpacks'));
   case STPACK_FETCH_SUCCESS:
   case STPACK_PATCH_SUCCESS:
   case STPACK_UPDATE:
