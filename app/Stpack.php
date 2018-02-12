@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Stpack extends Model
 {
@@ -25,6 +26,16 @@ class Stpack extends Model
 
     public function getIdStrAttribute(){
         return (string)$this->id;
+    }
+
+    public function getCreatedAtAttribute($datetime)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $datetime)->format('Y/m/d H:i:s');
+    }
+    
+    public function getUpdatedAtAttribute($datetime)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $datetime)->format('Y/m/d H:i:s');
     }
 
     public function stickers(){

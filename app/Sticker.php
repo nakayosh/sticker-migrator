@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 use Emoji;
 
 class Sticker extends Model
@@ -44,5 +45,15 @@ class Sticker extends Model
 
     public function setEmojisAttribute($value){
         $this->attributes['emojis'] = implode($value);
+    }
+
+    public function getCreatedAtAttribute($datetime)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $datetime)->format('Y/m/d H:i:s');
+    }
+    
+    public function getUpdatedAtAttribute($datetime)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $datetime)->format('Y/m/d H:i:s');
     }
 }

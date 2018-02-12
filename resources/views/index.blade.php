@@ -19,17 +19,21 @@
     <link rel="apple-touch-icon" href="{{ url('/apple-touch-icon.png') }}" sizes="180x180">
     <link rel="manifest" href="/manifest.json">
 
-    <meta property="og:title" content="Sticker Migrator">
-    <meta property="og:type" content="website">
-    <meta property="og:description" content="Sticker Migrator from LINE to Telegram">
-    <meta property="og:url" content="{{ url('/') }}">
-    <meta property="og:image" content="{{ url('/apple-touch-icon.png') }}">
-    <meta property="og:site_name" content="Sticker Migrator">
+    @section('twitter_card')
+      <meta property="og:title" content="Sticker Migrator">
+      <meta property="og:type" content="website">
+      <meta property="og:description" content="Sticker Migrator from LINE to Telegram">
+      <meta property="og:url" content="{{ url('/') }}">
+      <meta property="og:image" content="{{ url('/apple-touch-icon.png') }}">
+      <meta property="og:site_name" content="Sticker Migrator">
 
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Sticker Migrator">
-    <meta name="twitter:text:description" content="Sticker Migrator from LINE to Telegram">
-    <meta name="twitter:image" content="{{ url('/apple-touch-icon.png') }}">
+      <meta name="twitter:card" content="summary">
+      <meta name="twitter:title" content="Sticker Migrator">
+      <meta name="twitter:text:description" content="Sticker Migrator from LINE to Telegram">
+      <meta name="twitter:image" content="{{ url('/apple-touch-icon.png') }}">
+    @show
+
+    @yield('initial_state')
 
     {{--  Socket.io  --}}
     <script src="//{{ $echo_host }}/socket.io/socket.io.js"></script>
